@@ -199,6 +199,10 @@ class _LocationsListPageWidgetState extends State<LocationsListPageWidget> {
                                                   true,
                                                   ParamType.bool,
                                                 ),
+                                                'locationJSON': serializeParam(
+                                                  locationsListItem.toMap(),
+                                                  ParamType.JSON,
+                                                ),
                                               }.withoutNulls,
                                             );
                                           },

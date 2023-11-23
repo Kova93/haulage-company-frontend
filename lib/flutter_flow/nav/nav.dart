@@ -79,6 +79,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/locationForm',
           builder: (context, params) => LocationFormWidget(
             isExisting: params.getParam('isExisting', ParamType.bool),
+            locationJSON: params.getParam('locationJSON', ParamType.JSON),
           ),
         ),
         FFRoute(

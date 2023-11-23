@@ -1,9 +1,11 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'location_form_model.dart';
@@ -13,9 +15,11 @@ class LocationFormWidget extends StatefulWidget {
   const LocationFormWidget({
     super.key,
     required this.isExisting,
+    this.locationJSON,
   });
 
   final bool? isExisting;
+  final dynamic locationJSON;
 
   @override
   _LocationFormWidgetState createState() => _LocationFormWidgetState();
@@ -30,6 +34,18 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => LocationFormModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (widget.locationJSON!) {
+        setState(() {
+          _model.location =
+              widget.locationJSON != null && widget.locationJSON != ''
+                  ? LorrySiteDTOStruct.fromMap(widget.locationJSON)
+                  : null;
+        });
+      }
+    });
 
     _model.textController1 ??=
         TextEditingController(text: _model.location?.name);
