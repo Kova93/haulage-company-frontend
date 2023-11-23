@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -233,26 +234,64 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
                               !_model.formKey.currentState!.validate()) {
                             return;
                           }
-                          await Future.delayed(
-                              const Duration(milliseconds: 100));
-                          if (true) {
-                            context.safePop();
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Submit failed',
-                                  style: TextStyle(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
+                          _model.updateLocationStruct(
+                            (e) => e
+                              ..name = _model.textController1.text
+                              ..address = _model.textController2.text,
+                          );
+                          if (widget.isExisting!) {
+                            _model.updateResult = await HaulageCompanyAPIGroup
+                                .updateLocationCall
+                                .call();
+                            if ((_model.updateResult?.succeeded ?? true)) {
+                              context.safePop();
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Failed to update location',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                        ),
                                   ),
+                                  duration: const Duration(milliseconds: 4000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).error,
                                 ),
-                                duration: const Duration(milliseconds: 4000),
-                                backgroundColor:
-                                    FlutterFlowTheme.of(context).error,
-                              ),
-                            );
+                              );
+                            }
+                          } else {
+                            _model.createResult = await HaulageCompanyAPIGroup
+                                .createLocationCall
+                                .call();
+                            if ((_model.createResult?.succeeded ?? true)) {
+                              context.safePop();
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Failed to create location',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                        ),
+                                  ),
+                                  duration: const Duration(milliseconds: 4000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).error,
+                                ),
+                              );
+                            }
                           }
+
+                          setState(() {});
                         },
                         text: FFLocalizations.of(context).getText(
                           '3mmqzp9d' /* Confirm */,

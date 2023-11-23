@@ -476,7 +476,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Shop',
       'hu': 'Cím',
     },
-    'nztpo92q': {
+    'gmimnuv4': {
       'en': 'Goods',
       'hu': '',
     },

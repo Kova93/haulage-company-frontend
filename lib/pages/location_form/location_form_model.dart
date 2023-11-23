@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'location_form_widget.dart' show LocationFormWidget;
@@ -6,9 +7,9 @@ import 'package:flutter/material.dart';
 class LocationFormModel extends FlutterFlowModel<LocationFormWidget> {
   ///  Local state fields for this page.
 
-  LocationStruct? location;
-  void updateLocationStruct(Function(LocationStruct) updateFn) =>
-      updateFn(location ??= LocationStruct());
+  LorrySiteDTOStruct? location;
+  void updateLocationStruct(Function(LorrySiteDTOStruct) updateFn) =>
+      updateFn(location ??= LorrySiteDTOStruct());
 
   ///  State fields for stateful widgets in this page.
 
@@ -41,6 +42,11 @@ class LocationFormModel extends FlutterFlowModel<LocationFormWidget> {
 
     return null;
   }
+
+  // Stores action output result for [Backend Call - API (updateLocation)] action in ConfirmButton widget.
+  ApiCallResponse? updateResult;
+  // Stores action output result for [Backend Call - API (createLocation)] action in ConfirmButton widget.
+  ApiCallResponse? createResult;
 
   /// Initialization and disposal methods.
 
