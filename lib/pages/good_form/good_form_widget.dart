@@ -1,8 +1,11 @@
+import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'good_form_model.dart';
@@ -12,9 +15,13 @@ class GoodFormWidget extends StatefulWidget {
   const GoodFormWidget({
     super.key,
     required this.isExisting,
+    this.goodJSON,
+    this.lorrySiteID,
   });
 
   final bool? isExisting;
+  final dynamic goodJSON;
+  final int? lorrySiteID;
 
   @override
   _GoodFormWidgetState createState() => _GoodFormWidgetState();
@@ -30,6 +37,15 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
     super.initState();
     _model = createModel(context, () => GoodFormModel());
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setState(() {
+        _model.good = widget.goodJSON != null && widget.goodJSON != ''
+            ? GoodDTOStruct.fromMap(widget.goodJSON)
+            : null;
+      });
+    });
+
     _model.textController1 ??= TextEditingController(text: _model.good?.name);
     _model.textFieldFocusNode1 ??= FocusNode();
 
@@ -38,8 +54,16 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
     _model.textFieldFocusNode2 ??= FocusNode();
 
     _model.textController3 ??=
-        TextEditingController(text: _model.good?.price.toString());
+        TextEditingController(text: _model.good?.size.toString());
     _model.textFieldFocusNode3 ??= FocusNode();
+
+    _model.textController4 ??=
+        TextEditingController(text: _model.good?.weight.toString());
+    _model.textFieldFocusNode4 ??= FocusNode();
+
+    _model.textController5 ??=
+        TextEditingController(text: _model.good?.quantity.toString());
+    _model.textFieldFocusNode5 ??= FocusNode();
   }
 
   @override
@@ -210,7 +234,7 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                     obscureText: false,
                     decoration: InputDecoration(
                       labelText: FFLocalizations.of(context).getText(
-                        'i2zn0py0' /* Price */,
+                        'i2zn0py0' /* Size */,
                       ),
                       labelStyle: FlutterFlowTheme.of(context).labelLarge,
                       hintStyle: FlutterFlowTheme.of(context).labelMedium,
@@ -251,6 +275,114 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                         const TextInputType.numberWithOptions(decimal: true),
                     validator:
                         _model.textController3Validator.asValidator(context),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp('\\d+(.\\d+)?'))
+                    ],
+                  ),
+                  TextFormField(
+                    controller: _model.textController4,
+                    focusNode: _model.textFieldFocusNode4,
+                    autofocus: true,
+                    textInputAction: TextInputAction.next,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      labelText: FFLocalizations.of(context).getText(
+                        'bgwveqko' /* Weight */,
+                      ),
+                      labelStyle: FlutterFlowTheme.of(context).labelLarge,
+                      hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).alternate,
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).primary,
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).error,
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).error,
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      filled: true,
+                      fillColor:
+                          FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyLarge,
+                    keyboardType:
+                        const TextInputType.numberWithOptions(decimal: true),
+                    validator:
+                        _model.textController4Validator.asValidator(context),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp('\\d+(.\\d+)?'))
+                    ],
+                  ),
+                  TextFormField(
+                    controller: _model.textController5,
+                    focusNode: _model.textFieldFocusNode5,
+                    autofocus: true,
+                    textInputAction: TextInputAction.next,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      labelText: FFLocalizations.of(context).getText(
+                        'z7xtbt5v' /* Quantity */,
+                      ),
+                      labelStyle: FlutterFlowTheme.of(context).labelLarge,
+                      hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).alternate,
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).primary,
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).error,
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).error,
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      filled: true,
+                      fillColor:
+                          FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyLarge,
+                    keyboardType: TextInputType.number,
+                    validator:
+                        _model.textController5Validator.asValidator(context),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+                    ],
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.max,
@@ -285,26 +417,79 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                               !_model.formKey.currentState!.validate()) {
                             return;
                           }
-                          await Future.delayed(
-                              const Duration(milliseconds: 100));
-                          if (true) {
-                            context.safePop();
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Submit failed',
-                                  style: TextStyle(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
+                          _model.updateGoodStruct(
+                            (e) => e
+                              ..name = _model.textController1.text
+                              ..description = _model.textController2.text
+                              ..size =
+                                  double.tryParse(_model.textController3.text)
+                              ..weight =
+                                  double.tryParse(_model.textController4.text)
+                              ..quantity =
+                                  int.tryParse(_model.textController5.text),
+                          );
+                          if (widget.isExisting!) {
+                            _model.updateResult = await HaulageCompanyAPIGroup
+                                .updateGoodCall
+                                .call(
+                              id: _model.good?.id,
+                              goodJson: _model.good?.toMap(),
+                            );
+                            if ((_model.updateResult?.succeeded ?? true)) {
+                              context.safePop();
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Failed to update good',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                        ),
                                   ),
+                                  duration: const Duration(milliseconds: 4000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).error,
                                 ),
-                                duration: const Duration(milliseconds: 4000),
-                                backgroundColor:
-                                    FlutterFlowTheme.of(context).error,
+                              );
+                            }
+                          } else {
+                            _model.createResult = await HaulageCompanyAPIGroup
+                                .createGoodCall
+                                .call(
+                              goodJson: _model.good?.toMap(),
+                              lorrySiteId: valueOrDefault<int>(
+                                widget.lorrySiteID,
+                                0,
                               ),
                             );
+                            if ((_model.createResult?.succeeded ?? true)) {
+                              context.safePop();
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Failed to create good',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                        ),
+                                  ),
+                                  duration: const Duration(milliseconds: 4000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).error,
+                                ),
+                              );
+                            }
                           }
+
+                          setState(() {});
                         },
                         text: FFLocalizations.of(context).getText(
                           's9qf5sui' /* Confirm */,

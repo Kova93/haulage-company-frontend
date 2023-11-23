@@ -217,6 +217,10 @@ class _GoodsListPageWidgetState extends State<GoodsListPageWidget> {
                                                   true,
                                                   ParamType.bool,
                                                 ),
+                                                'goodJSON': serializeParam(
+                                                  goodsListItem.toMap(),
+                                                  ParamType.JSON,
+                                                ),
                                               }.withoutNulls,
                                             );
                                           },

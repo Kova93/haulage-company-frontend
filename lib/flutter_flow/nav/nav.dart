@@ -72,6 +72,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/goodForm',
           builder: (context, params) => GoodFormWidget(
             isExisting: params.getParam('isExisting', ParamType.bool),
+            goodJSON: params.getParam('goodJSON', ParamType.JSON),
+            lorrySiteID: params.getParam('lorrySiteID', ParamType.int),
           ),
         ),
         FFRoute(

@@ -633,6 +633,10 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                         false,
                                         ParamType.bool,
                                       ),
+                                      'lorrySiteID': serializeParam(
+                                        _model.location?.id,
+                                        ParamType.int,
+                                      ),
                                     }.withoutNulls,
                                   );
                                 },

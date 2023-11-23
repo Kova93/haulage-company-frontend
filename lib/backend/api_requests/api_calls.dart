@@ -74,16 +74,10 @@ class GetAllGoodsCall {
 class CreateGoodCall {
   Future<ApiCallResponse> call({
     int? lorrySiteId,
+    dynamic goodJson,
   }) async {
-    const ffApiRequestBody = '''
-{
-  "id": 0,
-  "name": "",
-  "description": "",
-  "size": 0,
-  "weight": 0,
-  "quantity": 0
-}''';
+    final good = _serializeJson(goodJson);
+    final ffApiRequestBody = good;
     return ApiManager.instance.makeApiCall(
       callName: 'createGood',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/goods/$lorrySiteId',
@@ -121,16 +115,10 @@ class GetGoodByIdCall {
 class UpdateGoodCall {
   Future<ApiCallResponse> call({
     int? id,
+    dynamic goodJson,
   }) async {
-    const ffApiRequestBody = '''
-{
-  "id": 0,
-  "name": "",
-  "description": "",
-  "size": 0,
-  "weight": 0,
-  "quantity": 0
-}''';
+    final good = _serializeJson(goodJson);
+    final ffApiRequestBody = good;
     return ApiManager.instance.makeApiCall(
       callName: 'updateGood',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/goods/$id',
