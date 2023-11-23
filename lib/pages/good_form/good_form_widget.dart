@@ -278,7 +278,7 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                           _model.textController3Validator.asValidator(context),
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(
-                            RegExp('\\d+(.\\d+)?'))
+                            RegExp('\\d+(\\.\\d+)?'))
                       ],
                     ),
                     TextFormField(
@@ -289,7 +289,7 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          '6fy2jq52' /* Weight */,
+                          'jjv8x3dl' /* Weight */,
                         ),
                         labelStyle: FlutterFlowTheme.of(context).labelLarge,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
@@ -332,7 +332,7 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                           _model.textController4Validator.asValidator(context),
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(
-                            RegExp('\\d+(.\\d+)?'))
+                            RegExp('\\d+(\\.\\d+)?'))
                       ],
                     ),
                     TextFormField(
@@ -343,7 +343,7 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          'm96emfn2' /* Quantity */,
+                          'lz6s4ver' /* Quantity */,
                         ),
                         labelStyle: FlutterFlowTheme.of(context).labelLarge,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,

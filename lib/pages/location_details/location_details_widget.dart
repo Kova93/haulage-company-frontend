@@ -1,9 +1,11 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
+import '/components/add_quantity_dialog/add_quantity_dialog_widget.dart';
 import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -503,30 +505,80 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.end,
                                                   children: [
-                                                    FlutterFlowIconButton(
-                                                      borderColor:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      borderRadius: 8.0,
-                                                      borderWidth: 1.0,
-                                                      buttonSize: 40.0,
-                                                      fillColor:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .accent1,
-                                                      icon: Icon(
-                                                        Icons.shopping_cart,
-                                                        color:
+                                                    Builder(
+                                                      builder: (context) =>
+                                                          FlutterFlowIconButton(
+                                                        borderColor:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .primaryText,
-                                                        size: 24.0,
+                                                                .primary,
+                                                        borderRadius: 8.0,
+                                                        borderWidth: 1.0,
+                                                        buttonSize: 40.0,
+                                                        fillColor:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .accent1,
+                                                        icon: Icon(
+                                                          Icons.shopping_cart,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          size: 24.0,
+                                                        ),
+                                                        onPressed: () async {
+                                                          await showAlignedDialog(
+                                                            barrierColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .accent4,
+                                                            context: context,
+                                                            isGlobal: true,
+                                                            avoidOverflow:
+                                                                false,
+                                                            targetAnchor:
+                                                                const AlignmentDirectional(
+                                                                        0.0,
+                                                                        0.0)
+                                                                    .resolve(
+                                                                        Directionality.of(
+                                                                            context)),
+                                                            followerAnchor:
+                                                                const AlignmentDirectional(
+                                                                        0.0,
+                                                                        0.0)
+                                                                    .resolve(
+                                                                        Directionality.of(
+                                                                            context)),
+                                                            builder:
+                                                                (dialogContext) {
+                                                              return Material(
+                                                                color: Colors
+                                                                    .transparent,
+                                                                child:
+                                                                    GestureDetector(
+                                                                  onTap: () => _model
+                                                                          .unfocusNode
+                                                                          .canRequestFocus
+                                                                      ? FocusScope.of(
+                                                                              context)
+                                                                          .requestFocus(_model
+                                                                              .unfocusNode)
+                                                                      : FocusScope.of(
+                                                                              context)
+                                                                          .unfocus(),
+                                                                  child:
+                                                                      AddQuantityDialogWidget(
+                                                                    goodParam:
+                                                                        goodsListItem,
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            },
+                                                          ).then((value) =>
+                                                              setState(() {}));
+                                                        },
                                                       ),
-                                                      onPressed: () {
-                                                        print(
-                                                            'PurchaseButton pressed ...');
-                                                      },
                                                     ),
                                                     FlutterFlowIconButton(
                                                       borderColor:

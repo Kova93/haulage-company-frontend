@@ -257,11 +257,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Size',
       'hu': '',
     },
-    '6fy2jq52': {
+    'jjv8x3dl': {
       'en': 'Weight',
       'hu': '',
     },
-    'm96emfn2': {
+    'lz6s4ver': {
       'en': 'Quantity',
       'hu': '',
     },
@@ -297,19 +297,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Please choose an option from the dropdown',
       'hu': '',
     },
-    'vx478z69': {
+    'fcbhs2q7': {
       'en': 'Field is required',
       'hu': '',
     },
-    'dsm4ngzw': {
+    'rfcido8j': {
       'en': 'Please choose an option from the dropdown',
       'hu': '',
     },
-    'fpxqez73': {
+    'kjs4qol7': {
       'en': 'Field is required',
       'hu': '',
     },
-    '8njr0hd9': {
+    'pocvubbw': {
       'en': 'Please choose an option from the dropdown',
       'hu': '',
     },
@@ -500,7 +500,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Shop',
       'hu': 'Cím',
     },
-    'cr2wid7g': {
+    'bfqxrbnk': {
       'en': 'Goods',
       'hu': '',
     },
@@ -642,6 +642,37 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'fqb4f957': {
       'en': 'Home',
+      'hu': '',
+    },
+  },
+  // AddQuantityDialog
+  {
+    '8jbf90c5': {
+      'en': 'Add quantity to good',
+      'hu': '',
+    },
+    'y28nwitv': {
+      'en': 'Quantity',
+      'hu': '',
+    },
+    'jabm4sna': {
+      'en': '0',
+      'hu': '',
+    },
+    'd7je085f': {
+      'en': 'Field is required',
+      'hu': '',
+    },
+    'ojlujiff': {
+      'en': 'Please choose an option from the dropdown',
+      'hu': '',
+    },
+    '8w4l0bgb': {
+      'en': 'Cancel',
+      'hu': '',
+    },
+    'oiod804p': {
+      'en': 'Confirm',
       'hu': '',
     },
   },
