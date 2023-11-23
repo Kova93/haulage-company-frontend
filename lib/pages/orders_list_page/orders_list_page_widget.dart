@@ -144,7 +144,7 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
                                   ),
                                   Text(
                                     FFLocalizations.of(context).getText(
-                                      'vbfptmns' /* Goods */,
+                                      'cr2wid7g' /* Goods */,
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge

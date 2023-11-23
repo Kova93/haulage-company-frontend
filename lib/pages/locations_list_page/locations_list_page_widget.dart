@@ -171,8 +171,15 @@ class _LocationsListPageWidgetState extends State<LocationsListPageWidget> {
                                             size: 24.0,
                                           ),
                                           onPressed: () async {
-                                            context
-                                                .pushNamed('LocationDetails');
+                                            context.pushNamed(
+                                              'LocationDetails',
+                                              queryParameters: {
+                                                'locationJSON': serializeParam(
+                                                  locationsListItem.toMap(),
+                                                  ParamType.JSON,
+                                                ),
+                                              }.withoutNulls,
+                                            );
                                           },
                                         ),
                                         FlutterFlowIconButton(

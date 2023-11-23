@@ -1,17 +1,24 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'location_details_model.dart';
 export 'location_details_model.dart';
 
 class LocationDetailsWidget extends StatefulWidget {
-  const LocationDetailsWidget({super.key});
+  const LocationDetailsWidget({
+    super.key,
+    required this.locationJSON,
+  });
+
+  final dynamic locationJSON;
 
   @override
   _LocationDetailsWidgetState createState() => _LocationDetailsWidgetState();
@@ -27,6 +34,16 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => LocationDetailsModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setState(() {
+        _model.location =
+            widget.locationJSON != null && widget.locationJSON != ''
+                ? LorrySiteDTOStruct.fromMap(widget.locationJSON)
+                : null;
+      });
+    });
 
     _model.tabBarController = TabController(
       vsync: this,

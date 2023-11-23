@@ -101,7 +101,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'LocationDetails',
           path: '/locationDetails',
-          builder: (context, params) => const LocationDetailsWidget(),
+          builder: (context, params) => LocationDetailsWidget(
+            locationJSON: params.getParam('locationJSON', ParamType.JSON),
+          ),
         ),
         FFRoute(
           name: 'OrdersListPage',
