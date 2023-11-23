@@ -190,8 +190,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                 ),
                 FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
+                  onPressed: () async {
+                    context.pushNamed('OrdersListPage');
                   },
                   text: FFLocalizations.of(context).getText(
                     'q0nvi86i' /* Orders */,
@@ -213,8 +213,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                 ),
                 FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
+                  onPressed: () async {
+                    context.pushNamed('TransportsListPage');
                   },
                   text: FFLocalizations.of(context).getText(
                     'usnqp34g' /* Transports */,
