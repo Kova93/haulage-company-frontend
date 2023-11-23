@@ -166,42 +166,11 @@ class DeleteGoodCall {
 }
 
 class CreateLocationCall {
-  Future<ApiCallResponse> call() async {
-    const ffApiRequestBody = '''
-{
-  "id": 0,
-  "name": "",
-  "address": "",
-  "goodDTOs": [
-    {
-      "id": 0,
-      "name": "",
-      "description": "",
-      "size": 0,
-      "weight": 0,
-      "quantity": 0
-    }
-  ],
-  "vehicleDTOs": [
-    {
-      "id": 0,
-      "licensePlate": "",
-      "size": 0,
-      "maxWeight": 0,
-      "lorrySiteID": 0,
-      "transportOperationDTOs": [
-        {
-          "id": 0,
-          "date": "",
-          "usedVehicleIDs": [
-            0
-          ],
-          "orderID": 0
-        }
-      ]
-    }
-  ]
-}''';
+  Future<ApiCallResponse> call({
+    dynamic locationJson,
+  }) async {
+    final location = _serializeJson(locationJson);
+    final ffApiRequestBody = location;
     return ApiManager.instance.makeApiCall(
       callName: 'createLocation',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/locations',
@@ -261,42 +230,10 @@ class GetLocationByIdCall {
 class UpdateLocationCall {
   Future<ApiCallResponse> call({
     int? id,
+    dynamic locationJson,
   }) async {
-    const ffApiRequestBody = '''
-{
-  "id": 0,
-  "name": "",
-  "address": "",
-  "goodDTOs": [
-    {
-      "id": 0,
-      "name": "",
-      "description": "",
-      "size": 0,
-      "weight": 0,
-      "quantity": 0
-    }
-  ],
-  "vehicleDTOs": [
-    {
-      "id": 0,
-      "licensePlate": "",
-      "size": 0,
-      "maxWeight": 0,
-      "lorrySiteID": 0,
-      "transportOperationDTOs": [
-        {
-          "id": 0,
-          "date": "",
-          "usedVehicleIDs": [
-            0
-          ],
-          "orderID": 0
-        }
-      ]
-    }
-  ]
-}''';
+    final location = _serializeJson(locationJson);
+    final ffApiRequestBody = location;
     return ApiManager.instance.makeApiCall(
       callName: 'updateLocation',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/locations/$id',

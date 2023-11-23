@@ -242,7 +242,10 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
                           if (widget.isExisting!) {
                             _model.updateResult = await HaulageCompanyAPIGroup
                                 .updateLocationCall
-                                .call();
+                                .call(
+                              id: _model.location?.id,
+                              locationJson: _model.location?.toMap(),
+                            );
                             if ((_model.updateResult?.succeeded ?? true)) {
                               context.safePop();
                             } else {
@@ -267,7 +270,9 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
                           } else {
                             _model.createResult = await HaulageCompanyAPIGroup
                                 .createLocationCall
-                                .call();
+                                .call(
+                              locationJson: _model.location?.toMap(),
+                            );
                             if ((_model.createResult?.succeeded ?? true)) {
                               context.safePop();
                             } else {
