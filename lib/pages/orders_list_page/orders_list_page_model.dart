@@ -8,13 +8,13 @@ import 'package:flutter/material.dart';
 class OrdersListPageModel extends FlutterFlowModel<OrdersListPageWidget> {
   ///  Local state fields for this page.
 
-  List<OrderDTOStruct> orders = [];
-  void addToOrders(OrderDTOStruct item) => orders.add(item);
-  void removeFromOrders(OrderDTOStruct item) => orders.remove(item);
+  List<GetOrderDTOStruct> orders = [];
+  void addToOrders(GetOrderDTOStruct item) => orders.add(item);
+  void removeFromOrders(GetOrderDTOStruct item) => orders.remove(item);
   void removeAtIndexFromOrders(int index) => orders.removeAt(index);
-  void insertAtIndexInOrders(int index, OrderDTOStruct item) =>
+  void insertAtIndexInOrders(int index, GetOrderDTOStruct item) =>
       orders.insert(index, item);
-  void updateOrdersAtIndex(int index, Function(OrderDTOStruct) updateFn) =>
+  void updateOrdersAtIndex(int index, Function(GetOrderDTOStruct) updateFn) =>
       orders[index] = updateFn(orders[index]);
 
   ///  State fields for stateful widgets in this page.
@@ -44,11 +44,12 @@ class OrdersListPageModel extends FlutterFlowModel<OrdersListPageWidget> {
           .rootList(
             (updateResult.jsonBody ?? ''),
           )!
-          .map((e) => e != null && e != '' ? OrderDTOStruct.fromMap(e) : null)
+          .map(
+              (e) => e != null && e != '' ? GetOrderDTOStruct.fromMap(e) : null)
           .withoutNulls
           .toList()
           .toList()
-          .cast<OrderDTOStruct>();
+          .cast<GetOrderDTOStruct>();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

@@ -125,7 +125,7 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
                                 children: [
                                   Text(
                                     FFLocalizations.of(context).getText(
-                                      'cofgmggp' /* Shop ID */,
+                                      'cofgmggp' /* Shop */,
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge
@@ -136,11 +136,51 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
                                   ),
                                   Text(
                                     valueOrDefault<String>(
-                                      ordersListItem.shopID.toString(),
+                                      ordersListItem.shopDTO.name,
                                       'shopid',
                                     ),
                                     style:
                                         FlutterFlowTheme.of(context).bodyLarge,
+                                  ),
+                                  Text(
+                                    FFLocalizations.of(context).getText(
+                                      'i0ivg0xj' /* Goods */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          fontStyle: FontStyle.italic,
+                                        ),
+                                  ),
+                                  Builder(
+                                    builder: (context) {
+                                      final goodsList =
+                                          ordersListItem.goodDTOs.toList();
+                                      return ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount: goodsList.length,
+                                        itemBuilder: (context, goodsListIndex) {
+                                          final goodsListItem =
+                                              goodsList[goodsListIndex];
+                                          return Container(
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                            ),
+                                            child: Text(
+                                              'x${goodsListItem.quantity.toString()} ${goodsListItem.name}',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyLarge,
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
                                   ),
                                   Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(

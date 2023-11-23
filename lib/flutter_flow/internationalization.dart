@@ -473,8 +473,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'hu': '',
     },
     'cofgmggp': {
-      'en': 'Shop ID',
+      'en': 'Shop',
       'hu': 'Cím',
+    },
+    'i0ivg0xj': {
+      'en': 'Goods',
+      'hu': '',
     },
     '9uiyoxqe': {
       'en': 'Home',
