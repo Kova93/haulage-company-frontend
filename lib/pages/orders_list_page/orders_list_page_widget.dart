@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -28,7 +29,7 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await _model.updateShops(context);
+      await _model.updateOrders(context);
       setState(() {});
     });
   }
@@ -79,7 +80,7 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
           ),
           title: Text(
             FFLocalizations.of(context).getText(
-              'zsao3dgx' /* Shops */,
+              'zsao3dgx' /* Orders */,
             ),
             style: FlutterFlowTheme.of(context).headlineLarge,
           ),
@@ -93,25 +94,28 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
             children: [
               Builder(
                 builder: (context) {
-                  final shopsList = _model.shops.toList();
+                  final ordersList = _model.orders.toList();
                   return RefreshIndicator(
                     onRefresh: () async {
-                      await _model.updateShops(context);
+                      await _model.updateOrders(context);
                       setState(() {});
                     },
                     child: ListView.separated(
                       padding: EdgeInsets.zero,
                       scrollDirection: Axis.vertical,
-                      itemCount: shopsList.length,
+                      itemCount: ordersList.length,
                       separatorBuilder: (_, __) => const SizedBox(height: 10.0),
-                      itemBuilder: (context, shopsListIndex) {
-                        final shopsListItem = shopsList[shopsListIndex];
+                      itemBuilder: (context, ordersListIndex) {
+                        final ordersListItem = ordersList[ordersListIndex];
                         return Container(
                           decoration: const BoxDecoration(),
                           child: ExpandableNotifier(
                             child: ExpandablePanel(
                               header: Text(
-                                shopsListItem.name,
+                                valueOrDefault<String>(
+                                  ordersListItem.id.toString(),
+                                  'id',
+                                ),
                                 style: FlutterFlowTheme.of(context).titleLarge,
                               ),
                               collapsed: Container(),
@@ -121,7 +125,7 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
                                 children: [
                                   Text(
                                     FFLocalizations.of(context).getText(
-                                      'cofgmggp' /* Contact */,
+                                      'cofgmggp' /* Shop ID */,
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge
@@ -131,7 +135,10 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
                                         ),
                                   ),
                                   Text(
-                                    shopsListItem.contact,
+                                    valueOrDefault<String>(
+                                      ordersListItem.shopID.toString(),
+                                      'shopid',
+                                    ),
                                     style:
                                         FlutterFlowTheme.of(context).bodyLarge,
                                   ),
@@ -162,7 +169,7 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
                                           ),
                                           onPressed: () async {
                                             context.pushNamed(
-                                              'ShopForm',
+                                              'OrderForm',
                                               queryParameters: {
                                                 'isExisting': serializeParam(
                                                   true,
@@ -188,8 +195,48 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
                                                 .primaryText,
                                             size: 24.0,
                                           ),
-                                          onPressed: () {
-                                            print('DeleteButton pressed ...');
+                                          onPressed: () async {
+                                            _model.deleteResult =
+                                                await HaulageCompanyAPIGroup
+                                                    .deleteOrderCall
+                                                    .call(
+                                              id: ordersListItem.id,
+                                            );
+                                            if ((_model
+                                                    .deleteResult?.succeeded ??
+                                                true)) {
+                                              setState(() {
+                                                _model.removeAtIndexFromOrders(
+                                                    ordersListIndex);
+                                              });
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    'Failed to delete order',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                        ),
+                                                  ),
+                                                  duration: const Duration(
+                                                      milliseconds: 4000),
+                                                  backgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .error,
+                                                ),
+                                              );
+                                            }
+
+                                            setState(() {});
                                           },
                                         ),
                                       ].divide(const SizedBox(width: 10.0)),
@@ -231,7 +278,7 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
                     ),
                     onPressed: () async {
                       context.pushNamed(
-                        'ShopForm',
+                        'OrderForm',
                         queryParameters: {
                           'isExisting': serializeParam(
                             false,

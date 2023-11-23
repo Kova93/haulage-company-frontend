@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -137,7 +138,7 @@ class _GoodsListPageWidgetState extends State<GoodsListPageWidget> {
                                   ),
                                   Text(
                                     FFLocalizations.of(context).getText(
-                                      'dvmsu62x' /* Price */,
+                                      'va7bnt9b' /* Size */,
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge
@@ -147,12 +148,39 @@ class _GoodsListPageWidgetState extends State<GoodsListPageWidget> {
                                         ),
                                   ),
                                   Text(
-                                    formatNumber(
-                                      goodsListItem.price,
-                                      formatType: FormatType.decimal,
-                                      decimalType: DecimalType.automatic,
-                                      currency: '\$',
+                                    goodsListItem.size.toString(),
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyLarge,
+                                  ),
+                                  Text(
+                                    FFLocalizations.of(context).getText(
+                                      '4l8ry766' /* Weight */,
                                     ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          fontStyle: FontStyle.italic,
+                                        ),
+                                  ),
+                                  Text(
+                                    goodsListItem.weight.toString(),
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyLarge,
+                                  ),
+                                  Text(
+                                    FFLocalizations.of(context).getText(
+                                      'pa793lkm' /* Quantity */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          fontStyle: FontStyle.italic,
+                                        ),
+                                  ),
+                                  Text(
+                                    goodsListItem.quantity.toString(),
                                     style:
                                         FlutterFlowTheme.of(context).bodyLarge,
                                   ),
@@ -209,8 +237,48 @@ class _GoodsListPageWidgetState extends State<GoodsListPageWidget> {
                                                 .primaryText,
                                             size: 24.0,
                                           ),
-                                          onPressed: () {
-                                            print('DeleteButton pressed ...');
+                                          onPressed: () async {
+                                            _model.deleteResult =
+                                                await HaulageCompanyAPIGroup
+                                                    .deleteGoodCall
+                                                    .call(
+                                              id: goodsListItem.id,
+                                            );
+                                            if ((_model
+                                                    .deleteResult?.succeeded ??
+                                                true)) {
+                                              setState(() {
+                                                _model.removeAtIndexFromGoods(
+                                                    goodsListIndex);
+                                              });
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    'Failed to delete good',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                        ),
+                                                  ),
+                                                  duration: const Duration(
+                                                      milliseconds: 4000),
+                                                  backgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .error,
+                                                ),
+                                              );
+                                            }
+
+                                            setState(() {});
                                           },
                                         ),
                                       ].divide(const SizedBox(width: 10.0)),

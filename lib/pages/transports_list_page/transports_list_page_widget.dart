@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -29,7 +30,7 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await _model.updateShops(context);
+      await _model.updateTransports(context);
       setState(() {});
     });
   }
@@ -80,7 +81,7 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
           ),
           title: Text(
             FFLocalizations.of(context).getText(
-              '2gn12uuw' /* Shops */,
+              '2gn12uuw' /* Transports */,
             ),
             style: FlutterFlowTheme.of(context).headlineLarge,
           ),
@@ -94,25 +95,29 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
             children: [
               Builder(
                 builder: (context) {
-                  final shopsList = _model.shops.toList();
+                  final transportsList = _model.transports.toList();
                   return RefreshIndicator(
                     onRefresh: () async {
-                      await _model.updateShops(context);
+                      await _model.updateTransports(context);
                       setState(() {});
                     },
                     child: ListView.separated(
                       padding: EdgeInsets.zero,
                       scrollDirection: Axis.vertical,
-                      itemCount: shopsList.length,
+                      itemCount: transportsList.length,
                       separatorBuilder: (_, __) => const SizedBox(height: 10.0),
-                      itemBuilder: (context, shopsListIndex) {
-                        final shopsListItem = shopsList[shopsListIndex];
+                      itemBuilder: (context, transportsListIndex) {
+                        final transportsListItem =
+                            transportsList[transportsListIndex];
                         return Container(
                           decoration: const BoxDecoration(),
                           child: ExpandableNotifier(
                             child: ExpandablePanel(
                               header: Text(
-                                shopsListItem.name,
+                                valueOrDefault<String>(
+                                  transportsListItem.id.toString(),
+                                  'id',
+                                ),
                                 style: FlutterFlowTheme.of(context).titleLarge,
                               ),
                               collapsed: Container(),
@@ -122,7 +127,7 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
                                 children: [
                                   Text(
                                     FFLocalizations.of(context).getText(
-                                      '0xavmslk' /* Contact */,
+                                      '0xavmslk' /* Date */,
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge
@@ -132,7 +137,29 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
                                         ),
                                   ),
                                   Text(
-                                    shopsListItem.contact,
+                                    valueOrDefault<String>(
+                                      transportsListItem.date?.toString(),
+                                      'date',
+                                    ),
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyLarge,
+                                  ),
+                                  Text(
+                                    FFLocalizations.of(context).getText(
+                                      '64v251nc' /* Order ID */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          fontStyle: FontStyle.italic,
+                                        ),
+                                  ),
+                                  Text(
+                                    valueOrDefault<String>(
+                                      transportsListItem.orderID.toString(),
+                                      'orderid',
+                                    ),
                                     style:
                                         FlutterFlowTheme.of(context).bodyLarge,
                                   ),
@@ -163,7 +190,7 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
                                           ),
                                           onPressed: () async {
                                             context.pushNamed(
-                                              'ShopForm',
+                                              'TransportForm',
                                               queryParameters: {
                                                 'isExisting': serializeParam(
                                                   true,
@@ -189,8 +216,49 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
                                                 .primaryText,
                                             size: 24.0,
                                           ),
-                                          onPressed: () {
-                                            print('DeleteButton pressed ...');
+                                          onPressed: () async {
+                                            _model.deleteResult =
+                                                await HaulageCompanyAPIGroup
+                                                    .deleteTransportOperationCall
+                                                    .call(
+                                              id: transportsListItem.id,
+                                            );
+                                            if ((_model
+                                                    .deleteResult?.succeeded ??
+                                                true)) {
+                                              setState(() {
+                                                _model
+                                                    .removeAtIndexFromTransports(
+                                                        transportsListIndex);
+                                              });
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    'Failed to delete transport',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                        ),
+                                                  ),
+                                                  duration: const Duration(
+                                                      milliseconds: 4000),
+                                                  backgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .error,
+                                                ),
+                                              );
+                                            }
+
+                                            setState(() {});
                                           },
                                         ),
                                       ].divide(const SizedBox(width: 10.0)),
@@ -232,7 +300,7 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
                     ),
                     onPressed: () async {
                       context.pushNamed(
-                        'ShopForm',
+                        'TransportForm',
                         queryParameters: {
                           'isExisting': serializeParam(
                             false,

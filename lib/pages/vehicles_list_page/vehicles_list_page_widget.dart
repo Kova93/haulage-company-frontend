@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -122,7 +123,7 @@ class _VehiclesListPageWidgetState extends State<VehiclesListPageWidget> {
                                 children: [
                                   Text(
                                     FFLocalizations.of(context).getText(
-                                      'oj0k2b31' /* Name */,
+                                      'oj0k2b31' /* License Plate */,
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge
@@ -132,13 +133,16 @@ class _VehiclesListPageWidgetState extends State<VehiclesListPageWidget> {
                                         ),
                                   ),
                                   Text(
-                                    vehiclesListItem.name,
+                                    valueOrDefault<String>(
+                                      vehiclesListItem.licensePlate,
+                                      'licensePlate',
+                                    ),
                                     style:
                                         FlutterFlowTheme.of(context).bodyLarge,
                                   ),
                                   Text(
                                     FFLocalizations.of(context).getText(
-                                      'i2pzntbt' /* Type */,
+                                      'ka0ypk0o' /* Size */,
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge
@@ -148,7 +152,23 @@ class _VehiclesListPageWidgetState extends State<VehiclesListPageWidget> {
                                         ),
                                   ),
                                   Text(
-                                    vehiclesListItem.type,
+                                    '${vehiclesListItem.size.toString()}m3',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyLarge,
+                                  ),
+                                  Text(
+                                    FFLocalizations.of(context).getText(
+                                      'i2pzntbt' /* Max weight */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          fontStyle: FontStyle.italic,
+                                        ),
+                                  ),
+                                  Text(
+                                    '${vehiclesListItem.maxWeight.toString()}kg',
                                     style:
                                         FlutterFlowTheme.of(context).bodyLarge,
                                   ),
@@ -205,8 +225,49 @@ class _VehiclesListPageWidgetState extends State<VehiclesListPageWidget> {
                                                 .primaryText,
                                             size: 24.0,
                                           ),
-                                          onPressed: () {
-                                            print('DeleteButton pressed ...');
+                                          onPressed: () async {
+                                            _model.deleteResult =
+                                                await HaulageCompanyAPIGroup
+                                                    .deleteVehicleCall
+                                                    .call(
+                                              id: vehiclesListItem.id,
+                                            );
+                                            if ((_model
+                                                    .deleteResult?.succeeded ??
+                                                true)) {
+                                              setState(() {
+                                                _model
+                                                    .removeAtIndexFromVehicles(
+                                                        vehiclesListIndex);
+                                              });
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    'Failed to delete vehicle',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                        ),
+                                                  ),
+                                                  duration: const Duration(
+                                                      milliseconds: 4000),
+                                                  backgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .error,
+                                                ),
+                                              );
+                                            }
+
+                                            setState(() {});
                                           },
                                         ),
                                       ].divide(const SizedBox(width: 10.0)),

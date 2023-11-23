@@ -80,8 +80,9 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
             },
           ),
           title: Text(
-            FFLocalizations.of(context).getText(
-              'timvayoc' /* Page Title */,
+            valueOrDefault<String>(
+              _model.location?.name,
+              'Location',
             ),
             style: FlutterFlowTheme.of(context).headlineLarge,
           ),
@@ -102,27 +103,28 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                         children: [
                           Builder(
                             builder: (context) {
-                              final locations =
+                              final vehiclesList =
                                   _model.location?.vehicleDTOs.toList() ?? [];
                               return RefreshIndicator(
                                 onRefresh: () async {
                                   await _model.updateLocation(context);
+                                  setState(() {});
                                 },
                                 child: ListView.separated(
                                   padding: EdgeInsets.zero,
                                   scrollDirection: Axis.vertical,
-                                  itemCount: locations.length,
+                                  itemCount: vehiclesList.length,
                                   separatorBuilder: (_, __) =>
                                       const SizedBox(height: 10.0),
-                                  itemBuilder: (context, locationsIndex) {
-                                    final locationsItem =
-                                        locations[locationsIndex];
+                                  itemBuilder: (context, vehiclesListIndex) {
+                                    final vehiclesListItem =
+                                        vehiclesList[vehiclesListIndex];
                                     return Container(
                                       decoration: const BoxDecoration(),
                                       child: ExpandableNotifier(
                                         child: ExpandablePanel(
                                           header: Text(
-                                            locationsItem.licensePlate,
+                                            vehiclesListItem.licensePlate,
                                             style: FlutterFlowTheme.of(context)
                                                 .titleLarge,
                                           ),
@@ -148,7 +150,7 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                         ),
                                               ),
                                               Text(
-                                                '${locationsItem.size.toString()}m3',
+                                                '${vehiclesListItem.size.toString()}m3',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyLarge,
@@ -169,7 +171,7 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                         ),
                                               ),
                                               Text(
-                                                '${locationsItem.maxWeight.toString()}kg',
+                                                '${vehiclesListItem.maxWeight.toString()}kg',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyLarge,
@@ -244,7 +246,8 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                             await HaulageCompanyAPIGroup
                                                                 .deleteVehicleCall
                                                                 .call(
-                                                          id: locationsItem.id,
+                                                          id: vehiclesListItem
+                                                              .id,
                                                         );
                                                         if ((_model
                                                                 .deleteVehicleResult
@@ -255,8 +258,8 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                                 .updateLocationStruct(
                                                               (e) => e
                                                                 ..updateVehicleDTOs(
-                                                                  (e) => e.remove(
-                                                                      locationsItem),
+                                                                  (e) => e.removeAt(
+                                                                      vehiclesListIndex),
                                                                 ),
                                                             );
                                                           });
@@ -355,26 +358,28 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                         children: [
                           Builder(
                             builder: (context) {
-                              final goods =
+                              final goodsList =
                                   _model.location?.goodDTOs.toList() ?? [];
                               return RefreshIndicator(
                                 onRefresh: () async {
                                   await _model.updateLocation(context);
+                                  setState(() {});
                                 },
                                 child: ListView.separated(
                                   padding: EdgeInsets.zero,
                                   scrollDirection: Axis.vertical,
-                                  itemCount: goods.length,
+                                  itemCount: goodsList.length,
                                   separatorBuilder: (_, __) =>
                                       const SizedBox(height: 10.0),
-                                  itemBuilder: (context, goodsIndex) {
-                                    final goodsItem = goods[goodsIndex];
+                                  itemBuilder: (context, goodsListIndex) {
+                                    final goodsListItem =
+                                        goodsList[goodsListIndex];
                                     return Container(
                                       decoration: const BoxDecoration(),
                                       child: ExpandableNotifier(
                                         child: ExpandablePanel(
                                           header: Text(
-                                            goodsItem.name,
+                                            goodsListItem.name,
                                             style: FlutterFlowTheme.of(context)
                                                 .titleLarge,
                                           ),
@@ -400,7 +405,7 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                         ),
                                               ),
                                               Text(
-                                                goodsItem.description,
+                                                goodsListItem.description,
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyLarge,
@@ -421,7 +426,7 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                         ),
                                               ),
                                               Text(
-                                                '${goodsItem.size.toString()}m3',
+                                                '${goodsListItem.size.toString()}m3',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyLarge,
@@ -442,7 +447,7 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                         ),
                                               ),
                                               Text(
-                                                goodsItem.weight.toString(),
+                                                goodsListItem.weight.toString(),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyLarge,
@@ -463,7 +468,8 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                         ),
                                               ),
                                               Text(
-                                                goodsItem.quantity.toString(),
+                                                goodsListItem.quantity
+                                                    .toString(),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyLarge,
@@ -530,7 +536,7 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                             await HaulageCompanyAPIGroup
                                                                 .deleteGoodCall
                                                                 .call(
-                                                          id: goodsItem.id,
+                                                          id: goodsListItem.id,
                                                         );
                                                         if ((_model
                                                                 .deleteGoodResult
@@ -541,8 +547,8 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                                 .updateLocationStruct(
                                                               (e) => e
                                                                 ..updateGoodDTOs(
-                                                                  (e) => e.remove(
-                                                                      goodsItem),
+                                                                  (e) => e.removeAt(
+                                                                      goodsListIndex),
                                                                 ),
                                                             );
                                                           });

@@ -63,6 +63,12 @@ class GetAllGoodsCall {
       cache: false,
     );
   }
+
+  dynamic rootList(dynamic response) => getJsonField(
+        response,
+        r'''$''',
+        true,
+      );
 }
 
 class CreateGoodCall {
@@ -338,7 +344,7 @@ class CreateOrderCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'createOrder',
-      apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/api/orders',
+      apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/orders',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -356,7 +362,7 @@ class GetAllOrdersCall {
   Future<ApiCallResponse> call() async {
     return ApiManager.instance.makeApiCall(
       callName: 'getAllOrders',
-      apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/api/orders',
+      apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/orders',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -366,6 +372,12 @@ class GetAllOrdersCall {
       cache: false,
     );
   }
+
+  dynamic rootList(dynamic response) => getJsonField(
+        response,
+        r'''$''',
+        true,
+      );
 }
 
 class GetOrderByIdCall {
@@ -374,7 +386,7 @@ class GetOrderByIdCall {
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getOrderById',
-      apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/api/orders/$id',
+      apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/orders/$id',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -401,7 +413,7 @@ class UpdateOrderCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'updateOrder',
-      apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/api/orders/$id',
+      apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/orders/$id',
       callType: ApiCallType.PUT,
       headers: {},
       params: {},
@@ -421,7 +433,7 @@ class DeleteOrderCall {
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'deleteOrder',
-      apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/api/orders/$id',
+      apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/orders/$id',
       callType: ApiCallType.DELETE,
       headers: {},
       params: {},
@@ -474,6 +486,12 @@ class GetAllShopsCall {
       cache: false,
     );
   }
+
+  dynamic rootList(dynamic response) => getJsonField(
+        response,
+        r'''$''',
+        true,
+      );
 }
 
 class GetShopByIdCall {
@@ -582,6 +600,12 @@ class GetAllTransportOperationsCall {
       cache: false,
     );
   }
+
+  dynamic rootList(dynamic response) => getJsonField(
+        response,
+        r'''$''',
+        true,
+      );
 }
 
 class GetTransportOperationByIdCall {
@@ -699,6 +723,12 @@ class GetAllVehiclesCall {
       cache: false,
     );
   }
+
+  dynamic rootList(dynamic response) => getJsonField(
+        response,
+        r'''$''',
+        true,
+      );
 }
 
 class GetVehicleByIdCall {

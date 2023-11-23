@@ -37,13 +37,13 @@ class LocationsListPageModel extends FlutterFlowModel<LocationsListPageWidget> {
   /// Action blocks are added here.
 
   Future updateLocations(BuildContext context) async {
-    ApiCallResponse? locationsJSON;
+    ApiCallResponse? updateResult;
 
-    locationsJSON = await HaulageCompanyAPIGroup.getAllLocationsCall.call();
-    if ((locationsJSON.succeeded ?? true)) {
+    updateResult = await HaulageCompanyAPIGroup.getAllLocationsCall.call();
+    if ((updateResult.succeeded ?? true)) {
       locations = HaulageCompanyAPIGroup.getAllLocationsCall
           .rootList(
-            (locationsJSON.jsonBody ?? ''),
+            (updateResult.jsonBody ?? ''),
           )!
           .map((e) =>
               e != null && e != '' ? LorrySiteDTOStruct.fromMap(e) : null)
@@ -55,7 +55,7 @@ class LocationsListPageModel extends FlutterFlowModel<LocationsListPageWidget> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Failed to update locations',
+            'Failed to load locations',
             style: FlutterFlowTheme.of(context).bodyMedium.override(
                   fontFamily: 'Readex Pro',
                   color: FlutterFlowTheme.of(context).primaryText,

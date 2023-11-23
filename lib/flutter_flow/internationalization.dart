@@ -162,11 +162,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'hu': '',
     },
     'oj0k2b31': {
-      'en': 'Name',
+      'en': 'License Plate',
+      'hu': 'Cím',
+    },
+    'ka0ypk0o': {
+      'en': 'Size',
       'hu': 'Cím',
     },
     'i2pzntbt': {
-      'en': 'Type',
+      'en': 'Max weight',
       'hu': '',
     },
     '0tmu1biv': {
@@ -180,9 +184,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Shops',
       'hu': '',
     },
-    'of886914': {
-      'en': 'Contact',
-      'hu': 'Cím',
+    'i03mri4k': {
+      'en': 'Address',
+      'hu': '',
     },
     '8380o8p2': {
       'en': 'Home',
@@ -199,8 +203,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Description',
       'hu': 'Cím',
     },
-    'dvmsu62x': {
-      'en': 'Price',
+    'va7bnt9b': {
+      'en': 'Size',
+      'hu': '',
+    },
+    '4l8ry766': {
+      'en': 'Weight',
+      'hu': '',
+    },
+    'pa793lkm': {
+      'en': 'Quantity',
       'hu': '',
     },
     'ht4xtuzr': {
@@ -417,10 +429,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // LocationDetails
   {
-    'timvayoc': {
-      'en': 'Page Title',
-      'hu': '',
-    },
     '532l404n': {
       'en': 'Vehicles',
       'hu': '',
@@ -461,11 +469,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // OrdersListPage
   {
     'zsao3dgx': {
-      'en': 'Shops',
+      'en': 'Orders',
       'hu': '',
     },
     'cofgmggp': {
-      'en': 'Contact',
+      'en': 'Shop ID',
       'hu': 'Cím',
     },
     '9uiyoxqe': {
@@ -562,11 +570,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // TransportsListPage
   {
     '2gn12uuw': {
-      'en': 'Shops',
+      'en': 'Transports',
       'hu': '',
     },
     '0xavmslk': {
-      'en': 'Contact',
+      'en': 'Date',
+      'hu': 'Cím',
+    },
+    '64v251nc': {
+      'en': 'Order ID',
       'hu': 'Cím',
     },
     'v1czhin2': {

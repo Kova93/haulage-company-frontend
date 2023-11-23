@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -121,7 +122,7 @@ class _ShopsListPageWidgetState extends State<ShopsListPageWidget> {
                                 children: [
                                   Text(
                                     FFLocalizations.of(context).getText(
-                                      'of886914' /* Contact */,
+                                      'i03mri4k' /* Address */,
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge
@@ -131,7 +132,7 @@ class _ShopsListPageWidgetState extends State<ShopsListPageWidget> {
                                         ),
                                   ),
                                   Text(
-                                    shopsListItem.contact,
+                                    shopsListItem.address,
                                     style:
                                         FlutterFlowTheme.of(context).bodyLarge,
                                   ),
@@ -188,8 +189,48 @@ class _ShopsListPageWidgetState extends State<ShopsListPageWidget> {
                                                 .primaryText,
                                             size: 24.0,
                                           ),
-                                          onPressed: () {
-                                            print('DeleteButton pressed ...');
+                                          onPressed: () async {
+                                            _model.deleteResult =
+                                                await HaulageCompanyAPIGroup
+                                                    .deleteShopCall
+                                                    .call(
+                                              id: shopsListItem.id,
+                                            );
+                                            if ((_model
+                                                    .deleteResult?.succeeded ??
+                                                true)) {
+                                              setState(() {
+                                                _model.removeAtIndexFromShops(
+                                                    shopsListIndex);
+                                              });
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    'Failed to delete shop',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                        ),
+                                                  ),
+                                                  duration: const Duration(
+                                                      milliseconds: 4000),
+                                                  backgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .error,
+                                                ),
+                                              );
+                                            }
+
+                                            setState(() {});
                                           },
                                         ),
                                       ].divide(const SizedBox(width: 10.0)),

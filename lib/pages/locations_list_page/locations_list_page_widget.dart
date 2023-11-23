@@ -230,8 +230,9 @@ class _LocationsListPageWidgetState extends State<LocationsListPageWidget> {
                                                     .deleteResult?.succeeded ??
                                                 true)) {
                                               setState(() {
-                                                _model.removeFromLocations(
-                                                    locationsListItem);
+                                                _model
+                                                    .removeAtIndexFromLocations(
+                                                        locationsListIndex);
                                               });
                                             } else {
                                               ScaffoldMessenger.of(context)

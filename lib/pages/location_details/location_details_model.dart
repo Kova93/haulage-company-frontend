@@ -39,21 +39,21 @@ class LocationDetailsModel extends FlutterFlowModel<LocationDetailsWidget> {
   /// Action blocks are added here.
 
   Future updateLocation(BuildContext context) async {
-    ApiCallResponse? getLocationResult;
+    ApiCallResponse? updateResult;
 
-    getLocationResult = await HaulageCompanyAPIGroup.getLocationByIdCall.call(
+    updateResult = await HaulageCompanyAPIGroup.getLocationByIdCall.call(
       id: location?.id,
     );
-    if ((getLocationResult.succeeded ?? true)) {
-      location = (getLocationResult.jsonBody ?? '') != null &&
-              (getLocationResult.jsonBody ?? '') != ''
-          ? LorrySiteDTOStruct.fromMap((getLocationResult.jsonBody ?? ''))
+    if ((updateResult.succeeded ?? true)) {
+      location = (updateResult.jsonBody ?? '') != null &&
+              (updateResult.jsonBody ?? '') != ''
+          ? LorrySiteDTOStruct.fromMap((updateResult.jsonBody ?? ''))
           : null;
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Failed to get location data',
+            'Failed to load location',
             style: FlutterFlowTheme.of(context).bodyMedium.override(
                   fontFamily: 'Readex Pro',
                   color: FlutterFlowTheme.of(context).primaryText,
