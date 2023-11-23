@@ -43,14 +43,18 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
                 ? LorrySiteDTOStruct.fromMap(widget.locationJSON)
                 : null;
       });
+      setState(() {
+        _model.textController1?.text = _model.location!.name;
+      });
+      setState(() {
+        _model.textController2?.text = _model.location!.address;
+      });
     });
 
-    _model.textController1 ??=
-        TextEditingController(text: _model.location?.name);
+    _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.textController2 ??=
-        TextEditingController(text: _model.location?.address);
+    _model.textController2 ??= TextEditingController();
     _model.textFieldFocusNode2 ??= FocusNode();
   }
 

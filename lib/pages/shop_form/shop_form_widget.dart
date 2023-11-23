@@ -1,9 +1,11 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'shop_form_model.dart';
@@ -33,11 +35,23 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
     super.initState();
     _model = createModel(context, () => ShopFormModel());
 
-    _model.textController1 ??= TextEditingController(text: _model.shop?.name);
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.shop = widget.shopJSON != null && widget.shopJSON != ''
+          ? ShopDTOStruct.fromMap(widget.shopJSON)
+          : null;
+      setState(() {
+        _model.textController1?.text = _model.shop!.name;
+      });
+      setState(() {
+        _model.textController2?.text = _model.shop!.address;
+      });
+    });
+
+    _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.textController2 ??=
-        TextEditingController(text: _model.shop?.address);
+    _model.textController2 ??= TextEditingController();
     _model.textFieldFocusNode2 ??= FocusNode();
   }
 

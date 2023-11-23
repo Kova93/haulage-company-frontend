@@ -257,11 +257,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Size',
       'hu': '',
     },
-    'r93ubbvl': {
+    '2xjmlz25': {
       'en': 'Weight',
       'hu': '',
     },
-    'y9i0jb0c': {
+    'oq8l3jds': {
       'en': 'Quantity',
       'hu': '',
     },
@@ -297,19 +297,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Please choose an option from the dropdown',
       'hu': '',
     },
-    'xkfmofqu': {
+    'ht35h569': {
       'en': 'Field is required',
       'hu': '',
     },
-    'zrekabd3': {
+    'hfil9h85': {
       'en': 'Please choose an option from the dropdown',
       'hu': '',
     },
-    'c6j4riq2': {
+    '4c6wmsda': {
       'en': 'Field is required',
       'hu': '',
     },
-    'zqgmsp3q': {
+    'n8ngmyo1': {
       'en': 'Please choose an option from the dropdown',
       'hu': '',
     },
@@ -414,15 +414,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Maximum weight',
       'hu': '',
     },
-    'ud9z6uyb': {
+    '4m0hch13': {
       'en': 'Option 1',
       'hu': '',
     },
-    '57k6unuv': {
+    '3dj9zr0w': {
       'en': 'Location',
       'hu': '',
     },
-    'ud31li34': {
+    'iimzy7w0': {
       'en': 'Search for an item...',
       'hu': '',
     },
@@ -512,7 +512,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Shop',
       'hu': 'Cím',
     },
-    'rrqmnv3r': {
+    'dbccp7n4': {
       'en': 'Goods',
       'hu': '',
     },
@@ -659,31 +659,31 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // AddQuantityDialog
   {
-    '6grmsale': {
+    'bv80zuy9': {
       'en': 'Add quantity to good',
       'hu': '',
     },
-    'z5ga0b45': {
+    '0g0lr0mh': {
       'en': 'Quantity',
       'hu': '',
     },
-    'mjkj1oz1': {
+    '4qi2s3xa': {
       'en': '0',
       'hu': '',
     },
-    'qa2ty6dn': {
+    'a6eelskv': {
       'en': 'Field is required',
       'hu': '',
     },
-    'jj6rs13o': {
+    'f4omoa6x': {
       'en': 'Please choose an option from the dropdown',
       'hu': '',
     },
-    'i02w1jv9': {
+    'qv1vbteq': {
       'en': 'Cancel',
       'hu': '',
     },
-    '0a4qqq3j': {
+    'kibdjc3y': {
       'en': 'Confirm',
       'hu': '',
     },

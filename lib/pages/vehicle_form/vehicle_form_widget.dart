@@ -75,18 +75,35 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
             ? VehicleDTOStruct.fromMap(widget.vehicleJSON)
             : null;
       });
+      setState(() {
+        _model.textController1?.text = _model.vehicle!.licensePlate;
+      });
+      setState(() {
+        _model.textController2?.text = _model.vehicle!.size.toString();
+      });
+      setState(() {
+        _model.textController3?.text = _model.vehicle!.maxWeight.toString();
+      });
+      setState(() {
+        _model.dropDownValueController?.value = _model.locations
+            .where((e) =>
+                (widget.locationID != null
+                    ? widget.locationID!
+                    : _model.vehicle!.lorrySiteID) ==
+                e.id)
+            .toList()
+            .first
+            .name;
+      });
     });
 
-    _model.textController1 ??=
-        TextEditingController(text: _model.vehicle?.licensePlate);
+    _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.textController2 ??=
-        TextEditingController(text: _model.vehicle?.size.toString());
+    _model.textController2 ??= TextEditingController();
     _model.textFieldFocusNode2 ??= FocusNode();
 
-    _model.textController3 ??=
-        TextEditingController(text: _model.vehicle?.maxWeight.toString());
+    _model.textController3 ??= TextEditingController();
     _model.textFieldFocusNode3 ??= FocusNode();
   }
 
@@ -326,7 +343,7 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                       height: 50.0,
                       textStyle: FlutterFlowTheme.of(context).bodyLarge,
                       hintText: FFLocalizations.of(context).getText(
-                        '57k6unuv' /* Location */,
+                        '3dj9zr0w' /* Location */,
                       ),
                       icon: Icon(
                         Icons.keyboard_arrow_down_rounded,

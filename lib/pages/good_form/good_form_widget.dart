@@ -44,25 +44,36 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
             ? GoodDTOStruct.fromMap(widget.goodJSON)
             : null;
       });
+      setState(() {
+        _model.textController1?.text = _model.good!.name;
+      });
+      setState(() {
+        _model.textController2?.text = _model.good!.description;
+      });
+      setState(() {
+        _model.textController3?.text = _model.good!.size.toString();
+      });
+      setState(() {
+        _model.textController4?.text = _model.good!.weight.toString();
+      });
+      setState(() {
+        _model.textController5?.text = _model.good!.quantity.toString();
+      });
     });
 
-    _model.textController1 ??= TextEditingController(text: _model.good?.name);
+    _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.textController2 ??=
-        TextEditingController(text: _model.good?.description);
+    _model.textController2 ??= TextEditingController();
     _model.textFieldFocusNode2 ??= FocusNode();
 
-    _model.textController3 ??=
-        TextEditingController(text: _model.good?.size.toString());
+    _model.textController3 ??= TextEditingController();
     _model.textFieldFocusNode3 ??= FocusNode();
 
-    _model.textController4 ??=
-        TextEditingController(text: _model.good?.weight.toString());
+    _model.textController4 ??= TextEditingController();
     _model.textFieldFocusNode4 ??= FocusNode();
 
-    _model.textController5 ??=
-        TextEditingController(text: _model.good?.quantity.toString());
+    _model.textController5 ??= TextEditingController();
     _model.textFieldFocusNode5 ??= FocusNode();
   }
 
@@ -288,7 +299,7 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          'r93ubbvl' /* Weight */,
+                          '2xjmlz25' /* Weight */,
                         ),
                         labelStyle: FlutterFlowTheme.of(context).labelLarge,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
@@ -341,7 +352,7 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          'y9i0jb0c' /* Quantity */,
+                          'oq8l3jds' /* Quantity */,
                         ),
                         labelStyle: FlutterFlowTheme.of(context).labelLarge,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
