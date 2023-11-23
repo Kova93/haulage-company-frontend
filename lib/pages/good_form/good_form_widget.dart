@@ -277,8 +277,7 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                       validator:
                           _model.textController3Validator.asValidator(context),
                       inputFormatters: [
-                        FilteringTextInputFormatter.allow(
-                            RegExp('\\d+(\\.\\d+)?'))
+                        FilteringTextInputFormatter.allow(RegExp('(\\d|\\.)'))
                       ],
                     ),
                     TextFormField(
@@ -289,7 +288,7 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          'jjv8x3dl' /* Weight */,
+                          'r93ubbvl' /* Weight */,
                         ),
                         labelStyle: FlutterFlowTheme.of(context).labelLarge,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
@@ -331,8 +330,7 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                       validator:
                           _model.textController4Validator.asValidator(context),
                       inputFormatters: [
-                        FilteringTextInputFormatter.allow(
-                            RegExp('\\d+(\\.\\d+)?'))
+                        FilteringTextInputFormatter.allow(RegExp('(\\d|\\.)'))
                       ],
                     ),
                     TextFormField(
@@ -343,7 +341,7 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          'lz6s4ver' /* Quantity */,
+                          'y9i0jb0c' /* Quantity */,
                         ),
                         labelStyle: FlutterFlowTheme.of(context).labelLarge,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,

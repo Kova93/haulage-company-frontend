@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'shop_form_widget.dart' show ShopFormWidget;
@@ -6,9 +7,9 @@ import 'package:flutter/material.dart';
 class ShopFormModel extends FlutterFlowModel<ShopFormWidget> {
   ///  Local state fields for this page.
 
-  ShopStruct? shop;
-  void updateShopStruct(Function(ShopStruct) updateFn) =>
-      updateFn(shop ??= ShopStruct());
+  ShopDTOStruct? shop;
+  void updateShopStruct(Function(ShopDTOStruct) updateFn) =>
+      updateFn(shop ??= ShopDTOStruct());
 
   ///  State fields for stateful widgets in this page.
 
@@ -39,13 +40,13 @@ class ShopFormModel extends FlutterFlowModel<ShopFormWidget> {
       );
     }
 
-    if (!RegExp(kTextValidatorEmailRegex).hasMatch(val)) {
-      return FFLocalizations.of(context).getText(
-        '0zttssb2' /* Has to be a valid email addres... */,
-      );
-    }
     return null;
   }
+
+  // Stores action output result for [Backend Call - API (updateShop)] action in ConfirmButton widget.
+  ApiCallResponse? updateResult;
+  // Stores action output result for [Backend Call - API (createShop)] action in ConfirmButton widget.
+  ApiCallResponse? createResult;
 
   /// Initialization and disposal methods.
 

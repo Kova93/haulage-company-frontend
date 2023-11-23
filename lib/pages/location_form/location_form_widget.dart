@@ -37,14 +37,12 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (widget.locationJSON!) {
-        setState(() {
-          _model.location =
-              widget.locationJSON != null && widget.locationJSON != ''
-                  ? LorrySiteDTOStruct.fromMap(widget.locationJSON)
-                  : null;
-        });
-      }
+      setState(() {
+        _model.location =
+            widget.locationJSON != null && widget.locationJSON != ''
+                ? LorrySiteDTOStruct.fromMap(widget.locationJSON)
+                : null;
+      });
     });
 
     _model.textController1 ??=

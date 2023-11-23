@@ -236,6 +236,12 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                               true,
                                                               ParamType.bool,
                                                             ),
+                                                            'vehicleJSON':
+                                                                serializeParam(
+                                                              vehiclesListItem
+                                                                  .toMap(),
+                                                              ParamType.JSON,
+                                                            ),
                                                           }.withoutNulls,
                                                         );
                                                       },
@@ -362,6 +368,10 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                       'isExisting': serializeParam(
                                         false,
                                         ParamType.bool,
+                                      ),
+                                      'locationID': serializeParam(
+                                        _model.location?.id,
+                                        ParamType.int,
                                       ),
                                     }.withoutNulls,
                                   );

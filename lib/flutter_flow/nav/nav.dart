@@ -89,6 +89,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/shopForm',
           builder: (context, params) => ShopFormWidget(
             isExisting: params.getParam('isExisting', ParamType.bool),
+            shopJSON: params.getParam('shopJSON', ParamType.JSON),
           ),
         ),
         FFRoute(
@@ -96,6 +97,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/vehicleForm',
           builder: (context, params) => VehicleFormWidget(
             isExisting: params.getParam('isExisting', ParamType.bool),
+            vehicleJSON: params.getParam('vehicleJSON', ParamType.JSON),
+            locationID: params.getParam('locationID', ParamType.int),
           ),
         ),
         FFRoute(

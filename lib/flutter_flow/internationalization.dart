@@ -257,11 +257,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Size',
       'hu': '',
     },
-    'jjv8x3dl': {
+    'r93ubbvl': {
       'en': 'Weight',
       'hu': '',
     },
-    'lz6s4ver': {
+    'y9i0jb0c': {
       'en': 'Quantity',
       'hu': '',
     },
@@ -297,19 +297,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Please choose an option from the dropdown',
       'hu': '',
     },
-    'fcbhs2q7': {
+    'xkfmofqu': {
       'en': 'Field is required',
       'hu': '',
     },
-    'rfcido8j': {
+    'zrekabd3': {
       'en': 'Please choose an option from the dropdown',
       'hu': '',
     },
-    'kjs4qol7': {
+    'c6j4riq2': {
       'en': 'Field is required',
       'hu': '',
     },
-    'pocvubbw': {
+    'zqgmsp3q': {
       'en': 'Please choose an option from the dropdown',
       'hu': '',
     },
@@ -364,7 +364,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'hu': '',
     },
     '8t2guohp': {
-      'en': 'Contact',
+      'en': 'Address',
       'hu': '',
     },
     'rm84sigc': {
@@ -407,11 +407,23 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'hu': '',
     },
     '1hvpc6hc': {
-      'en': 'Brand name',
+      'en': 'Size',
       'hu': '',
     },
     'dv3cqh30': {
-      'en': 'Type',
+      'en': 'Maximum weight',
+      'hu': '',
+    },
+    'ud9z6uyb': {
+      'en': 'Option 1',
+      'hu': '',
+    },
+    '57k6unuv': {
+      'en': 'Location',
+      'hu': '',
+    },
+    'ud31li34': {
+      'en': 'Search for an item...',
       'hu': '',
     },
     'wdh12arj': {
@@ -500,7 +512,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Shop',
       'hu': 'Cím',
     },
-    'bfqxrbnk': {
+    'rrqmnv3r': {
       'en': 'Goods',
       'hu': '',
     },
@@ -647,31 +659,31 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // AddQuantityDialog
   {
-    '8jbf90c5': {
+    '6grmsale': {
       'en': 'Add quantity to good',
       'hu': '',
     },
-    'y28nwitv': {
+    'z5ga0b45': {
       'en': 'Quantity',
       'hu': '',
     },
-    'jabm4sna': {
+    'mjkj1oz1': {
       'en': '0',
       'hu': '',
     },
-    'd7je085f': {
+    'qa2ty6dn': {
       'en': 'Field is required',
       'hu': '',
     },
-    'ojlujiff': {
+    'jj6rs13o': {
       'en': 'Please choose an option from the dropdown',
       'hu': '',
     },
-    '8w4l0bgb': {
+    'i02w1jv9': {
       'en': 'Cancel',
       'hu': '',
     },
-    'oiod804p': {
+    '0a4qqq3j': {
       'en': 'Confirm',
       'hu': '',
     },

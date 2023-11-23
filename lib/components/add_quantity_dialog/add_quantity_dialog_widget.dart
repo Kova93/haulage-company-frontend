@@ -49,7 +49,7 @@ class _AddQuantityDialogWidgetState extends State<AddQuantityDialogWidget> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
           _model.textController?.text = FFLocalizations.of(context).getText(
-            'jabm4sna' /* 0 */,
+            'mjkj1oz1' /* 0 */,
           );
         }));
   }
@@ -72,7 +72,7 @@ class _AddQuantityDialogWidgetState extends State<AddQuantityDialogWidget> {
         children: [
           Text(
             FFLocalizations.of(context).getText(
-              '8jbf90c5' /* Add quantity to good */,
+              '6grmsale' /* Add quantity to good */,
             ),
             style: FlutterFlowTheme.of(context).titleLarge,
           ),
@@ -87,7 +87,7 @@ class _AddQuantityDialogWidgetState extends State<AddQuantityDialogWidget> {
               obscureText: false,
               decoration: InputDecoration(
                 labelText: FFLocalizations.of(context).getText(
-                  'y28nwitv' /* Quantity */,
+                  'z5ga0b45' /* Quantity */,
                 ),
                 labelStyle: FlutterFlowTheme.of(context).labelLarge,
                 hintStyle: FlutterFlowTheme.of(context).labelMedium,
@@ -139,7 +139,7 @@ class _AddQuantityDialogWidgetState extends State<AddQuantityDialogWidget> {
                   Navigator.pop(context);
                 },
                 text: FFLocalizations.of(context).getText(
-                  '8w4l0bgb' /* Cancel */,
+                  'i02w1jv9' /* Cancel */,
                 ),
                 options: FFButtonOptions(
                   height: 40.0,
@@ -198,7 +198,7 @@ class _AddQuantityDialogWidgetState extends State<AddQuantityDialogWidget> {
                   setState(() {});
                 },
                 text: FFLocalizations.of(context).getText(
-                  'oiod804p' /* Confirm */,
+                  '0a4qqq3j' /* Confirm */,
                 ),
                 options: FFButtonOptions(
                   height: 40.0,

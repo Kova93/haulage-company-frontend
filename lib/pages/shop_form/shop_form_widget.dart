@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -12,9 +13,11 @@ class ShopFormWidget extends StatefulWidget {
   const ShopFormWidget({
     super.key,
     required this.isExisting,
+    this.shopJSON,
   });
 
   final bool? isExisting;
+  final dynamic shopJSON;
 
   @override
   _ShopFormWidgetState createState() => _ShopFormWidgetState();
@@ -34,7 +37,7 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
     _model.textFieldFocusNode1 ??= FocusNode();
 
     _model.textController2 ??=
-        TextEditingController(text: _model.shop?.contact);
+        TextEditingController(text: _model.shop?.address);
     _model.textFieldFocusNode2 ??= FocusNode();
   }
 
@@ -158,7 +161,7 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          '8t2guohp' /* Contact */,
+                          '8t2guohp' /* Address */,
                         ),
                         labelStyle: FlutterFlowTheme.of(context).labelLarge,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
@@ -233,26 +236,69 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
                                 !_model.formKey.currentState!.validate()) {
                               return;
                             }
-                            await Future.delayed(
-                                const Duration(milliseconds: 100));
-                            if (true) {
-                              context.safePop();
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'Submit failed',
-                                    style: TextStyle(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                    ),
-                                  ),
-                                  duration: const Duration(milliseconds: 4000),
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).error,
-                                ),
+                            _model.updateShopStruct(
+                              (e) => e
+                                ..name = _model.textController1.text
+                                ..address = _model.textController2.text,
+                            );
+                            if (widget.isExisting!) {
+                              _model.updateResult = await HaulageCompanyAPIGroup
+                                  .updateShopCall
+                                  .call(
+                                id: _model.shop?.id,
+                                shopJson: _model.shop?.toMap(),
                               );
+                              if ((_model.updateResult?.succeeded ?? true)) {
+                                context.safePop();
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Failed to update shop',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
+                                    ),
+                                    duration: const Duration(milliseconds: 4000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context).error,
+                                  ),
+                                );
+                              }
+                            } else {
+                              _model.createResult = await HaulageCompanyAPIGroup
+                                  .createShopCall
+                                  .call(
+                                shopJson: _model.shop?.toMap(),
+                              );
+                              if ((_model.createResult?.succeeded ?? true)) {
+                                context.safePop();
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Failed to create shop',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
+                                    ),
+                                    duration: const Duration(milliseconds: 4000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context).error,
+                                  ),
+                                );
+                              }
                             }
+
+                            setState(() {});
                           },
                           text: FFLocalizations.of(context).getText(
                             '2rfpf045' /* Confirm */,

@@ -205,6 +205,10 @@ class _VehiclesListPageWidgetState extends State<VehiclesListPageWidget> {
                                                   true,
                                                   ParamType.bool,
                                                 ),
+                                                'vehicleJSON': serializeParam(
+                                                  vehiclesListItem.toMap(),
+                                                  ParamType.JSON,
+                                                ),
                                               }.withoutNulls,
                                             );
                                           },

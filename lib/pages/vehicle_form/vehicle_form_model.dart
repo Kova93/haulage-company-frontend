@@ -1,19 +1,33 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'vehicle_form_widget.dart' show VehicleFormWidget;
 import 'package:flutter/material.dart';
 
 class VehicleFormModel extends FlutterFlowModel<VehicleFormWidget> {
   ///  Local state fields for this page.
 
-  VehicleStruct? vehicle;
-  void updateVehicleStruct(Function(VehicleStruct) updateFn) =>
-      updateFn(vehicle ??= VehicleStruct());
+  VehicleDTOStruct? vehicle;
+  void updateVehicleStruct(Function(VehicleDTOStruct) updateFn) =>
+      updateFn(vehicle ??= VehicleDTOStruct());
+
+  List<LorrySiteDTOStruct> locations = [];
+  void addToLocations(LorrySiteDTOStruct item) => locations.add(item);
+  void removeFromLocations(LorrySiteDTOStruct item) => locations.remove(item);
+  void removeAtIndexFromLocations(int index) => locations.removeAt(index);
+  void insertAtIndexInLocations(int index, LorrySiteDTOStruct item) =>
+      locations.insert(index, item);
+  void updateLocationsAtIndex(
+          int index, Function(LorrySiteDTOStruct) updateFn) =>
+      locations[index] = updateFn(locations[index]);
 
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
+  // Stores action output result for [Backend Call - API (getAllLocations)] action in VehicleForm widget.
+  ApiCallResponse? getResult;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;
@@ -55,6 +69,14 @@ class VehicleFormModel extends FlutterFlowModel<VehicleFormWidget> {
 
     return null;
   }
+
+  // State field(s) for DropDown widget.
+  String? dropDownValue;
+  FormFieldController<String>? dropDownValueController;
+  // Stores action output result for [Backend Call - API (updateVehicle)] action in ConfirmButton widget.
+  ApiCallResponse? updateResult;
+  // Stores action output result for [Backend Call - API (createVehicle)] action in ConfirmButton widget.
+  ApiCallResponse? createResult;
 
   /// Initialization and disposal methods.
 
