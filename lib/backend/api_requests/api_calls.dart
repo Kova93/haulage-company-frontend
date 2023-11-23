@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
 
 export 'api_manager.dart' show ApiCallResponse;
@@ -9,7 +10,7 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 /// Start Haulage Company API Group Code
 
 class HaulageCompanyAPIGroup {
-  static String baseUrl = 'localhost/api';
+  static String baseUrl = 'http://localhost:8080/api';
   static Map<String, String> headers = {};
   static GetAllGoodsCall getAllGoodsCall = GetAllGoodsCall();
   static CreateGoodCall createGoodCall = CreateGoodCall();
@@ -225,6 +226,12 @@ class GetAllLocationsCall {
       cache: false,
     );
   }
+
+  dynamic rootList(dynamic response) => getJsonField(
+        response,
+        r'''$''',
+        true,
+      );
 }
 
 class GetLocationByIdCall {

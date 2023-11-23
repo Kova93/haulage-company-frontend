@@ -429,7 +429,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Size',
       'hu': 'Cím',
     },
-    'hkpkpwhx': {
+    'zhemtemq': {
       'en': 'Max weight',
       'hu': '',
     },
@@ -441,15 +441,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Description',
       'hu': 'Cím',
     },
-    'y1d47mde': {
+    'yhvofjt3': {
       'en': 'Size',
       'hu': '',
     },
-    '64af8m88': {
+    'xtwc8hqd': {
       'en': 'Weight',
       'hu': '',
     },
-    '2s2cn7j8': {
+    'f476pkes': {
       'en': 'Quantity',
       'hu': '',
     },
@@ -570,6 +570,37 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'hu': 'Cím',
     },
     'v1czhin2': {
+      'en': 'Home',
+      'hu': '',
+    },
+  },
+  // login
+  {
+    'rpjhe0mk': {
+      'en': 'Haulage Company',
+      'hu': '',
+    },
+    'err0vg6r': {
+      'en': 'Welcome Back',
+      'hu': '',
+    },
+    '0cuh8ea3': {
+      'en': 'Fill out the information below in order to access your account.',
+      'hu': '',
+    },
+    'vl44ev4x': {
+      'en': 'Email',
+      'hu': '',
+    },
+    'us5q2fxx': {
+      'en': 'Password',
+      'hu': '',
+    },
+    'stea767j': {
+      'en': 'Sign In',
+      'hu': '',
+    },
+    'fqb4f957': {
       'en': 'Home',
       'hu': '',
     },

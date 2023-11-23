@@ -123,6 +123,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'TransportsListPage',
           path: '/transportsListPage',
           builder: (context, params) => const TransportsListPageWidget(),
+        ),
+        FFRoute(
+          name: 'login',
+          path: '/login',
+          builder: (context, params) => const LoginWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

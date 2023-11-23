@@ -41,11 +41,16 @@ class LocationsListPageModel extends FlutterFlowModel<LocationsListPageWidget> {
 
     locationsJSON = await HaulageCompanyAPIGroup.getAllLocationsCall.call();
     if ((locationsJSON.succeeded ?? true)) {
-      locations =
-          LorrySiteDTOListStruct.fromMap((locationsJSON.jsonBody ?? ''))
-              .sites
-              .toList()
-              .cast<LorrySiteDTOStruct>();
+      locations = HaulageCompanyAPIGroup.getAllLocationsCall
+          .rootList(
+            (locationsJSON.jsonBody ?? ''),
+          )!
+          .map((e) =>
+              e != null && e != '' ? LorrySiteDTOStruct.fromMap(e) : null)
+          .withoutNulls
+          .toList()
+          .toList()
+          .cast<LorrySiteDTOStruct>();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

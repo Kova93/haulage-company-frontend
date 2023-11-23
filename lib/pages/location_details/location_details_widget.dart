@@ -156,7 +156,7 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                               Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
-                                                  'hkpkpwhx' /* Max weight */,
+                                                  'zhemtemq' /* Max weight */,
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -408,7 +408,7 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                               Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
-                                                  'y1d47mde' /* Size */,
+                                                  'yhvofjt3' /* Size */,
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -429,7 +429,7 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                               Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
-                                                  '64af8m88' /* Weight */,
+                                                  'xtwc8hqd' /* Weight */,
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -450,7 +450,7 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                               Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
-                                                  '2s2cn7j8' /* Quantity */,
+                                                  'f476pkes' /* Quantity */,
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
