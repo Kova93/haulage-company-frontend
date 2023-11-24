@@ -47,24 +47,25 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
             : null;
       });
       setState(() {
-        _model.textController1?.text = _model.vehicle!.licensePlate;
+        _model.licensePlateFieldController?.text = _model.vehicle!.licensePlate;
       });
       setState(() {
-        _model.textController2?.text = _model.vehicle!.size.toString();
+        _model.sizeFieldController?.text = _model.vehicle!.size.toString();
       });
       setState(() {
-        _model.textController3?.text = _model.vehicle!.maxWeight.toString();
+        _model.weightFieldController?.text =
+            _model.vehicle!.maxWeight.toString();
       });
     });
 
-    _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode1 ??= FocusNode();
+    _model.licensePlateFieldController ??= TextEditingController();
+    _model.licensePlateFieldFocusNode ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController();
-    _model.textFieldFocusNode2 ??= FocusNode();
+    _model.sizeFieldController ??= TextEditingController();
+    _model.sizeFieldFocusNode ??= FocusNode();
 
-    _model.textController3 ??= TextEditingController();
-    _model.textFieldFocusNode3 ??= FocusNode();
+    _model.weightFieldController ??= TextEditingController();
+    _model.weightFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -154,8 +155,8 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TextFormField(
-                          controller: _model.textController1,
-                          focusNode: _model.textFieldFocusNode1,
+                          controller: _model.licensePlateFieldController,
+                          focusNode: _model.licensePlateFieldFocusNode,
                           autofocus: true,
                           textInputAction: TextInputAction.next,
                           obscureText: false,
@@ -198,12 +199,12 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                                 .secondaryBackground,
                           ),
                           style: FlutterFlowTheme.of(context).bodyLarge,
-                          validator: _model.textController1Validator
+                          validator: _model.licensePlateFieldControllerValidator
                               .asValidator(context),
                         ),
                         TextFormField(
-                          controller: _model.textController2,
-                          focusNode: _model.textFieldFocusNode2,
+                          controller: _model.sizeFieldController,
+                          focusNode: _model.sizeFieldFocusNode,
                           autofocus: true,
                           textInputAction: TextInputAction.next,
                           obscureText: false,
@@ -249,7 +250,7 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                           maxLines: null,
                           keyboardType: const TextInputType.numberWithOptions(
                               decimal: true),
-                          validator: _model.textController2Validator
+                          validator: _model.sizeFieldControllerValidator
                               .asValidator(context),
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
@@ -257,8 +258,8 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                           ],
                         ),
                         TextFormField(
-                          controller: _model.textController3,
-                          focusNode: _model.textFieldFocusNode3,
+                          controller: _model.weightFieldController,
+                          focusNode: _model.weightFieldFocusNode,
                           autofocus: true,
                           textInputAction: TextInputAction.next,
                           obscureText: false,
@@ -303,7 +304,7 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                           style: FlutterFlowTheme.of(context).bodyLarge,
                           keyboardType: const TextInputType.numberWithOptions(
                               decimal: true),
-                          validator: _model.textController3Validator
+                          validator: _model.weightFieldControllerValidator
                               .asValidator(context),
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
@@ -311,9 +312,9 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                           ],
                         ),
                         FlutterFlowDropDown<String>(
-                          controller: _model.dropDownValueController ??=
+                          controller: _model.locationDropDownValueController ??=
                               FormFieldController<String>(
-                            _model.dropDownValue ??= ((HaulageCompanyAPIGroup
+                            _model.locationDropDownValue ??= ((HaulageCompanyAPIGroup
                                                     .getAllLocationsCall
                                                     .rootList(
                                               vehicleFormGetAllLocationsResponse
@@ -323,41 +324,22 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                                                     (s) => s.toString())
                                                 .toList()
                                                 .where((e) =>
-                                                    valueOrDefault<bool>(
-                                                      (widget.locationID != null
-                                                              ? widget
-                                                                  .locationID!
-                                                              : _model.vehicle!
-                                                                  .lorrySiteID) ==
-                                                          LorrySiteDTOStruct
-                                                                  .fromMap(e)
-                                                              .id,
-                                                      false,
-                                                    ))
+                                                    (widget.locationID != null
+                                                        ? widget.locationID!
+                                                        : _model.vehicle!.lorrySiteID) ==
+                                                    LorrySiteDTOStruct.fromMap(e).id)
                                                 .toList()
                                                 .first !=
                                             ''
-                                    ? LorrySiteDTOStruct.fromMap(
-                                        (HaulageCompanyAPIGroup
-                                                .getAllLocationsCall
-                                                .rootList(
+                                    ? LorrySiteDTOStruct.fromMap((HaulageCompanyAPIGroup.getAllLocationsCall.rootList(
                                         vehicleFormGetAllLocationsResponse
                                             .jsonBody,
                                       ) as List)
-                                            .map<String>((s) => s.toString())
-                                            .toList()
-                                            .where((e) => valueOrDefault<bool>(
-                                                  (widget.locationID != null
-                                                          ? widget.locationID!
-                                                          : _model.vehicle!
-                                                              .lorrySiteID) ==
-                                                      LorrySiteDTOStruct
-                                                              .fromMap(e)
-                                                          .id,
-                                                  false,
-                                                ))
-                                            .toList()
-                                            .first)
+                                        .map<String>((s) => s.toString())
+                                        .toList()
+                                        .where((e) => (widget.locationID != null ? widget.locationID! : _model.vehicle!.lorrySiteID) == LorrySiteDTOStruct.fromMap(e).id)
+                                        .toList()
+                                        .first)
                                     : null)
                                 ?.name,
                           ),
@@ -372,8 +354,8 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                                   ?.name)
                               .withoutNulls
                               .toList(),
-                          onChanged: (val) =>
-                              setState(() => _model.dropDownValue = val),
+                          onChanged: (val) => setState(
+                              () => _model.locationDropDownValue = val),
                           height: 50.0,
                           textStyle: FlutterFlowTheme.of(context).bodyLarge,
                           hintText: FFLocalizations.of(context).getText(
@@ -432,11 +414,12 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                                 }
                                 _model.updateVehicleStruct(
                                   (e) => e
-                                    ..licensePlate = _model.textController1.text
+                                    ..licensePlate =
+                                        _model.licensePlateFieldController.text
                                     ..size = double.tryParse(
-                                        _model.textController2.text)
+                                        _model.sizeFieldController.text)
                                     ..maxWeight = double.tryParse(
-                                        _model.textController3.text)
+                                        _model.weightFieldController.text)
                                     ..lorrySiteID = (HaulageCompanyAPIGroup
                                                         .getAllLocationsCall
                                                         .rootList(
@@ -445,7 +428,7 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                                                         )
                                                         .where((e) =>
                                                             _model
-                                                                .dropDownValue! ==
+                                                                .locationDropDownValue! ==
                                                             LorrySiteDTOStruct
                                                                     .fromMap(e)
                                                                 .name)
@@ -460,7 +443,7 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                                                         )
                                                         .where((e) =>
                                                             _model
-                                                                .dropDownValue! ==
+                                                                .locationDropDownValue! ==
                                                             LorrySiteDTOStruct
                                                                     .fromMap(e)
                                                                 .name)
@@ -475,7 +458,8 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                                                           .jsonBody,
                                                     )
                                                     .where((e) =>
-                                                        _model.dropDownValue! ==
+                                                        _model
+                                                            .locationDropDownValue! ==
                                                         LorrySiteDTOStruct
                                                                 .fromMap(e)
                                                             .name)

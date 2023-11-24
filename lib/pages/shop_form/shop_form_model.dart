@@ -15,11 +15,11 @@ class ShopFormModel extends FlutterFlowModel<ShopFormWidget> {
 
   final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode1;
-  TextEditingController? textController1;
-  String? Function(BuildContext, String?)? textController1Validator;
-  String? _textController1Validator(BuildContext context, String? val) {
+  // State field(s) for NameField widget.
+  FocusNode? nameFieldFocusNode;
+  TextEditingController? nameFieldController;
+  String? Function(BuildContext, String?)? nameFieldControllerValidator;
+  String? _nameFieldControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
         'kjz33d80' /* Field is required */,
@@ -29,11 +29,11 @@ class ShopFormModel extends FlutterFlowModel<ShopFormWidget> {
     return null;
   }
 
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode2;
-  TextEditingController? textController2;
-  String? Function(BuildContext, String?)? textController2Validator;
-  String? _textController2Validator(BuildContext context, String? val) {
+  // State field(s) for AddressField widget.
+  FocusNode? addressFieldFocusNode;
+  TextEditingController? addressFieldController;
+  String? Function(BuildContext, String?)? addressFieldControllerValidator;
+  String? _addressFieldControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
         'lia2uahk' /* Field is required */,
@@ -52,18 +52,18 @@ class ShopFormModel extends FlutterFlowModel<ShopFormWidget> {
 
   @override
   void initState(BuildContext context) {
-    textController1Validator = _textController1Validator;
-    textController2Validator = _textController2Validator;
+    nameFieldControllerValidator = _nameFieldControllerValidator;
+    addressFieldControllerValidator = _addressFieldControllerValidator;
   }
 
   @override
   void dispose() {
     unfocusNode.dispose();
-    textFieldFocusNode1?.dispose();
-    textController1?.dispose();
+    nameFieldFocusNode?.dispose();
+    nameFieldController?.dispose();
 
-    textFieldFocusNode2?.dispose();
-    textController2?.dispose();
+    addressFieldFocusNode?.dispose();
+    addressFieldController?.dispose();
   }
 
   /// Action blocks are added here.

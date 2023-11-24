@@ -16,11 +16,12 @@ class VehicleFormModel extends FlutterFlowModel<VehicleFormWidget> {
 
   final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode1;
-  TextEditingController? textController1;
-  String? Function(BuildContext, String?)? textController1Validator;
-  String? _textController1Validator(BuildContext context, String? val) {
+  // State field(s) for LicensePlateField widget.
+  FocusNode? licensePlateFieldFocusNode;
+  TextEditingController? licensePlateFieldController;
+  String? Function(BuildContext, String?)? licensePlateFieldControllerValidator;
+  String? _licensePlateFieldControllerValidator(
+      BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
         'zs5szbt9' /* Field is required */,
@@ -30,11 +31,11 @@ class VehicleFormModel extends FlutterFlowModel<VehicleFormWidget> {
     return null;
   }
 
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode2;
-  TextEditingController? textController2;
-  String? Function(BuildContext, String?)? textController2Validator;
-  String? _textController2Validator(BuildContext context, String? val) {
+  // State field(s) for SizeField widget.
+  FocusNode? sizeFieldFocusNode;
+  TextEditingController? sizeFieldController;
+  String? Function(BuildContext, String?)? sizeFieldControllerValidator;
+  String? _sizeFieldControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
         'glssoky6' /* Field is required */,
@@ -44,11 +45,11 @@ class VehicleFormModel extends FlutterFlowModel<VehicleFormWidget> {
     return null;
   }
 
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode3;
-  TextEditingController? textController3;
-  String? Function(BuildContext, String?)? textController3Validator;
-  String? _textController3Validator(BuildContext context, String? val) {
+  // State field(s) for WeightField widget.
+  FocusNode? weightFieldFocusNode;
+  TextEditingController? weightFieldController;
+  String? Function(BuildContext, String?)? weightFieldControllerValidator;
+  String? _weightFieldControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
         'puxlvlgy' /* Field is required */,
@@ -58,9 +59,9 @@ class VehicleFormModel extends FlutterFlowModel<VehicleFormWidget> {
     return null;
   }
 
-  // State field(s) for DropDown widget.
-  String? dropDownValue;
-  FormFieldController<String>? dropDownValueController;
+  // State field(s) for LocationDropDown widget.
+  String? locationDropDownValue;
+  FormFieldController<String>? locationDropDownValueController;
   // Stores action output result for [Backend Call - API (updateVehicle)] action in ConfirmButton widget.
   ApiCallResponse? updateResult;
   // Stores action output result for [Backend Call - API (createVehicle)] action in ConfirmButton widget.
@@ -70,22 +71,23 @@ class VehicleFormModel extends FlutterFlowModel<VehicleFormWidget> {
 
   @override
   void initState(BuildContext context) {
-    textController1Validator = _textController1Validator;
-    textController2Validator = _textController2Validator;
-    textController3Validator = _textController3Validator;
+    licensePlateFieldControllerValidator =
+        _licensePlateFieldControllerValidator;
+    sizeFieldControllerValidator = _sizeFieldControllerValidator;
+    weightFieldControllerValidator = _weightFieldControllerValidator;
   }
 
   @override
   void dispose() {
     unfocusNode.dispose();
-    textFieldFocusNode1?.dispose();
-    textController1?.dispose();
+    licensePlateFieldFocusNode?.dispose();
+    licensePlateFieldController?.dispose();
 
-    textFieldFocusNode2?.dispose();
-    textController2?.dispose();
+    sizeFieldFocusNode?.dispose();
+    sizeFieldController?.dispose();
 
-    textFieldFocusNode3?.dispose();
-    textController3?.dispose();
+    weightFieldFocusNode?.dispose();
+    weightFieldController?.dispose();
   }
 
   /// Action blocks are added here.

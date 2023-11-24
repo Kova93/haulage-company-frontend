@@ -45,36 +45,36 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
             : null;
       });
       setState(() {
-        _model.textController1?.text = _model.good!.name;
+        _model.nameFieldController?.text = _model.good!.name;
       });
       setState(() {
-        _model.textController2?.text = _model.good!.description;
+        _model.descriptionFieldController?.text = _model.good!.description;
       });
       setState(() {
-        _model.textController3?.text = _model.good!.size.toString();
+        _model.sizeFieldController?.text = _model.good!.size.toString();
       });
       setState(() {
-        _model.textController4?.text = _model.good!.weight.toString();
+        _model.weightFieldController?.text = _model.good!.weight.toString();
       });
       setState(() {
-        _model.textController5?.text = _model.good!.quantity.toString();
+        _model.quantityFieldController?.text = _model.good!.quantity.toString();
       });
     });
 
-    _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode1 ??= FocusNode();
+    _model.nameFieldController ??= TextEditingController();
+    _model.nameFieldFocusNode ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController();
-    _model.textFieldFocusNode2 ??= FocusNode();
+    _model.descriptionFieldController ??= TextEditingController();
+    _model.descriptionFieldFocusNode ??= FocusNode();
 
-    _model.textController3 ??= TextEditingController();
-    _model.textFieldFocusNode3 ??= FocusNode();
+    _model.sizeFieldController ??= TextEditingController();
+    _model.sizeFieldFocusNode ??= FocusNode();
 
-    _model.textController4 ??= TextEditingController();
-    _model.textFieldFocusNode4 ??= FocusNode();
+    _model.weightFieldController ??= TextEditingController();
+    _model.weightFieldFocusNode ??= FocusNode();
 
-    _model.textController5 ??= TextEditingController();
-    _model.textFieldFocusNode5 ??= FocusNode();
+    _model.quantityFieldController ??= TextEditingController();
+    _model.quantityFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -142,8 +142,8 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextFormField(
-                      controller: _model.textController1,
-                      focusNode: _model.textFieldFocusNode1,
+                      controller: _model.nameFieldController,
+                      focusNode: _model.nameFieldFocusNode,
                       autofocus: true,
                       textInputAction: TextInputAction.next,
                       obscureText: false,
@@ -186,12 +186,12 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                             FlutterFlowTheme.of(context).secondaryBackground,
                       ),
                       style: FlutterFlowTheme.of(context).bodyLarge,
-                      validator:
-                          _model.textController1Validator.asValidator(context),
+                      validator: _model.nameFieldControllerValidator
+                          .asValidator(context),
                     ),
                     TextFormField(
-                      controller: _model.textController2,
-                      focusNode: _model.textFieldFocusNode2,
+                      controller: _model.descriptionFieldController,
+                      focusNode: _model.descriptionFieldFocusNode,
                       autofocus: true,
                       obscureText: false,
                       decoration: InputDecoration(
@@ -235,12 +235,12 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                       style: FlutterFlowTheme.of(context).bodyLarge,
                       maxLines: null,
                       keyboardType: TextInputType.multiline,
-                      validator:
-                          _model.textController2Validator.asValidator(context),
+                      validator: _model.descriptionFieldControllerValidator
+                          .asValidator(context),
                     ),
                     TextFormField(
-                      controller: _model.textController3,
-                      focusNode: _model.textFieldFocusNode3,
+                      controller: _model.sizeFieldController,
+                      focusNode: _model.sizeFieldFocusNode,
                       autofocus: true,
                       textInputAction: TextInputAction.next,
                       obscureText: false,
@@ -285,15 +285,15 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                       style: FlutterFlowTheme.of(context).bodyLarge,
                       keyboardType:
                           const TextInputType.numberWithOptions(decimal: true),
-                      validator:
-                          _model.textController3Validator.asValidator(context),
+                      validator: _model.sizeFieldControllerValidator
+                          .asValidator(context),
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(RegExp('(\\d|\\.)'))
                       ],
                     ),
                     TextFormField(
-                      controller: _model.textController4,
-                      focusNode: _model.textFieldFocusNode4,
+                      controller: _model.weightFieldController,
+                      focusNode: _model.weightFieldFocusNode,
                       autofocus: true,
                       textInputAction: TextInputAction.next,
                       obscureText: false,
@@ -338,15 +338,15 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                       style: FlutterFlowTheme.of(context).bodyLarge,
                       keyboardType:
                           const TextInputType.numberWithOptions(decimal: true),
-                      validator:
-                          _model.textController4Validator.asValidator(context),
+                      validator: _model.weightFieldControllerValidator
+                          .asValidator(context),
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(RegExp('(\\d|\\.)'))
                       ],
                     ),
                     TextFormField(
-                      controller: _model.textController5,
-                      focusNode: _model.textFieldFocusNode5,
+                      controller: _model.quantityFieldController,
+                      focusNode: _model.quantityFieldFocusNode,
                       autofocus: true,
                       textInputAction: TextInputAction.next,
                       obscureText: false,
@@ -390,8 +390,8 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                       ),
                       style: FlutterFlowTheme.of(context).bodyLarge,
                       keyboardType: TextInputType.number,
-                      validator:
-                          _model.textController5Validator.asValidator(context),
+                      validator: _model.quantityFieldControllerValidator
+                          .asValidator(context),
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(RegExp('[0-9]'))
                       ],
@@ -431,14 +431,15 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                             }
                             _model.updateGoodStruct(
                               (e) => e
-                                ..name = _model.textController1.text
-                                ..description = _model.textController2.text
-                                ..size =
-                                    double.tryParse(_model.textController3.text)
-                                ..weight =
-                                    double.tryParse(_model.textController4.text)
-                                ..quantity =
-                                    int.tryParse(_model.textController5.text),
+                                ..name = _model.nameFieldController.text
+                                ..description =
+                                    _model.descriptionFieldController.text
+                                ..size = double.tryParse(
+                                    _model.sizeFieldController.text)
+                                ..weight = double.tryParse(
+                                    _model.weightFieldController.text)
+                                ..quantity = int.tryParse(
+                                    _model.quantityFieldController.text),
                             );
                             if (widget.isExisting!) {
                               _model.updateResult = await HaulageCompanyAPIGroup

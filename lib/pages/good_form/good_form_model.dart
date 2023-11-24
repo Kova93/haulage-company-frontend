@@ -15,11 +15,11 @@ class GoodFormModel extends FlutterFlowModel<GoodFormWidget> {
 
   final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode1;
-  TextEditingController? textController1;
-  String? Function(BuildContext, String?)? textController1Validator;
-  String? _textController1Validator(BuildContext context, String? val) {
+  // State field(s) for NameField widget.
+  FocusNode? nameFieldFocusNode;
+  TextEditingController? nameFieldController;
+  String? Function(BuildContext, String?)? nameFieldControllerValidator;
+  String? _nameFieldControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
         '74f3sbir' /* Field is required */,
@@ -29,11 +29,12 @@ class GoodFormModel extends FlutterFlowModel<GoodFormWidget> {
     return null;
   }
 
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode2;
-  TextEditingController? textController2;
-  String? Function(BuildContext, String?)? textController2Validator;
-  String? _textController2Validator(BuildContext context, String? val) {
+  // State field(s) for DescriptionField widget.
+  FocusNode? descriptionFieldFocusNode;
+  TextEditingController? descriptionFieldController;
+  String? Function(BuildContext, String?)? descriptionFieldControllerValidator;
+  String? _descriptionFieldControllerValidator(
+      BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
         '52fqlu5p' /* Field is required */,
@@ -43,11 +44,11 @@ class GoodFormModel extends FlutterFlowModel<GoodFormWidget> {
     return null;
   }
 
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode3;
-  TextEditingController? textController3;
-  String? Function(BuildContext, String?)? textController3Validator;
-  String? _textController3Validator(BuildContext context, String? val) {
+  // State field(s) for SizeField widget.
+  FocusNode? sizeFieldFocusNode;
+  TextEditingController? sizeFieldController;
+  String? Function(BuildContext, String?)? sizeFieldControllerValidator;
+  String? _sizeFieldControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
         '6u1b29sa' /* Field is required */,
@@ -57,11 +58,11 @@ class GoodFormModel extends FlutterFlowModel<GoodFormWidget> {
     return null;
   }
 
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode4;
-  TextEditingController? textController4;
-  String? Function(BuildContext, String?)? textController4Validator;
-  String? _textController4Validator(BuildContext context, String? val) {
+  // State field(s) for WeightField widget.
+  FocusNode? weightFieldFocusNode;
+  TextEditingController? weightFieldController;
+  String? Function(BuildContext, String?)? weightFieldControllerValidator;
+  String? _weightFieldControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
         'yf7bbmgl' /* Field is required */,
@@ -71,11 +72,11 @@ class GoodFormModel extends FlutterFlowModel<GoodFormWidget> {
     return null;
   }
 
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode5;
-  TextEditingController? textController5;
-  String? Function(BuildContext, String?)? textController5Validator;
-  String? _textController5Validator(BuildContext context, String? val) {
+  // State field(s) for QuantityField widget.
+  FocusNode? quantityFieldFocusNode;
+  TextEditingController? quantityFieldController;
+  String? Function(BuildContext, String?)? quantityFieldControllerValidator;
+  String? _quantityFieldControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
         'd2gnrgle' /* Field is required */,
@@ -94,30 +95,30 @@ class GoodFormModel extends FlutterFlowModel<GoodFormWidget> {
 
   @override
   void initState(BuildContext context) {
-    textController1Validator = _textController1Validator;
-    textController2Validator = _textController2Validator;
-    textController3Validator = _textController3Validator;
-    textController4Validator = _textController4Validator;
-    textController5Validator = _textController5Validator;
+    nameFieldControllerValidator = _nameFieldControllerValidator;
+    descriptionFieldControllerValidator = _descriptionFieldControllerValidator;
+    sizeFieldControllerValidator = _sizeFieldControllerValidator;
+    weightFieldControllerValidator = _weightFieldControllerValidator;
+    quantityFieldControllerValidator = _quantityFieldControllerValidator;
   }
 
   @override
   void dispose() {
     unfocusNode.dispose();
-    textFieldFocusNode1?.dispose();
-    textController1?.dispose();
+    nameFieldFocusNode?.dispose();
+    nameFieldController?.dispose();
 
-    textFieldFocusNode2?.dispose();
-    textController2?.dispose();
+    descriptionFieldFocusNode?.dispose();
+    descriptionFieldController?.dispose();
 
-    textFieldFocusNode3?.dispose();
-    textController3?.dispose();
+    sizeFieldFocusNode?.dispose();
+    sizeFieldController?.dispose();
 
-    textFieldFocusNode4?.dispose();
-    textController4?.dispose();
+    weightFieldFocusNode?.dispose();
+    weightFieldController?.dispose();
 
-    textFieldFocusNode5?.dispose();
-    textController5?.dispose();
+    quantityFieldFocusNode?.dispose();
+    quantityFieldController?.dispose();
   }
 
   /// Action blocks are added here.

@@ -14,11 +14,11 @@ class AddQuantityDialogModel extends FlutterFlowModel<AddQuantityDialogWidget> {
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode;
-  TextEditingController? textController;
-  String? Function(BuildContext, String?)? textControllerValidator;
-  String? _textControllerValidator(BuildContext context, String? val) {
+  // State field(s) for QuantityField widget.
+  FocusNode? quantityFieldFocusNode;
+  TextEditingController? quantityFieldController;
+  String? Function(BuildContext, String?)? quantityFieldControllerValidator;
+  String? _quantityFieldControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
         'w4btgtad' /* Field is required */,
@@ -35,13 +35,13 @@ class AddQuantityDialogModel extends FlutterFlowModel<AddQuantityDialogWidget> {
 
   @override
   void initState(BuildContext context) {
-    textControllerValidator = _textControllerValidator;
+    quantityFieldControllerValidator = _quantityFieldControllerValidator;
   }
 
   @override
   void dispose() {
-    textFieldFocusNode?.dispose();
-    textController?.dispose();
+    quantityFieldFocusNode?.dispose();
+    quantityFieldController?.dispose();
   }
 
   /// Action blocks are added here.

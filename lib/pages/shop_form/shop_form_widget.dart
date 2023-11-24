@@ -41,18 +41,18 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
           ? ShopDTOStruct.fromMap(widget.shopJSON)
           : null;
       setState(() {
-        _model.textController1?.text = _model.shop!.name;
+        _model.nameFieldController?.text = _model.shop!.name;
       });
       setState(() {
-        _model.textController2?.text = _model.shop!.address;
+        _model.addressFieldController?.text = _model.shop!.address;
       });
     });
 
-    _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode1 ??= FocusNode();
+    _model.nameFieldController ??= TextEditingController();
+    _model.nameFieldFocusNode ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController();
-    _model.textFieldFocusNode2 ??= FocusNode();
+    _model.addressFieldController ??= TextEditingController();
+    _model.addressFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -120,8 +120,8 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextFormField(
-                      controller: _model.textController1,
-                      focusNode: _model.textFieldFocusNode1,
+                      controller: _model.nameFieldController,
+                      focusNode: _model.nameFieldFocusNode,
                       autofocus: true,
                       textInputAction: TextInputAction.next,
                       obscureText: false,
@@ -164,12 +164,12 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
                             FlutterFlowTheme.of(context).secondaryBackground,
                       ),
                       style: FlutterFlowTheme.of(context).bodyLarge,
-                      validator:
-                          _model.textController1Validator.asValidator(context),
+                      validator: _model.nameFieldControllerValidator
+                          .asValidator(context),
                     ),
                     TextFormField(
-                      controller: _model.textController2,
-                      focusNode: _model.textFieldFocusNode2,
+                      controller: _model.addressFieldController,
+                      focusNode: _model.addressFieldFocusNode,
                       autofocus: true,
                       textInputAction: TextInputAction.next,
                       obscureText: false,
@@ -214,8 +214,8 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
                       style: FlutterFlowTheme.of(context).bodyLarge,
                       maxLines: null,
                       keyboardType: TextInputType.emailAddress,
-                      validator:
-                          _model.textController2Validator.asValidator(context),
+                      validator: _model.addressFieldControllerValidator
+                          .asValidator(context),
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.max,
@@ -252,8 +252,8 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
                             }
                             _model.updateShopStruct(
                               (e) => e
-                                ..name = _model.textController1.text
-                                ..address = _model.textController2.text,
+                                ..name = _model.nameFieldController.text
+                                ..address = _model.addressFieldController.text,
                             );
                             if (widget.isExisting!) {
                               _model.updateResult = await HaulageCompanyAPIGroup

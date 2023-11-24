@@ -44,18 +44,18 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
                 : null;
       });
       setState(() {
-        _model.textController1?.text = _model.location!.name;
+        _model.nameFieldController?.text = _model.location!.name;
       });
       setState(() {
-        _model.textController2?.text = _model.location!.address;
+        _model.addressFieldController?.text = _model.location!.address;
       });
     });
 
-    _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode1 ??= FocusNode();
+    _model.nameFieldController ??= TextEditingController();
+    _model.nameFieldFocusNode ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController();
-    _model.textFieldFocusNode2 ??= FocusNode();
+    _model.addressFieldController ??= TextEditingController();
+    _model.addressFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -123,8 +123,8 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextFormField(
-                      controller: _model.textController1,
-                      focusNode: _model.textFieldFocusNode1,
+                      controller: _model.nameFieldController,
+                      focusNode: _model.nameFieldFocusNode,
                       autofocus: true,
                       textInputAction: TextInputAction.next,
                       obscureText: false,
@@ -167,12 +167,12 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
                             FlutterFlowTheme.of(context).secondaryBackground,
                       ),
                       style: FlutterFlowTheme.of(context).bodyLarge,
-                      validator:
-                          _model.textController1Validator.asValidator(context),
+                      validator: _model.nameFieldControllerValidator
+                          .asValidator(context),
                     ),
                     TextFormField(
-                      controller: _model.textController2,
-                      focusNode: _model.textFieldFocusNode2,
+                      controller: _model.addressFieldController,
+                      focusNode: _model.addressFieldFocusNode,
                       autofocus: true,
                       textInputAction: TextInputAction.next,
                       obscureText: false,
@@ -217,8 +217,8 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
                       style: FlutterFlowTheme.of(context).bodyLarge,
                       maxLines: null,
                       keyboardType: TextInputType.streetAddress,
-                      validator:
-                          _model.textController2Validator.asValidator(context),
+                      validator: _model.addressFieldControllerValidator
+                          .asValidator(context),
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.max,
@@ -255,8 +255,8 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
                             }
                             _model.updateLocationStruct(
                               (e) => e
-                                ..name = _model.textController1.text
-                                ..address = _model.textController2.text,
+                                ..name = _model.nameFieldController.text
+                                ..address = _model.addressFieldController.text,
                             );
                             if (widget.isExisting!) {
                               _model.updateResult = await HaulageCompanyAPIGroup

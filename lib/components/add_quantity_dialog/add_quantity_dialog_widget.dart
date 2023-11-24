@@ -44,11 +44,12 @@ class _AddQuantityDialogWidgetState extends State<AddQuantityDialogWidget> {
       });
     });
 
-    _model.textController ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
+    _model.quantityFieldController ??= TextEditingController();
+    _model.quantityFieldFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
-          _model.textController?.text = FFLocalizations.of(context).getText(
+          _model.quantityFieldController?.text =
+              FFLocalizations.of(context).getText(
             'pzmh44tk' /* 0 */,
           );
         }));
@@ -80,8 +81,8 @@ class _AddQuantityDialogWidgetState extends State<AddQuantityDialogWidget> {
             key: _model.formKey,
             autovalidateMode: AutovalidateMode.disabled,
             child: TextFormField(
-              controller: _model.textController,
-              focusNode: _model.textFieldFocusNode,
+              controller: _model.quantityFieldController,
+              focusNode: _model.quantityFieldFocusNode,
               autofocus: true,
               textInputAction: TextInputAction.next,
               obscureText: false,
@@ -124,7 +125,8 @@ class _AddQuantityDialogWidgetState extends State<AddQuantityDialogWidget> {
               ),
               style: FlutterFlowTheme.of(context).bodyLarge,
               keyboardType: TextInputType.number,
-              validator: _model.textControllerValidator.asValidator(context),
+              validator:
+                  _model.quantityFieldControllerValidator.asValidator(context),
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp('[0-9]'))
               ],
@@ -142,15 +144,12 @@ class _AddQuantityDialogWidgetState extends State<AddQuantityDialogWidget> {
                   'ge0jne1u' /* Cancel */,
                 ),
                 options: FFButtonOptions(
-                  height: 40.0,
-                  padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 24.0),
                   iconPadding:
                       const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).primary,
-                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                        fontFamily: 'Outfit',
-                        color: Colors.white,
-                      ),
+                  textStyle: FlutterFlowTheme.of(context).headlineMedium,
                   elevation: 3.0,
                   borderSide: const BorderSide(
                     color: Colors.transparent,
@@ -168,7 +167,7 @@ class _AddQuantityDialogWidgetState extends State<AddQuantityDialogWidget> {
                   _model.updateGoodStruct(
                     (e) => e
                       ..quantity = _model.good!.quantity +
-                          int.parse(_model.textController.text),
+                          int.parse(_model.quantityFieldController.text),
                   );
                   _model.updateResult =
                       await HaulageCompanyAPIGroup.updateGoodCall.call(
@@ -201,15 +200,12 @@ class _AddQuantityDialogWidgetState extends State<AddQuantityDialogWidget> {
                   '2vyzkjln' /* Confirm */,
                 ),
                 options: FFButtonOptions(
-                  height: 40.0,
-                  padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 24.0),
                   iconPadding:
                       const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).primary,
-                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                        fontFamily: 'Outfit',
-                        color: Colors.white,
-                      ),
+                  textStyle: FlutterFlowTheme.of(context).headlineMedium,
                   elevation: 3.0,
                   borderSide: const BorderSide(
                     color: Colors.transparent,

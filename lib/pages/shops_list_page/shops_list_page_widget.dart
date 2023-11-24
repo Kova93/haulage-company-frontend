@@ -169,6 +169,10 @@ class _ShopsListPageWidgetState extends State<ShopsListPageWidget> {
                                                   true,
                                                   ParamType.bool,
                                                 ),
+                                                'shopJSON': serializeParam(
+                                                  shopsListItem.toMap(),
+                                                  ParamType.JSON,
+                                                ),
                                               }.withoutNulls,
                                             );
                                           },
