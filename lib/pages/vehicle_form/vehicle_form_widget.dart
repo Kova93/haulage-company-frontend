@@ -335,10 +335,9 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                                   .rootList(
                             locationDropDownGetAllLocationsResponse.jsonBody,
                           ) as List)
-                              .map<String>((s) => s.toString())
-                              .toList().map((e) => (e != ''
-                                      ? LorrySiteDTOStruct.fromMap(e)
-                                      : null)
+                              .map((e) => (e != ''
+                                    ? LorrySiteDTOStruct.fromMap(e)
+                                    : null)
                                   ?.name)
                               .withoutNulls
                               .toList(),
