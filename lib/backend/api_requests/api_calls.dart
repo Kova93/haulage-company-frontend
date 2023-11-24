@@ -257,16 +257,11 @@ class DeleteLocationCall {
 }
 
 class CreateOrderCall {
-  Future<ApiCallResponse> call() async {
-    const ffApiRequestBody = '''
-{
-  "id": 0,
-  "shopID": 0,
-  "goodIDs": [
-    0
-  ],
-  "transportOperationID": 0
-}''';
+  Future<ApiCallResponse> call({
+    dynamic orderJson,
+  }) async {
+    final order = _serializeJson(orderJson);
+    final ffApiRequestBody = order;
     return ApiManager.instance.makeApiCall(
       callName: 'createOrder',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/orders',
@@ -326,16 +321,10 @@ class GetOrderByIdCall {
 class UpdateOrderCall {
   Future<ApiCallResponse> call({
     int? id,
+    dynamic orderJson,
   }) async {
-    const ffApiRequestBody = '''
-{
-  "id": 0,
-  "shopID": 0,
-  "goodIDs": [
-    0
-  ],
-  "transportOperationID": 0
-}''';
+    final order = _serializeJson(orderJson);
+    final ffApiRequestBody = order;
     return ApiManager.instance.makeApiCall(
       callName: 'updateOrder',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/orders/$id',

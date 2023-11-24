@@ -123,25 +123,6 @@ class _VehiclesListPageWidgetState extends State<VehiclesListPageWidget> {
                                 children: [
                                   Text(
                                     FFLocalizations.of(context).getText(
-                                      'oj0k2b31' /* License Plate */,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          fontStyle: FontStyle.italic,
-                                        ),
-                                  ),
-                                  Text(
-                                    valueOrDefault<String>(
-                                      vehiclesListItem.licensePlate,
-                                      'licensePlate',
-                                    ),
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyLarge,
-                                  ),
-                                  Text(
-                                    FFLocalizations.of(context).getText(
                                       'ka0ypk0o' /* Size */,
                                     ),
                                     style: FlutterFlowTheme.of(context)

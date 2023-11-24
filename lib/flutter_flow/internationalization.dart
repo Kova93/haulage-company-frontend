@@ -161,10 +161,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Vehicles',
       'hu': '',
     },
-    'oj0k2b31': {
-      'en': 'License Plate',
-      'hu': 'Cím',
-    },
     'ka0ypk0o': {
       'en': 'Size',
       'hu': 'Cím',
@@ -414,12 +410,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Maximum weight',
       'hu': '',
     },
-    '0kqzewle': {
+    'd4sae6tw': {
       'en': 'Option 1',
       'hu': '',
     },
     '0tznzxwg': {
-      'en': 'Location',
+      'en': 'Select location...',
       'hu': '',
     },
     'np481smo': {
@@ -523,12 +519,24 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // OrderForm
   {
-    'p98ryqw2': {
-      'en': 'Name',
+    '5s476s4z': {
+      'en': 'Option 1',
       'hu': '',
     },
-    'qn7xaojp': {
-      'en': 'Contact',
+    's0tnrqv2': {
+      'en': 'Select shop...',
+      'hu': '',
+    },
+    '1mwdlcl5': {
+      'en': 'Search for an item...',
+      'hu': '',
+    },
+    'a4cei8hp': {
+      'en': 'Goods',
+      'hu': '',
+    },
+    '4vsuyfzk': {
+      'en': 'Add good',
       'hu': '',
     },
     'w80oozv0': {
@@ -537,26 +545,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'r3zwqkn4': {
       'en': 'Confirm',
-      'hu': '',
-    },
-    '97fos1qt': {
-      'en': 'Field is required',
-      'hu': '',
-    },
-    '1m1h8zst': {
-      'en': 'Please choose an option from the dropdown',
-      'hu': '',
-    },
-    'fldtsabx': {
-      'en': 'Field is required',
-      'hu': '',
-    },
-    'mbcy93nm': {
-      'en': 'Has to be a valid email address',
-      'hu': '',
-    },
-    'x8adxxda': {
-      'en': 'Please choose an option from the dropdown',
       'hu': '',
     },
     '5c9ktj5j': {
@@ -688,6 +676,33 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'hu': '',
     },
   },
+  // AddGoodDialog
+  {
+    'vf7s01zd': {
+      'en': 'Add good to order',
+      'hu': '',
+    },
+    'pk2gl0n9': {
+      'en': 'Option 1',
+      'hu': '',
+    },
+    'llmtuz95': {
+      'en': 'Select good...',
+      'hu': '',
+    },
+    '9h6yxzv6': {
+      'en': 'Search for an item...',
+      'hu': '',
+    },
+    'nk90wt9i': {
+      'en': 'Cancel',
+      'hu': '',
+    },
+    'pvna2gyn': {
+      'en': 'Confirm',
+      'hu': '',
+    },
+  },
   // Miscellaneous
   {
     'nzebh124': {
@@ -708,6 +723,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '17cb47d3': {
       'en': 'Label here...',
+      'hu': '',
+    },
+    '71pmsb57': {
+      'en': 'Option 1',
+      'hu': '',
+    },
+    '8opzexz2': {
+      'en': 'Please select...',
+      'hu': '',
+    },
+    '2zmj7bnu': {
+      'en': 'Search for an item...',
       'hu': '',
     },
     'wn8cy8og': {

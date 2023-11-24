@@ -28,7 +28,7 @@ class AddQuantityDialogModel extends FlutterFlowModel<AddQuantityDialogWidget> {
     return null;
   }
 
-  // Stores action output result for [Backend Call - API (updateGood)] action in Button widget.
+  // Stores action output result for [Backend Call - API (updateGood)] action in ConfirmButton widget.
   ApiCallResponse? updateResult;
 
   /// Initialization and disposal methods.

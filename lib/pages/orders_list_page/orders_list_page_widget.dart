@@ -215,6 +215,10 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
                                                   true,
                                                   ParamType.bool,
                                                 ),
+                                                'getOrderJSON': serializeParam(
+                                                  ordersListItem.toMap(),
+                                                  ParamType.JSON,
+                                                ),
                                               }.withoutNulls,
                                             );
                                           },

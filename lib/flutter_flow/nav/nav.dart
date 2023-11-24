@@ -118,6 +118,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/orderForm',
           builder: (context, params) => OrderFormWidget(
             isExisting: params.getParam('isExisting', ParamType.bool),
+            getOrderJSON: params.getParam('getOrderJSON', ParamType.JSON),
           ),
         ),
         FFRoute(

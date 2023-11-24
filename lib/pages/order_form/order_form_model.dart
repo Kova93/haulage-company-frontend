@@ -1,27 +1,32 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'order_form_widget.dart' show OrderFormWidget;
 import 'package:flutter/material.dart';
 
 class OrderFormModel extends FlutterFlowModel<OrderFormWidget> {
   ///  Local state fields for this page.
 
-  ShopStruct? shop;
-  void updateShopStruct(Function(ShopStruct) updateFn) =>
-      updateFn(shop ??= ShopStruct());
+  GetOrderDTOStruct? getOrder;
+  void updateGetOrderStruct(Function(GetOrderDTOStruct) updateFn) =>
+      updateFn(getOrder ??= GetOrderDTOStruct());
+
+  OrderDTOStruct? order;
+  void updateOrderStruct(Function(OrderDTOStruct) updateFn) =>
+      updateFn(order ??= OrderDTOStruct());
 
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode1;
-  TextEditingController? textController1;
-  String? Function(BuildContext, String?)? textController1Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode2;
-  TextEditingController? textController2;
-  String? Function(BuildContext, String?)? textController2Validator;
+  // State field(s) for ShopDropDown widget.
+  String? shopDropDownValue;
+  FormFieldController<String>? shopDropDownValueController;
+  // Stores action output result for [Backend Call - API (updateOrder)] action in ConfirmButton widget.
+  ApiCallResponse? updateResult;
+  // Stores action output result for [Backend Call - API (createOrder)] action in ConfirmButton widget.
+  ApiCallResponse? createResult;
 
   /// Initialization and disposal methods.
 
@@ -31,11 +36,6 @@ class OrderFormModel extends FlutterFlowModel<OrderFormWidget> {
   @override
   void dispose() {
     unfocusNode.dispose();
-    textFieldFocusNode1?.dispose();
-    textController1?.dispose();
-
-    textFieldFocusNode2?.dispose();
-    textController2?.dispose();
   }
 
   /// Action blocks are added here.

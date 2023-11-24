@@ -356,10 +356,9 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                               .toList(),
                           onChanged: (val) => setState(
                               () => _model.locationDropDownValue = val),
-                          height: 50.0,
                           textStyle: FlutterFlowTheme.of(context).bodyLarge,
                           hintText: FFLocalizations.of(context).getText(
-                            '0tznzxwg' /* Location */,
+                            '0tznzxwg' /* Select location... */,
                           ),
                           icon: Icon(
                             Icons.keyboard_arrow_down_rounded,
@@ -373,9 +372,8 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                           borderWidth: 2.0,
                           borderRadius: 8.0,
                           margin: const EdgeInsetsDirectional.fromSTEB(
-                              10.0, 10.0, 10.0, 10.0),
+                              10.0, 0.0, 10.0, 0.0),
                           hidesUnderline: true,
-                          disabled: widget.locationID != null,
                           isSearchable: false,
                           isMultiSelect: false,
                         ),
@@ -410,6 +408,9 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                               onPressed: () async {
                                 if (_model.formKey.currentState == null ||
                                     !_model.formKey.currentState!.validate()) {
+                                  return;
+                                }
+                                if (_model.locationDropDownValue == null) {
                                   return;
                                 }
                                 _model.updateVehicleStruct(
