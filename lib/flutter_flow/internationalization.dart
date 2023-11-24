@@ -410,7 +410,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Maximum weight',
       'hu': '',
     },
-    'n8t25tw0': {
+    'pamxxyyv': {
       'en': 'Option 1',
       'hu': '',
     },
@@ -519,23 +519,23 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // OrderForm
   {
-    'cxs7dmpz': {
+    'jc8wqdi1': {
       'en': 'Option 1',
       'hu': '',
     },
-    'k2oormpx': {
+    'u7dnydl6': {
       'en': 'Select shop...',
       'hu': '',
     },
-    'wyus128o': {
+    '3lyqgyrl': {
       'en': 'Search for an item...',
       'hu': '',
     },
-    'joiwknvl': {
+    'hbo3opho': {
       'en': 'Goods',
       'hu': '',
     },
-    'a9mt3ddz': {
+    'tyutxsii': {
       'en': 'Add good',
       'hu': '',
     },
@@ -678,27 +678,27 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // AddGoodDialog
   {
-    'r2ezbsqf': {
+    'sj06ii3p': {
       'en': 'Add good to order',
       'hu': '',
     },
-    'unys1hu4': {
+    'k6udoilz': {
       'en': 'Option 1',
       'hu': '',
     },
-    '05j19i20': {
+    'exclgxae': {
       'en': 'Select good...',
       'hu': '',
     },
-    'pf0u60q8': {
+    'cx9t3qty': {
       'en': 'Search for an item...',
       'hu': '',
     },
-    '3ag5k3x5': {
+    'kvrqdjw9': {
       'en': 'Cancel',
       'hu': '',
     },
-    'p63uwl8j': {
+    '0x9wlr03': {
       'en': 'Confirm',
       'hu': '',
     },
@@ -725,15 +725,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Label here...',
       'hu': '',
     },
-    'fgv4v3vq': {
+    'h0dt50vx': {
       'en': 'Option 1',
       'hu': '',
     },
-    'blz1kdh8': {
+    '2idte11k': {
       'en': 'Please select...',
       'hu': '',
     },
-    'gume1ltt': {
+    'oghswde4': {
       'en': 'Search for an item...',
       'hu': '',
     },

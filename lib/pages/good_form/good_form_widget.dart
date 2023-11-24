@@ -449,7 +449,10 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                                 goodJson: _model.good?.toMap(),
                               );
                               if ((_model.updateResult?.succeeded ?? true)) {
-                                context.safePop();
+                                if (Navigator.of(context).canPop()) {
+                                  context.pop();
+                                }
+                                context.pushNamed('GoodsListPage');
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -480,7 +483,10 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                                 ),
                               );
                               if ((_model.createResult?.succeeded ?? true)) {
-                                context.safePop();
+                                if (Navigator.of(context).canPop()) {
+                                  context.pop();
+                                }
+                                context.pushNamed('GoodsListPage');
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
