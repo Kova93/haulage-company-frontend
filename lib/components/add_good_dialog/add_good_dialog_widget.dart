@@ -65,7 +65,7 @@ class _AddGoodDialogWidgetState extends State<AddGoodDialogWidget> {
           children: [
             Text(
               FFLocalizations.of(context).getText(
-                'vf7s01zd' /* Add good to order */,
+                '7bqyqsid' /* Add good to order */,
               ),
               style: FlutterFlowTheme.of(context).titleLarge,
             ),
@@ -77,7 +77,7 @@ class _AddGoodDialogWidgetState extends State<AddGoodDialogWidget> {
                   setState(() => _model.goodDropDownValue = val),
               textStyle: FlutterFlowTheme.of(context).bodyLarge,
               hintText: FFLocalizations.of(context).getText(
-                'llmtuz95' /* Select good... */,
+                '7gxdz9kp' /* Select good... */,
               ),
               icon: Icon(
                 Icons.keyboard_arrow_down_rounded,
@@ -103,7 +103,7 @@ class _AddGoodDialogWidgetState extends State<AddGoodDialogWidget> {
                     Navigator.pop(context);
                   },
                   text: FFLocalizations.of(context).getText(
-                    'nk90wt9i' /* Cancel */,
+                    '2oxzydlu' /* Cancel */,
                   ),
                   options: FFButtonOptions(
                     padding:
@@ -141,7 +141,7 @@ class _AddGoodDialogWidgetState extends State<AddGoodDialogWidget> {
                     Navigator.pop(context);
                   },
                   text: FFLocalizations.of(context).getText(
-                    'pvna2gyn' /* Confirm */,
+                    'gk958dof' /* Confirm */,
                   ),
                   options: FFButtonOptions(
                     padding:

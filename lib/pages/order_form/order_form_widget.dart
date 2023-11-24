@@ -41,12 +41,18 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        _model.getOrder =
-            widget.getOrderJSON != null && widget.getOrderJSON != ''
-                ? GetOrderDTOStruct.fromMap(widget.getOrderJSON)
-                : null;
-      });
+      if (widget.getOrderJSON != null) {
+        setState(() {
+          _model.getOrder =
+              widget.getOrderJSON != null && widget.getOrderJSON != ''
+                  ? GetOrderDTOStruct.fromMap(widget.getOrderJSON)
+                  : null;
+        });
+      } else {
+        setState(() {
+          _model.getOrder = GetOrderDTOStruct();
+        });
+      }
     });
   }
 
@@ -175,7 +181,7 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                                   () => _model.shopDropDownValue = val),
                               textStyle: FlutterFlowTheme.of(context).bodyLarge,
                               hintText: FFLocalizations.of(context).getText(
-                                's0tnrqv2' /* Select shop... */,
+                                'rmlrson1' /* Select shop... */,
                               ),
                               icon: Icon(
                                 Icons.keyboard_arrow_down_rounded,
@@ -198,7 +204,7 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                             ),
                             Text(
                               FFLocalizations.of(context).getText(
-                                'a4cei8hp' /* Goods */,
+                                'b6uflx3h' /* Goods */,
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .labelLarge
@@ -317,7 +323,7 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                                   ).then((value) => setState(() {}));
                                 },
                                 text: FFLocalizations.of(context).getText(
-                                  '4vsuyfzk' /* Add good */,
+                                  'muqwl0n7' /* Add good */,
                                 ),
                                 icon: const Icon(
                                   Icons.add,
