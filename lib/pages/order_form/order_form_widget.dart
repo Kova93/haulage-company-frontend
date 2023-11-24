@@ -181,7 +181,7 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                                   () => _model.shopDropDownValue = val),
                               textStyle: FlutterFlowTheme.of(context).bodyLarge,
                               hintText: FFLocalizations.of(context).getText(
-                                'rmlrson1' /* Select shop... */,
+                                'k2oormpx' /* Select shop... */,
                               ),
                               icon: Icon(
                                 Icons.keyboard_arrow_down_rounded,
@@ -204,7 +204,7 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                             ),
                             Text(
                               FFLocalizations.of(context).getText(
-                                'b6uflx3h' /* Goods */,
+                                'joiwknvl' /* Goods */,
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .labelLarge
@@ -323,7 +323,7 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                                   ).then((value) => setState(() {}));
                                 },
                                 text: FFLocalizations.of(context).getText(
-                                  'muqwl0n7' /* Add good */,
+                                  'a9mt3ddz' /* Add good */,
                                 ),
                                 icon: const Icon(
                                   Icons.add,
