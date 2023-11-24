@@ -588,25 +588,11 @@ class DeleteTransportOperationCall {
 }
 
 class CreateVehicleCall {
-  Future<ApiCallResponse> call() async {
-    const ffApiRequestBody = '''
-{
-  "id": 0,
-  "licensePlate": "",
-  "size": 0,
-  "maxWeight": 0,
-  "lorrySiteID": 0,
-  "transportOperationDTOs": [
-    {
-      "id": 0,
-      "date": "",
-      "usedVehicleIDs": [
-        0
-      ],
-      "orderID": 0
-    }
-  ]
-}''';
+  Future<ApiCallResponse> call({
+    dynamic vehicleJson,
+  }) async {
+    final vehicle = _serializeJson(vehicleJson);
+    final ffApiRequestBody = vehicle;
     return ApiManager.instance.makeApiCall(
       callName: 'createVehicle',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/vehicles',
@@ -666,25 +652,10 @@ class GetVehicleByIdCall {
 class UpdateVehicleCall {
   Future<ApiCallResponse> call({
     int? id,
+    dynamic vehicleJson,
   }) async {
-    const ffApiRequestBody = '''
-{
-  "id": 0,
-  "licensePlate": "",
-  "size": 0,
-  "maxWeight": 0,
-  "lorrySiteID": 0,
-  "transportOperationDTOs": [
-    {
-      "id": 0,
-      "date": "",
-      "usedVehicleIDs": [
-        0
-      ],
-      "orderID": 0
-    }
-  ]
-}''';
+    final vehicle = _serializeJson(vehicleJson);
+    final ffApiRequestBody = vehicle;
     return ApiManager.instance.makeApiCall(
       callName: 'updateVehicle',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/vehicles/$id',

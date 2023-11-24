@@ -671,20 +671,20 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '0',
       'hu': '',
     },
-    'w4btgtad': {
-      'en': 'Field is required',
-      'hu': '',
-    },
-    'obc48ygb': {
-      'en': 'Please choose an option from the dropdown',
-      'hu': '',
-    },
     'ge0jne1u': {
       'en': 'Cancel',
       'hu': '',
     },
     '2vyzkjln': {
       'en': 'Confirm',
+      'hu': '',
+    },
+    'w4btgtad': {
+      'en': 'Field is required',
+      'hu': '',
+    },
+    'obc48ygb': {
+      'en': 'Please choose an option from the dropdown',
       'hu': '',
     },
   },

@@ -472,7 +472,10 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                                   _model.updateResult =
                                       await HaulageCompanyAPIGroup
                                           .updateVehicleCall
-                                          .call();
+                                          .call(
+                                    id: _model.vehicle?.id,
+                                    vehicleJson: _model.vehicle?.toMap(),
+                                  );
                                   if ((_model.updateResult?.succeeded ??
                                       true)) {
                                     context.safePop();
@@ -500,7 +503,9 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                                   _model.createResult =
                                       await HaulageCompanyAPIGroup
                                           .createVehicleCall
-                                          .call();
+                                          .call(
+                                    vehicleJson: _model.vehicle?.toMap(),
+                                  );
                                   if ((_model.createResult?.succeeded ??
                                       true)) {
                                     context.safePop();
