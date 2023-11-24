@@ -64,7 +64,7 @@ class GoodFormModel extends FlutterFlowModel<GoodFormWidget> {
   String? _textController4Validator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        'ht35h569' /* Field is required */,
+        'yf7bbmgl' /* Field is required */,
       );
     }
 
@@ -78,7 +78,7 @@ class GoodFormModel extends FlutterFlowModel<GoodFormWidget> {
   String? _textController5Validator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        '4c6wmsda' /* Field is required */,
+        'd2gnrgle' /* Field is required */,
       );
     }
 

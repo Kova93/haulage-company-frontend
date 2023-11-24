@@ -41,35 +41,6 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.getResult =
-          await HaulageCompanyAPIGroup.getAllLocationsCall.call();
-      if ((_model.getResult?.succeeded ?? true)) {
-        _model.locations = HaulageCompanyAPIGroup.getAllLocationsCall
-            .rootList(
-              (_model.getResult?.jsonBody ?? ''),
-            )!
-            .map((e) =>
-                e != null && e != '' ? LorrySiteDTOStruct.fromMap(e) : null)
-            .withoutNulls
-            .toList()
-            .toList()
-            .cast<LorrySiteDTOStruct>();
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              'Failed to load locations',
-              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                    fontFamily: 'Readex Pro',
-                    color: FlutterFlowTheme.of(context).primaryText,
-                  ),
-            ),
-            duration: const Duration(milliseconds: 4000),
-            backgroundColor: FlutterFlowTheme.of(context).error,
-          ),
-        );
-      }
-
       setState(() {
         _model.vehicle = widget.vehicleJSON != null && widget.vehicleJSON != ''
             ? VehicleDTOStruct.fromMap(widget.vehicleJSON)
@@ -83,17 +54,6 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
       });
       setState(() {
         _model.textController3?.text = _model.vehicle!.maxWeight.toString();
-      });
-      setState(() {
-        _model.dropDownValueController?.value = _model.locations
-            .where((e) =>
-                (widget.locationID != null
-                    ? widget.locationID!
-                    : _model.vehicle!.lorrySiteID) ==
-                e.id)
-            .toList()
-            .first
-            .name;
       });
     });
 
@@ -127,371 +87,493 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
 
     context.watch<FFAppState>();
 
-    return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primary,
-          automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 60.0,
-            icon: Icon(
-              Icons.arrow_back_rounded,
-              color: FlutterFlowTheme.of(context).info,
-              size: 30.0,
+    return FutureBuilder<ApiCallResponse>(
+      future: HaulageCompanyAPIGroup.getAllLocationsCall.call(),
+      builder: (context, snapshot) {
+        // Customize what your widget looks like when it's loading.
+        if (!snapshot.hasData) {
+          return Scaffold(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            body: Center(
+              child: SizedBox(
+                width: 50.0,
+                height: 50.0,
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    FlutterFlowTheme.of(context).primary,
+                  ),
+                ),
+              ),
             ),
-            onPressed: () async {
-              context.pop();
-            },
-          ),
-          title: Text(
-            widget.isExisting! ? 'Edit vehicle' : 'Add vehicle',
-            style: FlutterFlowTheme.of(context).headlineLarge,
-          ),
-          actions: const [],
-          centerTitle: true,
-          elevation: 2.0,
-        ),
-        body: SafeArea(
-          top: true,
-          child: Form(
-            key: _model.formKey,
-            autovalidateMode: AutovalidateMode.disabled,
-            child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextFormField(
-                      controller: _model.textController1,
-                      focusNode: _model.textFieldFocusNode1,
-                      autofocus: true,
-                      textInputAction: TextInputAction.next,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        labelText: FFLocalizations.of(context).getText(
-                          'b5ep3o1d' /* Liceense plate */,
-                        ),
-                        labelStyle: FlutterFlowTheme.of(context).labelLarge,
-                        hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primary,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        filled: true,
-                        fillColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyLarge,
-                      validator:
-                          _model.textController1Validator.asValidator(context),
-                    ),
-                    TextFormField(
-                      controller: _model.textController2,
-                      focusNode: _model.textFieldFocusNode2,
-                      autofocus: true,
-                      textInputAction: TextInputAction.next,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        labelText: FFLocalizations.of(context).getText(
-                          '1hvpc6hc' /* Size */,
-                        ),
-                        labelStyle: FlutterFlowTheme.of(context).labelLarge,
-                        hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primary,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        filled: true,
-                        fillColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyLarge,
-                      maxLines: null,
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
-                      validator:
-                          _model.textController2Validator.asValidator(context),
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp('(\\d|\\.)'))
-                      ],
-                    ),
-                    TextFormField(
-                      controller: _model.textController3,
-                      focusNode: _model.textFieldFocusNode3,
-                      autofocus: true,
-                      textInputAction: TextInputAction.next,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        labelText: FFLocalizations.of(context).getText(
-                          'dv3cqh30' /* Maximum weight */,
-                        ),
-                        labelStyle: FlutterFlowTheme.of(context).labelLarge,
-                        hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primary,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        filled: true,
-                        fillColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyLarge,
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
-                      validator:
-                          _model.textController3Validator.asValidator(context),
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp('(\\d|\\.)'))
-                      ],
-                    ),
-                    FlutterFlowDropDown<String>(
-                      controller: _model.dropDownValueController ??=
-                          FormFieldController<String>(
-                        _model.dropDownValue ??= _model.locations
-                            .where((e) => widget.locationID != null
-                                ? widget.locationID!
-                                : _model.vehicle!.lorrySiteID == e.id)
-                            .toList()
-                            .first
-                            .name,
-                      ),
-                      options: _model.locations.map((e) => e.name).toList(),
-                      onChanged: (val) =>
-                          setState(() => _model.dropDownValue = val),
-                      height: 50.0,
-                      textStyle: FlutterFlowTheme.of(context).bodyLarge,
-                      hintText: FFLocalizations.of(context).getText(
-                        '3dj9zr0w' /* Location */,
-                      ),
-                      icon: Icon(
-                        Icons.keyboard_arrow_down_rounded,
-                        color: FlutterFlowTheme.of(context).secondaryText,
-                        size: 24.0,
-                      ),
-                      fillColor:
-                          FlutterFlowTheme.of(context).secondaryBackground,
-                      elevation: 2.0,
-                      borderColor: FlutterFlowTheme.of(context).alternate,
-                      borderWidth: 2.0,
-                      borderRadius: 8.0,
-                      margin: const EdgeInsetsDirectional.fromSTEB(
-                          10.0, 10.0, 10.0, 10.0),
-                      hidesUnderline: true,
-                      disabled: widget.locationID != null,
-                      isSearchable: false,
-                      isMultiSelect: false,
-                    ),
-                    Row(
+          );
+        }
+        final vehicleFormGetAllLocationsResponse = snapshot.data!;
+        return GestureDetector(
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
+          child: Scaffold(
+            key: scaffoldKey,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            appBar: AppBar(
+              backgroundColor: FlutterFlowTheme.of(context).primary,
+              automaticallyImplyLeading: false,
+              leading: FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30.0,
+                borderWidth: 1.0,
+                buttonSize: 60.0,
+                icon: Icon(
+                  Icons.arrow_back_rounded,
+                  color: FlutterFlowTheme.of(context).info,
+                  size: 30.0,
+                ),
+                onPressed: () async {
+                  context.pop();
+                },
+              ),
+              title: Text(
+                widget.isExisting! ? 'Edit vehicle' : 'Add vehicle',
+                style: FlutterFlowTheme.of(context).headlineLarge,
+              ),
+              actions: const [],
+              centerTitle: true,
+              elevation: 2.0,
+            ),
+            body: SafeArea(
+              top: true,
+              child: Form(
+                key: _model.formKey,
+                autovalidateMode: AutovalidateMode.disabled,
+                child: Padding(
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
+                  child: SingleChildScrollView(
+                    child: Column(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        FFButtonWidget(
-                          onPressed: () async {
-                            context.safePop();
-                          },
-                          text: FFLocalizations.of(context).getText(
-                            'wdh12arj' /* Cancel */,
-                          ),
-                          options: FFButtonOptions(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                24.0, 24.0, 24.0, 24.0),
-                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primary,
-                            textStyle:
-                                FlutterFlowTheme.of(context).headlineMedium,
-                            elevation: 3.0,
-                            borderSide: const BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
+                        TextFormField(
+                          controller: _model.textController1,
+                          focusNode: _model.textFieldFocusNode1,
+                          autofocus: true,
+                          textInputAction: TextInputAction.next,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            labelText: FFLocalizations.of(context).getText(
+                              'b5ep3o1d' /* License plate */,
                             ),
-                            borderRadius: BorderRadius.circular(8.0),
+                            labelStyle: FlutterFlowTheme.of(context).labelLarge,
+                            hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primary,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            filled: true,
+                            fillColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
                           ),
+                          style: FlutterFlowTheme.of(context).bodyLarge,
+                          validator: _model.textController1Validator
+                              .asValidator(context),
                         ),
-                        FFButtonWidget(
-                          onPressed: () async {
-                            if (_model.formKey.currentState == null ||
-                                !_model.formKey.currentState!.validate()) {
-                              return;
-                            }
-                            _model.updateVehicleStruct(
-                              (e) => e
-                                ..licensePlate = _model.textController1.text
-                                ..size =
-                                    double.tryParse(_model.textController2.text)
-                                ..maxWeight =
-                                    double.tryParse(_model.textController3.text)
-                                ..lorrySiteID = _model.locations
-                                    .where(
-                                        (e) => _model.dropDownValue! == e.name)
-                                    .toList()
-                                    .first
-                                    .id,
-                            );
-                            if (widget.isExisting!) {
-                              _model.updateResult = await HaulageCompanyAPIGroup
-                                  .updateVehicleCall
-                                  .call();
-                              if ((_model.updateResult?.succeeded ?? true)) {
+                        TextFormField(
+                          controller: _model.textController2,
+                          focusNode: _model.textFieldFocusNode2,
+                          autofocus: true,
+                          textInputAction: TextInputAction.next,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            labelText: FFLocalizations.of(context).getText(
+                              '1hvpc6hc' /* Size */,
+                            ),
+                            labelStyle: FlutterFlowTheme.of(context).labelLarge,
+                            hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primary,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            filled: true,
+                            fillColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                          style: FlutterFlowTheme.of(context).bodyLarge,
+                          maxLines: null,
+                          keyboardType: const TextInputType.numberWithOptions(
+                              decimal: true),
+                          validator: _model.textController2Validator
+                              .asValidator(context),
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp('(\\d|\\.)'))
+                          ],
+                        ),
+                        TextFormField(
+                          controller: _model.textController3,
+                          focusNode: _model.textFieldFocusNode3,
+                          autofocus: true,
+                          textInputAction: TextInputAction.next,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            labelText: FFLocalizations.of(context).getText(
+                              'dv3cqh30' /* Maximum weight */,
+                            ),
+                            labelStyle: FlutterFlowTheme.of(context).labelLarge,
+                            hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primary,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            filled: true,
+                            fillColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                          style: FlutterFlowTheme.of(context).bodyLarge,
+                          keyboardType: const TextInputType.numberWithOptions(
+                              decimal: true),
+                          validator: _model.textController3Validator
+                              .asValidator(context),
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp('(\\d|\\.)'))
+                          ],
+                        ),
+                        FlutterFlowDropDown<String>(
+                          controller: _model.dropDownValueController ??=
+                              FormFieldController<String>(
+                            _model.dropDownValue ??= ((HaulageCompanyAPIGroup
+                                                    .getAllLocationsCall
+                                                    .rootList(
+                                              vehicleFormGetAllLocationsResponse
+                                                  .jsonBody,
+                                            ) as List)
+                                                .map<String>(
+                                                    (s) => s.toString())
+                                                .toList()
+                                                .where((e) =>
+                                                    valueOrDefault<bool>(
+                                                      (widget.locationID != null
+                                                              ? widget
+                                                                  .locationID!
+                                                              : _model.vehicle!
+                                                                  .lorrySiteID) ==
+                                                          LorrySiteDTOStruct
+                                                                  .fromMap(e)
+                                                              .id,
+                                                      false,
+                                                    ))
+                                                .toList()
+                                                .first !=
+                                            ''
+                                    ? LorrySiteDTOStruct.fromMap(
+                                        (HaulageCompanyAPIGroup
+                                                .getAllLocationsCall
+                                                .rootList(
+                                        vehicleFormGetAllLocationsResponse
+                                            .jsonBody,
+                                      ) as List)
+                                            .map<String>((s) => s.toString())
+                                            .toList()
+                                            .where((e) => valueOrDefault<bool>(
+                                                  (widget.locationID != null
+                                                          ? widget.locationID!
+                                                          : _model.vehicle!
+                                                              .lorrySiteID) ==
+                                                      LorrySiteDTOStruct
+                                                              .fromMap(e)
+                                                          .id,
+                                                  false,
+                                                ))
+                                            .toList()
+                                            .first)
+                                    : null)
+                                ?.name,
+                          ),
+                          options: (HaulageCompanyAPIGroup.getAllLocationsCall
+                                  .rootList(
+                            vehicleFormGetAllLocationsResponse.jsonBody,
+                          ) as List)
+                              .map<String>((s) => s.toString())
+                              .toList().map((e) => (e != ''
+                                      ? LorrySiteDTOStruct.fromMap(e)
+                                      : null)
+                                  ?.name)
+                              .withoutNulls
+                              .toList(),
+                          onChanged: (val) =>
+                              setState(() => _model.dropDownValue = val),
+                          height: 50.0,
+                          textStyle: FlutterFlowTheme.of(context).bodyLarge,
+                          hintText: FFLocalizations.of(context).getText(
+                            '0tznzxwg' /* Location */,
+                          ),
+                          icon: Icon(
+                            Icons.keyboard_arrow_down_rounded,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            size: 24.0,
+                          ),
+                          fillColor:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          elevation: 2.0,
+                          borderColor: FlutterFlowTheme.of(context).alternate,
+                          borderWidth: 2.0,
+                          borderRadius: 8.0,
+                          margin: const EdgeInsetsDirectional.fromSTEB(
+                              10.0, 10.0, 10.0, 10.0),
+                          hidesUnderline: true,
+                          disabled: widget.locationID != null,
+                          isSearchable: false,
+                          isMultiSelect: false,
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            FFButtonWidget(
+                              onPressed: () async {
                                 context.safePop();
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'Failed to update vehicle',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                          ),
-                                    ),
-                                    duration: const Duration(milliseconds: 4000),
-                                    backgroundColor:
-                                        FlutterFlowTheme.of(context).error,
-                                  ),
+                              },
+                              text: FFLocalizations.of(context).getText(
+                                'wdh12arj' /* Cancel */,
+                              ),
+                              options: FFButtonOptions(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    24.0, 24.0, 24.0, 24.0),
+                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context).primary,
+                                textStyle:
+                                    FlutterFlowTheme.of(context).headlineMedium,
+                                elevation: 3.0,
+                                borderSide: const BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                            FFButtonWidget(
+                              onPressed: () async {
+                                if (_model.formKey.currentState == null ||
+                                    !_model.formKey.currentState!.validate()) {
+                                  return;
+                                }
+                                _model.updateVehicleStruct(
+                                  (e) => e
+                                    ..licensePlate = _model.textController1.text
+                                    ..size = double.tryParse(
+                                        _model.textController2.text)
+                                    ..maxWeight = double.tryParse(
+                                        _model.textController3.text)
+                                    ..lorrySiteID = (HaulageCompanyAPIGroup
+                                                        .getAllLocationsCall
+                                                        .rootList(
+                                                          vehicleFormGetAllLocationsResponse
+                                                              .jsonBody,
+                                                        )
+                                                        .where((e) =>
+                                                            _model
+                                                                .dropDownValue! ==
+                                                            LorrySiteDTOStruct
+                                                                    .fromMap(e)
+                                                                .name)
+                                                        .toList()
+                                                        .first !=
+                                                    null &&
+                                                HaulageCompanyAPIGroup
+                                                        .getAllLocationsCall
+                                                        .rootList(
+                                                          vehicleFormGetAllLocationsResponse
+                                                              .jsonBody,
+                                                        )
+                                                        .where((e) =>
+                                                            _model
+                                                                .dropDownValue! ==
+                                                            LorrySiteDTOStruct
+                                                                    .fromMap(e)
+                                                                .name)
+                                                        .toList()
+                                                        .first !=
+                                                    ''
+                                            ? LorrySiteDTOStruct.fromMap(
+                                                HaulageCompanyAPIGroup
+                                                    .getAllLocationsCall
+                                                    .rootList(
+                                                      vehicleFormGetAllLocationsResponse
+                                                          .jsonBody,
+                                                    )
+                                                    .where((e) =>
+                                                        _model.dropDownValue! ==
+                                                        LorrySiteDTOStruct
+                                                                .fromMap(e)
+                                                            .name)
+                                                    .toList()
+                                                    .first)
+                                            : null)
+                                        ?.id,
                                 );
-                              }
-                            } else {
-                              _model.createResult = await HaulageCompanyAPIGroup
-                                  .createVehicleCall
-                                  .call();
-                              if ((_model.createResult?.succeeded ?? true)) {
-                                context.safePop();
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'Failed to create vehicle',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                          ),
-                                    ),
-                                    duration: const Duration(milliseconds: 4000),
-                                    backgroundColor:
-                                        FlutterFlowTheme.of(context).error,
-                                  ),
-                                );
-                              }
-                            }
+                                if (widget.isExisting!) {
+                                  _model.updateResult =
+                                      await HaulageCompanyAPIGroup
+                                          .updateVehicleCall
+                                          .call();
+                                  if ((_model.updateResult?.succeeded ??
+                                      true)) {
+                                    context.safePop();
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Failed to update vehicle',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                        ),
+                                        duration: const Duration(milliseconds: 4000),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context).error,
+                                      ),
+                                    );
+                                  }
+                                } else {
+                                  _model.createResult =
+                                      await HaulageCompanyAPIGroup
+                                          .createVehicleCall
+                                          .call();
+                                  if ((_model.createResult?.succeeded ??
+                                      true)) {
+                                    context.safePop();
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Failed to create vehicle',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                              ),
+                                        ),
+                                        duration: const Duration(milliseconds: 4000),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context).error,
+                                      ),
+                                    );
+                                  }
+                                }
 
-                            setState(() {});
-                          },
-                          text: FFLocalizations.of(context).getText(
-                            '244g6y53' /* Confirm */,
-                          ),
-                          options: FFButtonOptions(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                24.0, 24.0, 24.0, 24.0),
-                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primary,
-                            textStyle:
-                                FlutterFlowTheme.of(context).headlineMedium,
-                            elevation: 3.0,
-                            borderSide: const BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
+                                setState(() {});
+                              },
+                              text: FFLocalizations.of(context).getText(
+                                '244g6y53' /* Confirm */,
+                              ),
+                              options: FFButtonOptions(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    24.0, 24.0, 24.0, 24.0),
+                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context).primary,
+                                textStyle:
+                                    FlutterFlowTheme.of(context).headlineMedium,
+                                elevation: 3.0,
+                                borderSide: const BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
                             ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
+                          ].divide(const SizedBox(width: 10.0)),
                         ),
-                      ].divide(const SizedBox(width: 10.0)),
+                      ].divide(const SizedBox(height: 10.0)),
                     ),
-                  ].divide(const SizedBox(height: 10.0)),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

@@ -21,7 +21,7 @@ class AddQuantityDialogModel extends FlutterFlowModel<AddQuantityDialogWidget> {
   String? _textControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        'a6eelskv' /* Field is required */,
+        'w4btgtad' /* Field is required */,
       );
     }
 

@@ -12,22 +12,10 @@ class VehicleFormModel extends FlutterFlowModel<VehicleFormWidget> {
   void updateVehicleStruct(Function(VehicleDTOStruct) updateFn) =>
       updateFn(vehicle ??= VehicleDTOStruct());
 
-  List<LorrySiteDTOStruct> locations = [];
-  void addToLocations(LorrySiteDTOStruct item) => locations.add(item);
-  void removeFromLocations(LorrySiteDTOStruct item) => locations.remove(item);
-  void removeAtIndexFromLocations(int index) => locations.removeAt(index);
-  void insertAtIndexInLocations(int index, LorrySiteDTOStruct item) =>
-      locations.insert(index, item);
-  void updateLocationsAtIndex(
-          int index, Function(LorrySiteDTOStruct) updateFn) =>
-      locations[index] = updateFn(locations[index]);
-
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
-  // Stores action output result for [Backend Call - API (getAllLocations)] action in VehicleForm widget.
-  ApiCallResponse? getResult;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;

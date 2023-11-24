@@ -299,7 +299,7 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          '2xjmlz25' /* Weight */,
+                          'jftkvkoj' /* Weight */,
                         ),
                         labelStyle: FlutterFlowTheme.of(context).labelLarge,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
@@ -352,7 +352,7 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          'oq8l3jds' /* Quantity */,
+                          'zri4zv3q' /* Quantity */,
                         ),
                         labelStyle: FlutterFlowTheme.of(context).labelLarge,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,

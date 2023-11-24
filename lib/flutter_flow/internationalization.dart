@@ -257,11 +257,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Size',
       'hu': '',
     },
-    '2xjmlz25': {
+    'jftkvkoj': {
       'en': 'Weight',
       'hu': '',
     },
-    'oq8l3jds': {
+    'zri4zv3q': {
       'en': 'Quantity',
       'hu': '',
     },
@@ -297,19 +297,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Please choose an option from the dropdown',
       'hu': '',
     },
-    'ht35h569': {
+    'yf7bbmgl': {
       'en': 'Field is required',
       'hu': '',
     },
-    'hfil9h85': {
+    '1g6eopvw': {
       'en': 'Please choose an option from the dropdown',
       'hu': '',
     },
-    '4c6wmsda': {
+    'd2gnrgle': {
       'en': 'Field is required',
       'hu': '',
     },
-    'n8ngmyo1': {
+    'gapkddm4': {
       'en': 'Please choose an option from the dropdown',
       'hu': '',
     },
@@ -403,7 +403,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // VehicleForm
   {
     'b5ep3o1d': {
-      'en': 'Liceense plate',
+      'en': 'License plate',
       'hu': '',
     },
     '1hvpc6hc': {
@@ -414,15 +414,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Maximum weight',
       'hu': '',
     },
-    '4m0hch13': {
+    '0kqzewle': {
       'en': 'Option 1',
       'hu': '',
     },
-    '3dj9zr0w': {
+    '0tznzxwg': {
       'en': 'Location',
       'hu': '',
     },
-    'iimzy7w0': {
+    'np481smo': {
       'en': 'Search for an item...',
       'hu': '',
     },
@@ -512,7 +512,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Shop',
       'hu': 'Cím',
     },
-    'dbccp7n4': {
+    'n2tuz4j5': {
       'en': 'Goods',
       'hu': '',
     },
@@ -659,31 +659,31 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // AddQuantityDialog
   {
-    'bv80zuy9': {
+    'vh0vbnw4': {
       'en': 'Add quantity to good',
       'hu': '',
     },
-    '0g0lr0mh': {
+    'igis03u3': {
       'en': 'Quantity',
       'hu': '',
     },
-    '4qi2s3xa': {
+    'pzmh44tk': {
       'en': '0',
       'hu': '',
     },
-    'a6eelskv': {
+    'w4btgtad': {
       'en': 'Field is required',
       'hu': '',
     },
-    'f4omoa6x': {
+    'obc48ygb': {
       'en': 'Please choose an option from the dropdown',
       'hu': '',
     },
-    'qv1vbteq': {
+    'ge0jne1u': {
       'en': 'Cancel',
       'hu': '',
     },
-    'kibdjc3y': {
+    '2vyzkjln': {
       'en': 'Confirm',
       'hu': '',
     },
