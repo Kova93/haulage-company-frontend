@@ -41,10 +41,10 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
           ? LorrySiteDTOStruct.fromMap(widget.locationJSON)
           : null;
       setState(() {
-        _model.nameFieldController?.text = _model.location!.name;
+        _model.nameFieldController?.text = _model.location?.name ?? '';
       });
       setState(() {
-        _model.addressFieldController?.text = _model.location!.address;
+        _model.addressFieldController?.text = _model.location?.address ?? '';
       });
     });
 

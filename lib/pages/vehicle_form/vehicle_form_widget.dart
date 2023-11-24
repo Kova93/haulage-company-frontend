@@ -45,14 +45,14 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
           ? VehicleDTOStruct.fromMap(widget.vehicleJSON)
           : null;
       setState(() {
-        _model.licensePlateFieldController?.text = _model.vehicle!.licensePlate;
+        _model.licensePlateFieldController?.text = _model.vehicle?.licensePlate ?? '';
       });
       setState(() {
-        _model.sizeFieldController?.text = _model.vehicle!.size.toString();
+        _model.sizeFieldController?.text = _model.vehicle?.size.toString() ?? '';
       });
       setState(() {
         _model.weightFieldController?.text =
-            _model.vehicle!.maxWeight.toString();
+            _model.vehicle?.maxWeight.toString() ?? '';
       });
     });
 

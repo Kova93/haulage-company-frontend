@@ -41,10 +41,10 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
           ? ShopDTOStruct.fromMap(widget.shopJSON)
           : null;
       setState(() {
-        _model.nameFieldController?.text = _model.shop!.name;
+        _model.nameFieldController?.text = _model.shop?.name ?? '';
       });
       setState(() {
-        _model.addressFieldController?.text = _model.shop!.address;
+        _model.addressFieldController?.text = _model.shop?.address ?? '';
       });
     });
 

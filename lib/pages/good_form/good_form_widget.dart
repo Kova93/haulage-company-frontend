@@ -41,16 +41,16 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
           ? GoodDTOStruct.fromMap(widget.goodJSON)
           : null;
       setState(() {
-        _model.nameFieldController?.text = _model.good!.name;
+        _model.nameFieldController?.text = _model.good?.name ?? '';
       });
       setState(() {
-        _model.descriptionFieldController?.text = _model.good!.description;
+        _model.descriptionFieldController?.text = _model.good?.description ?? '';
       });
       setState(() {
-        _model.sizeFieldController?.text = _model.good!.size.toString();
+        _model.sizeFieldController?.text = _model.good?.size.toString() ?? '';
       });
       setState(() {
-        _model.weightFieldController?.text = _model.good!.weight.toString();
+        _model.weightFieldController?.text = _model.good?.weight.toString() ?? '';
       });
     });
 
