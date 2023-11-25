@@ -15,8 +15,8 @@ class AddGoodDialogModel extends FlutterFlowModel<AddGoodDialogWidget> {
 
   final formKey = GlobalKey<FormState>();
   // State field(s) for GoodDropDown widget.
-  String? goodDropDownValue;
-  FormFieldController<String>? goodDropDownValueController;
+  int? goodDropDownValue;
+  FormFieldController<int>? goodDropDownValueController;
 
   /// Initialization and disposal methods.
 

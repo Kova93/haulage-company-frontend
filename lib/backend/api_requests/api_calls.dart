@@ -10,8 +10,17 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 /// Start Haulage Company API Group Code
 
 class HaulageCompanyAPIGroup {
-  static String baseUrl = 'http://localhost:8080/api';
+  static String baseUrl = '/api';
   static Map<String, String> headers = {};
+  static RegisterANewUserCall registerANewUserCall = RegisterANewUserCall();
+  static LogInAUserCall logInAUserCall = LogInAUserCall();
+  static CheckIfAUsernameExistsCall checkIfAUsernameExistsCall =
+      CheckIfAUsernameExistsCall();
+  static GetAllUsersCall getAllUsersCall = GetAllUsersCall();
+  static GetUserByIDCall getUserByIDCall = GetUserByIDCall();
+  static DeleteUserByIDCall deleteUserByIDCall = DeleteUserByIDCall();
+  static UpdateUserRolesByIDCall updateUserRolesByIDCall =
+      UpdateUserRolesByIDCall();
   static GetAllGoodsCall getAllGoodsCall = GetAllGoodsCall();
   static CreateGoodCall createGoodCall = CreateGoodCall();
   static GetGoodByIdCall getGoodByIdCall = GetGoodByIdCall();
@@ -49,13 +58,171 @@ class HaulageCompanyAPIGroup {
   static DeleteVehicleCall deleteVehicleCall = DeleteVehicleCall();
 }
 
-class GetAllGoodsCall {
+class RegisterANewUserCall {
   Future<ApiCallResponse> call() async {
+    const ffApiRequestBody = '''
+{
+  "name": "",
+  "username": "",
+  "password": "",
+  "role": ""
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Register a new user',
+      apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/users/register',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class LogInAUserCall {
+  Future<ApiCallResponse> call({
+    dynamic loginJsonJson,
+  }) async {
+    final loginJson = _serializeJson(loginJsonJson);
+    final ffApiRequestBody = loginJson;
+    return ApiManager.instance.makeApiCall(
+      callName: 'Log in a user',
+      apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/users/login',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class CheckIfAUsernameExistsCall {
+  Future<ApiCallResponse> call({
+    String? name = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Check if a username exists',
+      apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/users/checkName/$name',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class GetAllUsersCall {
+  Future<ApiCallResponse> call({
+    String? bearerAuth = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get all users',
+      apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/users/all',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class GetUserByIDCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? bearerAuth = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get user by ID',
+      apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/users/$id',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class DeleteUserByIDCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? bearerAuth = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Delete user by ID',
+      apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/users/$id',
+      callType: ApiCallType.DELETE,
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class UpdateUserRolesByIDCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? bearerAuth = '',
+  }) async {
+    const ffApiRequestBody = '''
+[
+  ""
+]''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Update user roles by ID',
+      apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/users/$id',
+      callType: ApiCallType.PUT,
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class GetAllGoodsCall {
+  Future<ApiCallResponse> call({
+    String? bearerAuth = '',
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getAllGoods',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/goods',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
@@ -66,7 +233,7 @@ class GetAllGoodsCall {
 
   dynamic rootList(dynamic response) => getJsonField(
         response,
-        r'''$''',
+        r'''$[*]''',
         true,
       );
 }
@@ -74,15 +241,18 @@ class GetAllGoodsCall {
 class CreateGoodCall {
   Future<ApiCallResponse> call({
     int? lorrySiteId,
-    dynamic goodJson,
+    String? bearerAuth = '',
+    dynamic goodJsonJson,
   }) async {
-    final good = _serializeJson(goodJson);
-    final ffApiRequestBody = good;
+    final goodJson = _serializeJson(goodJsonJson);
+    final ffApiRequestBody = goodJson;
     return ApiManager.instance.makeApiCall(
       callName: 'createGood',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/goods/$lorrySiteId',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -97,12 +267,15 @@ class CreateGoodCall {
 class GetGoodByIdCall {
   Future<ApiCallResponse> call({
     int? id,
+    String? bearerAuth = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getGoodById',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/goods/$id',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
@@ -115,15 +288,18 @@ class GetGoodByIdCall {
 class UpdateGoodCall {
   Future<ApiCallResponse> call({
     int? id,
-    dynamic goodJson,
+    String? bearerAuth = '',
+    dynamic goodJsonJson,
   }) async {
-    final good = _serializeJson(goodJson);
-    final ffApiRequestBody = good;
+    final goodJson = _serializeJson(goodJsonJson);
+    final ffApiRequestBody = goodJson;
     return ApiManager.instance.makeApiCall(
       callName: 'updateGood',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/goods/$id',
       callType: ApiCallType.PUT,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -138,12 +314,15 @@ class UpdateGoodCall {
 class DeleteGoodCall {
   Future<ApiCallResponse> call({
     int? id,
+    String? bearerAuth = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'deleteGood',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/goods/$id',
       callType: ApiCallType.DELETE,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
@@ -155,15 +334,18 @@ class DeleteGoodCall {
 
 class CreateLocationCall {
   Future<ApiCallResponse> call({
-    dynamic locationJson,
+    String? bearerAuth = '',
+    dynamic locationJsonJson,
   }) async {
-    final location = _serializeJson(locationJson);
-    final ffApiRequestBody = location;
+    final locationJson = _serializeJson(locationJsonJson);
+    final ffApiRequestBody = locationJson;
     return ApiManager.instance.makeApiCall(
       callName: 'createLocation',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/locations',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -176,12 +358,16 @@ class CreateLocationCall {
 }
 
 class GetAllLocationsCall {
-  Future<ApiCallResponse> call() async {
+  Future<ApiCallResponse> call({
+    String? bearerAuth = '',
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getAllLocations',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/locations',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
@@ -192,7 +378,7 @@ class GetAllLocationsCall {
 
   dynamic rootList(dynamic response) => getJsonField(
         response,
-        r'''$''',
+        r'''$[*]''',
         true,
       );
 }
@@ -200,12 +386,15 @@ class GetAllLocationsCall {
 class GetLocationByIdCall {
   Future<ApiCallResponse> call({
     int? id,
+    String? bearerAuth = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getLocationById',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/locations/$id',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
@@ -218,15 +407,18 @@ class GetLocationByIdCall {
 class UpdateLocationCall {
   Future<ApiCallResponse> call({
     int? id,
-    dynamic locationJson,
+    String? bearerAuth = '',
+    dynamic locationJsonJson,
   }) async {
-    final location = _serializeJson(locationJson);
-    final ffApiRequestBody = location;
+    final locationJson = _serializeJson(locationJsonJson);
+    final ffApiRequestBody = locationJson;
     return ApiManager.instance.makeApiCall(
       callName: 'updateLocation',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/locations/$id',
       callType: ApiCallType.PUT,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -241,12 +433,15 @@ class UpdateLocationCall {
 class DeleteLocationCall {
   Future<ApiCallResponse> call({
     int? id,
+    String? bearerAuth = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'deleteLocation',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/locations/$id',
       callType: ApiCallType.DELETE,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
@@ -258,15 +453,18 @@ class DeleteLocationCall {
 
 class CreateOrderCall {
   Future<ApiCallResponse> call({
-    dynamic orderJson,
+    String? bearerAuth = '',
+    dynamic orderJsonJson,
   }) async {
-    final order = _serializeJson(orderJson);
-    final ffApiRequestBody = order;
+    final orderJson = _serializeJson(orderJsonJson);
+    final ffApiRequestBody = orderJson;
     return ApiManager.instance.makeApiCall(
       callName: 'createOrder',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/orders',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -279,12 +477,16 @@ class CreateOrderCall {
 }
 
 class GetAllOrdersCall {
-  Future<ApiCallResponse> call() async {
+  Future<ApiCallResponse> call({
+    String? bearerAuth = '',
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getAllOrders',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/orders',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
@@ -295,7 +497,7 @@ class GetAllOrdersCall {
 
   dynamic rootList(dynamic response) => getJsonField(
         response,
-        r'''$''',
+        r'''$[*]''',
         true,
       );
 }
@@ -303,12 +505,15 @@ class GetAllOrdersCall {
 class GetOrderByIdCall {
   Future<ApiCallResponse> call({
     int? id,
+    String? bearerAuth = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getOrderById',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/orders/$id',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
@@ -321,15 +526,18 @@ class GetOrderByIdCall {
 class UpdateOrderCall {
   Future<ApiCallResponse> call({
     int? id,
-    dynamic orderJson,
+    String? bearerAuth = '',
+    dynamic orderJsonJson,
   }) async {
-    final order = _serializeJson(orderJson);
-    final ffApiRequestBody = order;
+    final orderJson = _serializeJson(orderJsonJson);
+    final ffApiRequestBody = orderJson;
     return ApiManager.instance.makeApiCall(
       callName: 'updateOrder',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/orders/$id',
       callType: ApiCallType.PUT,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -344,12 +552,15 @@ class UpdateOrderCall {
 class DeleteOrderCall {
   Future<ApiCallResponse> call({
     int? id,
+    String? bearerAuth = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'deleteOrder',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/orders/$id',
       callType: ApiCallType.DELETE,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
@@ -361,15 +572,18 @@ class DeleteOrderCall {
 
 class CreateShopCall {
   Future<ApiCallResponse> call({
-    dynamic shopJson,
+    String? bearerAuth = '',
+    dynamic shopJsonJson,
   }) async {
-    final shop = _serializeJson(shopJson);
-    final ffApiRequestBody = shop;
+    final shopJson = _serializeJson(shopJsonJson);
+    final ffApiRequestBody = shopJson;
     return ApiManager.instance.makeApiCall(
       callName: 'createShop',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/shops',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -382,12 +596,16 @@ class CreateShopCall {
 }
 
 class GetAllShopsCall {
-  Future<ApiCallResponse> call() async {
+  Future<ApiCallResponse> call({
+    String? bearerAuth = '',
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getAllShops',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/shops',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
@@ -398,7 +616,7 @@ class GetAllShopsCall {
 
   dynamic rootList(dynamic response) => getJsonField(
         response,
-        r'''$''',
+        r'''$[*]''',
         true,
       );
 }
@@ -406,12 +624,15 @@ class GetAllShopsCall {
 class GetShopByIdCall {
   Future<ApiCallResponse> call({
     int? id,
+    String? bearerAuth = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getShopById',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/shops/$id',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
@@ -424,15 +645,18 @@ class GetShopByIdCall {
 class UpdateShopCall {
   Future<ApiCallResponse> call({
     int? id,
-    dynamic shopJson,
+    String? bearerAuth = '',
+    dynamic shopJsonJson,
   }) async {
-    final shop = _serializeJson(shopJson);
-    final ffApiRequestBody = shop;
+    final shopJson = _serializeJson(shopJsonJson);
+    final ffApiRequestBody = shopJson;
     return ApiManager.instance.makeApiCall(
       callName: 'updateShop',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/shops/$id',
       callType: ApiCallType.PUT,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -447,12 +671,15 @@ class UpdateShopCall {
 class DeleteShopCall {
   Future<ApiCallResponse> call({
     int? id,
+    String? bearerAuth = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'deleteShop',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/shops/$id',
       callType: ApiCallType.DELETE,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
@@ -463,21 +690,19 @@ class DeleteShopCall {
 }
 
 class CreateTransportOperationCall {
-  Future<ApiCallResponse> call() async {
-    const ffApiRequestBody = '''
-{
-  "id": 0,
-  "date": "",
-  "usedVehicleIDs": [
-    0
-  ],
-  "orderID": 0
-}''';
+  Future<ApiCallResponse> call({
+    String? bearerAuth = '',
+    dynamic transportJsonJson,
+  }) async {
+    final transportJson = _serializeJson(transportJsonJson);
+    final ffApiRequestBody = transportJson;
     return ApiManager.instance.makeApiCall(
       callName: 'createTransportOperation',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/transport-operations',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -490,12 +715,16 @@ class CreateTransportOperationCall {
 }
 
 class GetAllTransportOperationsCall {
-  Future<ApiCallResponse> call() async {
+  Future<ApiCallResponse> call({
+    String? bearerAuth = '',
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getAllTransportOperations',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/transport-operations',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
@@ -506,7 +735,7 @@ class GetAllTransportOperationsCall {
 
   dynamic rootList(dynamic response) => getJsonField(
         response,
-        r'''$''',
+        r'''$[*]''',
         true,
       );
 }
@@ -514,12 +743,15 @@ class GetAllTransportOperationsCall {
 class GetTransportOperationByIdCall {
   Future<ApiCallResponse> call({
     int? id,
+    String? bearerAuth = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getTransportOperationById',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/transport-operations/$id',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
@@ -532,21 +764,18 @@ class GetTransportOperationByIdCall {
 class UpdateTransportOperationCall {
   Future<ApiCallResponse> call({
     int? id,
+    String? bearerAuth = '',
+    dynamic transportJsonJson,
   }) async {
-    const ffApiRequestBody = '''
-{
-  "id": 0,
-  "date": "",
-  "usedVehicleIDs": [
-    0
-  ],
-  "orderID": 0
-}''';
+    final transportJson = _serializeJson(transportJsonJson);
+    final ffApiRequestBody = transportJson;
     return ApiManager.instance.makeApiCall(
       callName: 'updateTransportOperation',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/transport-operations/$id',
       callType: ApiCallType.PUT,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -561,12 +790,15 @@ class UpdateTransportOperationCall {
 class DeleteTransportOperationCall {
   Future<ApiCallResponse> call({
     int? id,
+    String? bearerAuth = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'deleteTransportOperation',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/transport-operations/$id',
       callType: ApiCallType.DELETE,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
@@ -578,15 +810,18 @@ class DeleteTransportOperationCall {
 
 class CreateVehicleCall {
   Future<ApiCallResponse> call({
-    dynamic vehicleJson,
+    String? bearerAuth = '',
+    dynamic vehicleJsonJson,
   }) async {
-    final vehicle = _serializeJson(vehicleJson);
-    final ffApiRequestBody = vehicle;
+    final vehicleJson = _serializeJson(vehicleJsonJson);
+    final ffApiRequestBody = vehicleJson;
     return ApiManager.instance.makeApiCall(
       callName: 'createVehicle',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/vehicles',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -599,12 +834,16 @@ class CreateVehicleCall {
 }
 
 class GetAllVehiclesCall {
-  Future<ApiCallResponse> call() async {
+  Future<ApiCallResponse> call({
+    String? bearerAuth = '',
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getAllVehicles',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/vehicles',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
@@ -615,7 +854,7 @@ class GetAllVehiclesCall {
 
   dynamic rootList(dynamic response) => getJsonField(
         response,
-        r'''$''',
+        r'''$[*]''',
         true,
       );
 }
@@ -623,12 +862,15 @@ class GetAllVehiclesCall {
 class GetVehicleByIdCall {
   Future<ApiCallResponse> call({
     int? id,
+    String? bearerAuth = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getVehicleById',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/vehicles/$id',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
@@ -641,15 +883,18 @@ class GetVehicleByIdCall {
 class UpdateVehicleCall {
   Future<ApiCallResponse> call({
     int? id,
-    dynamic vehicleJson,
+    String? bearerAuth = '',
+    dynamic vehicleJsonJson,
   }) async {
-    final vehicle = _serializeJson(vehicleJson);
-    final ffApiRequestBody = vehicle;
+    final vehicleJson = _serializeJson(vehicleJsonJson);
+    final ffApiRequestBody = vehicleJson;
     return ApiManager.instance.makeApiCall(
       callName: 'updateVehicle',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/vehicles/$id',
       callType: ApiCallType.PUT,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -664,12 +909,15 @@ class UpdateVehicleCall {
 class DeleteVehicleCall {
   Future<ApiCallResponse> call({
     int? id,
+    String? bearerAuth = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'deleteVehicle',
       apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/vehicles/$id',
       callType: ApiCallType.DELETE,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,

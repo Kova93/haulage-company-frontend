@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:provider/provider.dart';
 import 'settings_page_model.dart';
 export 'settings_page_model.dart';
 
@@ -100,8 +99,6 @@ class _SettingsPageWidgetState extends State<SettingsPageWidget>
         ),
       );
     }
-
-    context.watch<FFAppState>();
 
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus

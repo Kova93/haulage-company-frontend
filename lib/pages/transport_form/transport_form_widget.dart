@@ -1,10 +1,11 @@
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'transport_form_model.dart';
 export 'transport_form_model.dart';
 
@@ -12,9 +13,11 @@ class TransportFormWidget extends StatefulWidget {
   const TransportFormWidget({
     super.key,
     required this.isExisting,
+    this.transportOperationJSON,
   });
 
   final bool? isExisting;
+  final dynamic transportOperationJSON;
 
   @override
   _TransportFormWidgetState createState() => _TransportFormWidgetState();
@@ -30,12 +33,13 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
     super.initState();
     _model = createModel(context, () => TransportFormModel());
 
-    _model.textController1 ??= TextEditingController(text: _model.shop?.name);
-    _model.textFieldFocusNode1 ??= FocusNode();
-
-    _model.textController2 ??=
-        TextEditingController(text: _model.shop?.contact);
-    _model.textFieldFocusNode2 ??= FocusNode();
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.transportOperation = widget.transportOperationJSON != null &&
+              widget.transportOperationJSON != ''
+          ? TransportOperationDTOStruct.fromMap(widget.transportOperationJSON)
+          : null;
+    });
   }
 
   @override
@@ -55,8 +59,6 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
         ),
       );
     }
-
-    context.watch<FFAppState>();
 
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
@@ -102,104 +104,6 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextFormField(
-                      controller: _model.textController1,
-                      focusNode: _model.textFieldFocusNode1,
-                      autofocus: true,
-                      textInputAction: TextInputAction.next,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        labelText: FFLocalizations.of(context).getText(
-                          'fc8hnrq7' /* Name */,
-                        ),
-                        labelStyle: FlutterFlowTheme.of(context).labelLarge,
-                        hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primary,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        filled: true,
-                        fillColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyLarge,
-                      validator:
-                          _model.textController1Validator.asValidator(context),
-                    ),
-                    TextFormField(
-                      controller: _model.textController2,
-                      focusNode: _model.textFieldFocusNode2,
-                      autofocus: true,
-                      textInputAction: TextInputAction.next,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        labelText: FFLocalizations.of(context).getText(
-                          'twjfukty' /* Contact */,
-                        ),
-                        labelStyle: FlutterFlowTheme.of(context).labelLarge,
-                        hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primary,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        filled: true,
-                        fillColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyLarge,
-                      maxLines: null,
-                      keyboardType: TextInputType.emailAddress,
-                      validator:
-                          _model.textController2Validator.asValidator(context),
-                    ),
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -228,31 +132,8 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                           ),
                         ),
                         FFButtonWidget(
-                          onPressed: () async {
-                            if (_model.formKey.currentState == null ||
-                                !_model.formKey.currentState!.validate()) {
-                              return;
-                            }
-                            await Future.delayed(
-                                const Duration(milliseconds: 100));
-                            if (true) {
-                              context.safePop();
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'Submit failed',
-                                    style: TextStyle(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                    ),
-                                  ),
-                                  duration: const Duration(milliseconds: 4000),
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).error,
-                                ),
-                              );
-                            }
+                          onPressed: () {
+                            print('ConfirmButton pressed ...');
                           },
                           text: FFLocalizations.of(context).getText(
                             '6vah3i9r' /* Confirm */,

@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -7,7 +8,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'good_form_model.dart';
 export 'good_form_model.dart';
 
@@ -39,11 +39,9 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        _model.good = widget.goodJSON != null && widget.goodJSON != ''
-            ? GoodDTOStruct.fromMap(widget.goodJSON)
-            : null;
-      });
+      _model.good = widget.goodJSON != null && widget.goodJSON != ''
+          ? GoodDTOStruct.fromMap(widget.goodJSON)
+          : null;
       setState(() {
         _model.nameFieldController?.text = _model.good!.name;
       });
@@ -94,8 +92,6 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
         ),
       );
     }
-
-    context.watch<FFAppState>();
 
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
@@ -445,14 +441,12 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                               _model.updateResult = await HaulageCompanyAPIGroup
                                   .updateGoodCall
                                   .call(
+                                bearerAuth: currentUserData?.accessToken,
                                 id: _model.good?.id,
-                                goodJson: _model.good?.toMap(),
+                                goodJsonJson: _model.good?.toMap(),
                               );
                               if ((_model.updateResult?.succeeded ?? true)) {
-                                if (Navigator.of(context).canPop()) {
-                                  context.pop();
-                                }
-                                context.pushNamed('GoodsListPage');
+                                context.safePop();
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -476,17 +470,11 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                               _model.createResult = await HaulageCompanyAPIGroup
                                   .createGoodCall
                                   .call(
-                                goodJson: _model.good?.toMap(),
-                                lorrySiteId: valueOrDefault<int>(
-                                  widget.lorrySiteID,
-                                  0,
-                                ),
+                                bearerAuth: currentUserData?.accessToken,
+                                goodJsonJson: _model.good?.toMap(),
                               );
                               if ((_model.createResult?.succeeded ?? true)) {
-                                if (Navigator.of(context).canPop()) {
-                                  context.pop();
-                                }
-                                context.pushNamed('GoodsListPage');
+                                context.safePop();
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(

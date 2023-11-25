@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -6,7 +7,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'add_quantity_dialog_model.dart';
 export 'add_quantity_dialog_model.dart';
 
@@ -62,8 +62,6 @@ class _AddQuantityDialogWidgetState extends State<AddQuantityDialogWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
       child: Form(
@@ -168,8 +166,9 @@ class _AddQuantityDialogWidgetState extends State<AddQuantityDialogWidget> {
                     );
                     _model.updateResult =
                         await HaulageCompanyAPIGroup.updateGoodCall.call(
+                      bearerAuth: currentUserData?.accessToken,
                       id: _model.good?.id,
-                      goodJson: _model.good?.toMap(),
+                      goodJsonJson: _model.good?.toMap(),
                     );
                     if ((_model.updateResult?.succeeded ?? true)) {
                       Navigator.pop(context);

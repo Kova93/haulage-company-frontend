@@ -1,12 +1,14 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/components/empty_list/empty_list_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/backend/schema/structs/index.dart';
+import 'dart:async';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'orders_list_page_model.dart';
 export 'orders_list_page_model.dart';
 
@@ -26,12 +28,6 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => OrdersListPageModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await _model.updateOrders(context);
-      setState(() {});
-    });
   }
 
   @override
@@ -51,8 +47,6 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
         ),
       );
     }
-
-    context.watch<FFAppState>();
 
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
@@ -92,215 +86,267 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
           top: true,
           child: Stack(
             children: [
-              Builder(
-                builder: (context) {
-                  final ordersList = _model.orders.toList();
-                  return RefreshIndicator(
-                    onRefresh: () async {
-                      await _model.updateOrders(context);
-                      setState(() {});
-                    },
-                    child: ListView.separated(
-                      padding: EdgeInsets.zero,
-                      scrollDirection: Axis.vertical,
-                      itemCount: ordersList.length,
-                      separatorBuilder: (_, __) => const SizedBox(height: 10.0),
-                      itemBuilder: (context, ordersListIndex) {
-                        final ordersListItem = ordersList[ordersListIndex];
-                        return Container(
-                          decoration: const BoxDecoration(),
-                          child: ExpandableNotifier(
-                            child: ExpandablePanel(
-                              header: Text(
-                                valueOrDefault<String>(
-                                  ordersListItem.id.toString(),
-                                  'id',
-                                ),
-                                style: FlutterFlowTheme.of(context).titleLarge,
-                              ),
-                              collapsed: Container(),
-                              expanded: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    FFLocalizations.of(context).getText(
-                                      'cofgmggp' /* Shop */,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          fontStyle: FontStyle.italic,
-                                        ),
-                                  ),
-                                  Text(
+              FutureBuilder<ApiCallResponse>(
+                future: (_model
+                        .apiRequestCompleter ??= Completer<ApiCallResponse>()
+                      ..complete(HaulageCompanyAPIGroup.getAllOrdersCall.call(
+                        bearerAuth: currentUserData?.accessToken,
+                      )))
+                    .future,
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50.0,
+                        height: 50.0,
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            FlutterFlowTheme.of(context).primary,
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                  final listViewGetAllOrdersResponse = snapshot.data!;
+                  return Builder(
+                    builder: (context) {
+                      final ordersList = HaulageCompanyAPIGroup.getAllOrdersCall
+                              .rootList(
+                                listViewGetAllOrdersResponse.jsonBody,
+                              )
+                              ?.map((e) => e != null && e != ''
+                                  ? GetOrderDTOStruct.fromMap(e)
+                                  : null)
+                              .withoutNulls
+                              .toList()
+                              ?.toList() ??
+                          [];
+                      if (ordersList.isEmpty) {
+                        return const Center(
+                          child: EmptyListWidget(),
+                        );
+                      }
+                      return RefreshIndicator(
+                        onRefresh: () async {
+                          setState(() => _model.apiRequestCompleter = null);
+                          await _model.waitForApiRequestCompleted();
+                        },
+                        child: ListView.separated(
+                          padding: EdgeInsets.zero,
+                          scrollDirection: Axis.vertical,
+                          itemCount: ordersList.length,
+                          separatorBuilder: (_, __) => const SizedBox(height: 10.0),
+                          itemBuilder: (context, ordersListIndex) {
+                            final ordersListItem = ordersList[ordersListIndex];
+                            return Container(
+                              decoration: const BoxDecoration(),
+                              child: ExpandableNotifier(
+                                child: ExpandablePanel(
+                                  header: Text(
                                     valueOrDefault<String>(
-                                      ordersListItem.shopDTO.name,
-                                      'shopid',
+                                      ordersListItem.id.toString(),
+                                      'id',
                                     ),
                                     style:
-                                        FlutterFlowTheme.of(context).bodyLarge,
+                                        FlutterFlowTheme.of(context).titleLarge,
                                   ),
-                                  Text(
-                                    FFLocalizations.of(context).getText(
-                                      'n2tuz4j5' /* Goods */,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          fontStyle: FontStyle.italic,
+                                  collapsed: Container(),
+                                  expanded: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        FFLocalizations.of(context).getText(
+                                          'cofgmggp' /* Shop */,
                                         ),
-                                  ),
-                                  Builder(
-                                    builder: (context) {
-                                      final goodsList =
-                                          ordersListItem.goodDTOs.toList();
-                                      return ListView.builder(
-                                        padding: EdgeInsets.zero,
-                                        shrinkWrap: true,
-                                        scrollDirection: Axis.vertical,
-                                        itemCount: goodsList.length,
-                                        itemBuilder: (context, goodsListIndex) {
-                                          final goodsListItem =
-                                              goodsList[goodsListIndex];
-                                          return Container(
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelLarge
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              fontStyle: FontStyle.italic,
+                                            ),
+                                      ),
+                                      Text(
+                                        valueOrDefault<String>(
+                                          ordersListItem.shopDTO.name,
+                                          'shopid',
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyLarge,
+                                      ),
+                                      Text(
+                                        FFLocalizations.of(context).getText(
+                                          'n2tuz4j5' /* Goods */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelLarge
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              fontStyle: FontStyle.italic,
+                                            ),
+                                      ),
+                                      Builder(
+                                        builder: (context) {
+                                          final goodsList =
+                                              ordersListItem.goodDTOs.toList();
+                                          return ListView.builder(
+                                            padding: EdgeInsets.zero,
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.vertical,
+                                            itemCount: goodsList.length,
+                                            itemBuilder:
+                                                (context, goodsListIndex) {
+                                              final goodsListItem =
+                                                  goodsList[goodsListIndex];
+                                              return Container(
+                                                decoration: BoxDecoration(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
                                                       .secondaryBackground,
-                                            ),
-                                            child: Text(
-                                              'x${goodsListItem.quantity.toString()} ${goodsListItem.name}',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
+                                                ),
+                                                child: Text(
+                                                  'x${goodsListItem.quantity.toString()} ${goodsListItem.name}',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
                                                       .bodyLarge,
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    },
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        10.0, 10.0, 10.0, 10.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        FlutterFlowIconButton(
-                                          borderColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                          borderRadius: 8.0,
-                                          borderWidth: 1.0,
-                                          buttonSize: 40.0,
-                                          fillColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .accent1,
-                                          icon: Icon(
-                                            Icons.edit,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            size: 24.0,
-                                          ),
-                                          onPressed: () async {
-                                            context.pushNamed(
-                                              'OrderForm',
-                                              queryParameters: {
-                                                'isExisting': serializeParam(
-                                                  true,
-                                                  ParamType.bool,
-                                                ),
-                                                'getOrderJSON': serializeParam(
-                                                  ordersListItem.toMap(),
-                                                  ParamType.JSON,
-                                                ),
-                                              }.withoutNulls,
-                                            );
-                                          },
-                                        ),
-                                        FlutterFlowIconButton(
-                                          borderColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                          borderRadius: 8.0,
-                                          borderWidth: 1.0,
-                                          buttonSize: 40.0,
-                                          fillColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .accent1,
-                                          icon: Icon(
-                                            Icons.delete,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            size: 24.0,
-                                          ),
-                                          onPressed: () async {
-                                            _model.deleteResult =
-                                                await HaulageCompanyAPIGroup
-                                                    .deleteOrderCall
-                                                    .call(
-                                              id: ordersListItem.id,
-                                            );
-                                            if ((_model
-                                                    .deleteResult?.succeeded ??
-                                                true)) {
-                                              setState(() {
-                                                _model.removeAtIndexFromOrders(
-                                                    ordersListIndex);
-                                              });
-                                            } else {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  content: Text(
-                                                    'Failed to delete order',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Readex Pro',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                        ),
-                                                  ),
-                                                  duration: const Duration(
-                                                      milliseconds: 4000),
-                                                  backgroundColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .error,
                                                 ),
                                               );
-                                            }
+                                            },
+                                          );
+                                        },
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            10.0, 10.0, 10.0, 10.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            FlutterFlowIconButton(
+                                              borderColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              borderRadius: 8.0,
+                                              borderWidth: 1.0,
+                                              buttonSize: 40.0,
+                                              fillColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .accent1,
+                                              icon: Icon(
+                                                Icons.edit,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                size: 24.0,
+                                              ),
+                                              onPressed: () async {
+                                                context.pushNamed(
+                                                  'OrderForm',
+                                                  queryParameters: {
+                                                    'isExisting':
+                                                        serializeParam(
+                                                      true,
+                                                      ParamType.bool,
+                                                    ),
+                                                    'getOrderJSON':
+                                                        serializeParam(
+                                                      ordersListItem.toMap(),
+                                                      ParamType.JSON,
+                                                    ),
+                                                  }.withoutNulls,
+                                                );
+                                              },
+                                            ),
+                                            FlutterFlowIconButton(
+                                              borderColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              borderRadius: 8.0,
+                                              borderWidth: 1.0,
+                                              buttonSize: 40.0,
+                                              fillColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .accent1,
+                                              icon: Icon(
+                                                Icons.delete,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                size: 24.0,
+                                              ),
+                                              onPressed: () async {
+                                                _model.deleteResult =
+                                                    await HaulageCompanyAPIGroup
+                                                        .deleteOrderCall
+                                                        .call(
+                                                  bearerAuth: currentUserData
+                                                      ?.accessToken,
+                                                  id: ordersListItem.id,
+                                                );
+                                                if ((_model.deleteResult
+                                                        ?.succeeded ??
+                                                    true)) {
+                                                  setState(() => _model
+                                                          .apiRequestCompleter =
+                                                      null);
+                                                  await _model
+                                                      .waitForApiRequestCompleted();
+                                                } else {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(
+                                                        'Failed to delete order',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Readex Pro',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
+                                                                ),
+                                                      ),
+                                                      duration: const Duration(
+                                                          milliseconds: 4000),
+                                                      backgroundColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .error,
+                                                    ),
+                                                  );
+                                                }
 
-                                            setState(() {});
-                                          },
+                                                setState(() {});
+                                              },
+                                            ),
+                                          ].divide(const SizedBox(width: 10.0)),
                                         ),
-                                      ].divide(const SizedBox(width: 10.0)),
-                                    ),
+                                      ),
+                                    ],
                                   ),
-                                ],
+                                  theme: const ExpandableThemeData(
+                                    tapHeaderToExpand: true,
+                                    tapBodyToExpand: false,
+                                    tapBodyToCollapse: false,
+                                    headerAlignment:
+                                        ExpandablePanelHeaderAlignment.center,
+                                    hasIcon: true,
+                                  ),
+                                ),
                               ),
-                              theme: const ExpandableThemeData(
-                                tapHeaderToExpand: true,
-                                tapBodyToExpand: false,
-                                tapBodyToCollapse: false,
-                                headerAlignment:
-                                    ExpandablePanelHeaderAlignment.center,
-                                hasIcon: true,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+                            );
+                          },
+                        ),
+                      );
+                    },
                   );
                 },
               ),

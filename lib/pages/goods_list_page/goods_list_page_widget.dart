@@ -1,4 +1,6 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/components/empty_list/empty_list_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -7,7 +9,6 @@ import 'dart:async';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'goods_list_page_model.dart';
 export 'goods_list_page_model.dart';
 
@@ -46,8 +47,6 @@ class _GoodsListPageWidgetState extends State<GoodsListPageWidget> {
         ),
       );
     }
-
-    context.watch<FFAppState>();
 
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
@@ -90,7 +89,9 @@ class _GoodsListPageWidgetState extends State<GoodsListPageWidget> {
               FutureBuilder<ApiCallResponse>(
                 future: (_model
                         .apiRequestCompleter ??= Completer<ApiCallResponse>()
-                      ..complete(HaulageCompanyAPIGroup.getAllGoodsCall.call()))
+                      ..complete(HaulageCompanyAPIGroup.getAllGoodsCall.call(
+                        bearerAuth: currentUserData?.accessToken,
+                      )))
                     .future,
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.
@@ -121,6 +122,11 @@ class _GoodsListPageWidgetState extends State<GoodsListPageWidget> {
                               .toList()
                               ?.toList() ??
                           [];
+                      if (goodsList.isEmpty) {
+                        return const Center(
+                          child: EmptyListWidget(),
+                        );
+                      }
                       return RefreshIndicator(
                         onRefresh: () async {
                           setState(() => _model.apiRequestCompleter = null);
@@ -278,6 +284,8 @@ class _GoodsListPageWidgetState extends State<GoodsListPageWidget> {
                                                     await HaulageCompanyAPIGroup
                                                         .deleteGoodCall
                                                         .call(
+                                                  bearerAuth: currentUserData
+                                                      ?.accessToken,
                                                   id: goodsListItem.id,
                                                 );
                                                 if ((_model.deleteResult

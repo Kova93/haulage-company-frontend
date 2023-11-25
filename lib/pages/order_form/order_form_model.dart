@@ -21,8 +21,8 @@ class OrderFormModel extends FlutterFlowModel<OrderFormWidget> {
   final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // State field(s) for ShopDropDown widget.
-  String? shopDropDownValue;
-  FormFieldController<String>? shopDropDownValueController;
+  int? shopDropDownValue;
+  FormFieldController<int>? shopDropDownValueController;
   // Stores action output result for [Backend Call - API (updateOrder)] action in ConfirmButton widget.
   ApiCallResponse? updateResult;
   // Stores action output result for [Backend Call - API (createOrder)] action in ConfirmButton widget.

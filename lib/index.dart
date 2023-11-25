@@ -22,4 +22,4 @@ export '/pages/transport_form/transport_form_widget.dart'
     show TransportFormWidget;
 export '/pages/transports_list_page/transports_list_page_widget.dart'
     show TransportsListPageWidget;
-export '/pages/login/login_widget.dart' show LoginWidget;
+export '/pages/login_page/login_page_widget.dart' show LoginPageWidget;

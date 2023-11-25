@@ -6,19 +6,18 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:provider/provider.dart';
 import 'add_good_dialog_model.dart';
 export 'add_good_dialog_model.dart';
 
 class AddGoodDialogWidget extends StatefulWidget {
   const AddGoodDialogWidget({
     super.key,
-    required this.goods,
     required this.getOrderParam,
+    required this.goods,
   });
 
-  final List<GoodDTOStruct>? goods;
   final GetOrderDTOStruct? getOrderParam;
+  final List<GoodDTOStruct>? goods;
 
   @override
   _AddGoodDialogWidgetState createState() => _AddGoodDialogWidgetState();
@@ -53,8 +52,6 @@ class _AddGoodDialogWidgetState extends State<AddGoodDialogWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
       child: Form(
@@ -65,19 +62,20 @@ class _AddGoodDialogWidgetState extends State<AddGoodDialogWidget> {
           children: [
             Text(
               FFLocalizations.of(context).getText(
-                'sj06ii3p' /* Add good to order */,
+                'kla312ft' /* Add good to order */,
               ),
               style: FlutterFlowTheme.of(context).titleLarge,
             ),
-            FlutterFlowDropDown<String>(
+            FlutterFlowDropDown<int>(
               controller: _model.goodDropDownValueController ??=
-                  FormFieldController<String>(null),
-              options: widget.goods!.map((e) => e.name).toList(),
+                  FormFieldController<int>(null),
+              options: List<int>.from(widget.goods!.map((e) => e.id).toList()),
+              optionLabels: widget.goods!.map((e) => e.name).toList(),
               onChanged: (val) =>
                   setState(() => _model.goodDropDownValue = val),
               textStyle: FlutterFlowTheme.of(context).bodyLarge,
               hintText: FFLocalizations.of(context).getText(
-                'exclgxae' /* Select good... */,
+                'z7lglw3a' /* Select good... */,
               ),
               icon: Icon(
                 Icons.keyboard_arrow_down_rounded,
@@ -103,7 +101,7 @@ class _AddGoodDialogWidgetState extends State<AddGoodDialogWidget> {
                     Navigator.pop(context);
                   },
                   text: FFLocalizations.of(context).getText(
-                    'kvrqdjw9' /* Cancel */,
+                    '4kdyikj7' /* Cancel */,
                   ),
                   options: FFButtonOptions(
                     padding:
@@ -131,8 +129,7 @@ class _AddGoodDialogWidgetState extends State<AddGoodDialogWidget> {
                         (e) => e
                           ..updateGoodDTOs(
                             (e) => e.add(widget.goods!
-                                .where(
-                                    (e) => e.name == _model.goodDropDownValue)
+                                .where((e) => e.id == _model.goodDropDownValue)
                                 .toList()
                                 .first),
                           ),
@@ -141,7 +138,7 @@ class _AddGoodDialogWidgetState extends State<AddGoodDialogWidget> {
                     Navigator.pop(context);
                   },
                   text: FFLocalizations.of(context).getText(
-                    '0x9wlr03' /* Confirm */,
+                    'f1kd0bog' /* Confirm */,
                   ),
                   options: FFButtonOptions(
                     padding:

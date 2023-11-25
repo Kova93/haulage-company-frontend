@@ -60,8 +60,8 @@ class VehicleFormModel extends FlutterFlowModel<VehicleFormWidget> {
   }
 
   // State field(s) for LocationDropDown widget.
-  String? locationDropDownValue;
-  FormFieldController<String>? locationDropDownValueController;
+  int? locationDropDownValue;
+  FormFieldController<int>? locationDropDownValueController;
   // Stores action output result for [Backend Call - API (updateVehicle)] action in ConfirmButton widget.
   ApiCallResponse? updateResult;
   // Stores action output result for [Backend Call - API (createVehicle)] action in ConfirmButton widget.

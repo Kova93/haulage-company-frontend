@@ -410,10 +410,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Maximum weight',
       'hu': '',
     },
-    'pamxxyyv': {
-      'en': 'Option 1',
-      'hu': '',
-    },
     '0tznzxwg': {
       'en': 'Select location...',
       'hu': '',
@@ -519,23 +515,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // OrderForm
   {
-    'jc8wqdi1': {
-      'en': 'Option 1',
-      'hu': '',
-    },
-    'u7dnydl6': {
+    'l4d5zy7g': {
       'en': 'Select shop...',
       'hu': '',
     },
-    '3lyqgyrl': {
+    '3vijjty0': {
       'en': 'Search for an item...',
       'hu': '',
     },
-    'hbo3opho': {
+    'aimy0v0e': {
       'en': 'Goods',
       'hu': '',
     },
-    'tyutxsii': {
+    '5bfmx2a6': {
       'en': 'Add good',
       'hu': '',
     },
@@ -554,14 +546,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // TransportForm
   {
-    'fc8hnrq7': {
-      'en': 'Name',
-      'hu': '',
-    },
-    'twjfukty': {
-      'en': 'Contact',
-      'hu': '',
-    },
     '1kjmf0s9': {
       'en': 'Cancel',
       'hu': '',
@@ -609,12 +593,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Order ID',
       'hu': 'Cím',
     },
+    'ccnyp1bu': {
+      'en': 'Vehicles',
+      'hu': '',
+    },
     'v1czhin2': {
       'en': 'Home',
       'hu': '',
     },
   },
-  // login
+  // LoginPage
   {
     'rpjhe0mk': {
       'en': 'Haulage Company',
@@ -678,28 +666,31 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // AddGoodDialog
   {
-    'sj06ii3p': {
+    'kla312ft': {
       'en': 'Add good to order',
       'hu': '',
     },
-    'k6udoilz': {
-      'en': 'Option 1',
-      'hu': '',
-    },
-    'exclgxae': {
+    'z7lglw3a': {
       'en': 'Select good...',
       'hu': '',
     },
-    'cx9t3qty': {
+    '7dmr0aun': {
       'en': 'Search for an item...',
       'hu': '',
     },
-    'kvrqdjw9': {
+    '4kdyikj7': {
       'en': 'Cancel',
       'hu': '',
     },
-    '0x9wlr03': {
+    'f1kd0bog': {
       'en': 'Confirm',
+      'hu': '',
+    },
+  },
+  // EmptyList
+  {
+    'krvh6z6u': {
+      'en': 'No entries found',
       'hu': '',
     },
   },
@@ -725,15 +716,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Label here...',
       'hu': '',
     },
-    'h0dt50vx': {
+    '7t64dth4': {
       'en': 'Option 1',
       'hu': '',
     },
-    '2idte11k': {
+    'n5yfv9bp': {
       'en': 'Please select...',
       'hu': '',
     },
-    'oghswde4': {
+    '83292t8b': {
       'en': 'Search for an item...',
       'hu': '',
     },

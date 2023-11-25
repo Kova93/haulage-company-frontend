@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -7,7 +8,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'location_form_model.dart';
 export 'location_form_model.dart';
 
@@ -37,12 +37,9 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        _model.location =
-            widget.locationJSON != null && widget.locationJSON != ''
-                ? LorrySiteDTOStruct.fromMap(widget.locationJSON)
-                : null;
-      });
+      _model.location = widget.locationJSON != null && widget.locationJSON != ''
+          ? LorrySiteDTOStruct.fromMap(widget.locationJSON)
+          : null;
       setState(() {
         _model.nameFieldController?.text = _model.location!.name;
       });
@@ -75,8 +72,6 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
         ),
       );
     }
-
-    context.watch<FFAppState>();
 
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
@@ -262,8 +257,9 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
                               _model.updateResult = await HaulageCompanyAPIGroup
                                   .updateLocationCall
                                   .call(
+                                bearerAuth: currentUserData?.accessToken,
                                 id: _model.location?.id,
-                                locationJson: _model.location?.toMap(),
+                                locationJsonJson: _model.location?.toMap(),
                               );
                               if ((_model.updateResult?.succeeded ?? true)) {
                                 context.safePop();
@@ -290,7 +286,8 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
                               _model.createResult = await HaulageCompanyAPIGroup
                                   .createLocationCall
                                   .call(
-                                locationJson: _model.location?.toMap(),
+                                bearerAuth: currentUserData?.accessToken,
+                                locationJsonJson: _model.location?.toMap(),
                               );
                               if ((_model.createResult?.succeeded ?? true)) {
                                 context.safePop();

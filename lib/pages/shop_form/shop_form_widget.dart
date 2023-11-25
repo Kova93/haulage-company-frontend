@@ -1,3 +1,4 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -7,7 +8,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'shop_form_model.dart';
 export 'shop_form_model.dart';
 
@@ -72,8 +72,6 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
         ),
       );
     }
-
-    context.watch<FFAppState>();
 
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
@@ -259,8 +257,9 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
                               _model.updateResult = await HaulageCompanyAPIGroup
                                   .updateShopCall
                                   .call(
+                                bearerAuth: currentUserData?.accessToken,
                                 id: _model.shop?.id,
-                                shopJson: _model.shop?.toMap(),
+                                shopJsonJson: _model.shop?.toMap(),
                               );
                               if ((_model.updateResult?.succeeded ?? true)) {
                                 context.safePop();
@@ -287,7 +286,8 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
                               _model.createResult = await HaulageCompanyAPIGroup
                                   .createShopCall
                                   .call(
-                                shopJson: _model.shop?.toMap(),
+                                bearerAuth: currentUserData?.accessToken,
+                                shopJsonJson: _model.shop?.toMap(),
                               );
                               if ((_model.createResult?.succeeded ?? true)) {
                                 context.safePop();

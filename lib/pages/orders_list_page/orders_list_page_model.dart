@@ -1,25 +1,14 @@
 import '/backend/api_requests/api_calls.dart';
-import '/backend/schema/structs/index.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:async';
 import 'orders_list_page_widget.dart' show OrdersListPageWidget;
 import 'package:flutter/material.dart';
 
 class OrdersListPageModel extends FlutterFlowModel<OrdersListPageWidget> {
-  ///  Local state fields for this page.
-
-  List<GetOrderDTOStruct> orders = [];
-  void addToOrders(GetOrderDTOStruct item) => orders.add(item);
-  void removeFromOrders(GetOrderDTOStruct item) => orders.remove(item);
-  void removeAtIndexFromOrders(int index) => orders.removeAt(index);
-  void insertAtIndexInOrders(int index, GetOrderDTOStruct item) =>
-      orders.insert(index, item);
-  void updateOrdersAtIndex(int index, Function(GetOrderDTOStruct) updateFn) =>
-      orders[index] = updateFn(orders[index]);
-
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  Completer<ApiCallResponse>? apiRequestCompleter;
   // Stores action output result for [Backend Call - API (deleteOrder)] action in DeleteButton widget.
   ApiCallResponse? deleteResult;
 
@@ -35,37 +24,20 @@ class OrdersListPageModel extends FlutterFlowModel<OrdersListPageWidget> {
 
   /// Action blocks are added here.
 
-  Future updateOrders(BuildContext context) async {
-    ApiCallResponse? updateResult;
+  /// Additional helper methods are added here.
 
-    updateResult = await HaulageCompanyAPIGroup.getAllOrdersCall.call();
-    if ((updateResult.succeeded ?? true)) {
-      orders = HaulageCompanyAPIGroup.getAllOrdersCall
-          .rootList(
-            (updateResult.jsonBody ?? ''),
-          )!
-          .map(
-              (e) => e != null && e != '' ? GetOrderDTOStruct.fromMap(e) : null)
-          .withoutNulls
-          .toList()
-          .toList()
-          .cast<GetOrderDTOStruct>();
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            'Failed to load orders',
-            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  fontFamily: 'Readex Pro',
-                  color: FlutterFlowTheme.of(context).primaryText,
-                ),
-          ),
-          duration: const Duration(milliseconds: 4000),
-          backgroundColor: FlutterFlowTheme.of(context).error,
-        ),
-      );
+  Future waitForApiRequestCompleted({
+    double minWait = 0,
+    double maxWait = double.infinity,
+  }) async {
+    final stopwatch = Stopwatch()..start();
+    while (true) {
+      await Future.delayed(const Duration(milliseconds: 50));
+      final timeElapsed = stopwatch.elapsedMilliseconds;
+      final requestComplete = apiRequestCompleter?.isCompleted ?? false;
+      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
+        break;
+      }
     }
   }
-
-  /// Additional helper methods are added here.
 }

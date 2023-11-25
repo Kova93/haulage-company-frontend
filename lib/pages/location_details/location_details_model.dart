@@ -1,17 +1,10 @@
 import '/backend/api_requests/api_calls.dart';
-import '/backend/schema/structs/index.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:async';
 import 'location_details_widget.dart' show LocationDetailsWidget;
 import 'package:flutter/material.dart';
 
 class LocationDetailsModel extends FlutterFlowModel<LocationDetailsWidget> {
-  ///  Local state fields for this page.
-
-  LorrySiteDTOStruct? location;
-  void updateLocationStruct(Function(LorrySiteDTOStruct) updateFn) =>
-      updateFn(location ??= LorrySiteDTOStruct());
-
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -20,6 +13,7 @@ class LocationDetailsModel extends FlutterFlowModel<LocationDetailsWidget> {
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
 
+  Completer<ApiCallResponse>? apiRequestCompleter;
   // Stores action output result for [Backend Call - API (deleteVehicle)] action in DeleteButton widget.
   ApiCallResponse? deleteVehicleResult;
   // Stores action output result for [Backend Call - API (deleteGood)] action in DeleteButton widget.
@@ -38,33 +32,20 @@ class LocationDetailsModel extends FlutterFlowModel<LocationDetailsWidget> {
 
   /// Action blocks are added here.
 
-  Future updateLocation(BuildContext context) async {
-    ApiCallResponse? updateResult;
+  /// Additional helper methods are added here.
 
-    updateResult = await HaulageCompanyAPIGroup.getLocationByIdCall.call(
-      id: location?.id,
-    );
-    if ((updateResult.succeeded ?? true)) {
-      location = (updateResult.jsonBody ?? '') != null &&
-              (updateResult.jsonBody ?? '') != ''
-          ? LorrySiteDTOStruct.fromMap((updateResult.jsonBody ?? ''))
-          : null;
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            'Failed to load location',
-            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  fontFamily: 'Readex Pro',
-                  color: FlutterFlowTheme.of(context).primaryText,
-                ),
-          ),
-          duration: const Duration(milliseconds: 4000),
-          backgroundColor: FlutterFlowTheme.of(context).error,
-        ),
-      );
+  Future waitForApiRequestCompleted({
+    double minWait = 0,
+    double maxWait = double.infinity,
+  }) async {
+    final stopwatch = Stopwatch()..start();
+    while (true) {
+      await Future.delayed(const Duration(milliseconds: 50));
+      final timeElapsed = stopwatch.elapsedMilliseconds;
+      final requestComplete = apiRequestCompleter?.isCompleted ?? false;
+      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
+        break;
+      }
     }
   }
-
-  /// Additional helper methods are added here.
 }
