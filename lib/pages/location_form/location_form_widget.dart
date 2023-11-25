@@ -210,7 +210,6 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
                             FlutterFlowTheme.of(context).secondaryBackground,
                       ),
                       style: FlutterFlowTheme.of(context).bodyLarge,
-                      maxLines: null,
                       keyboardType: TextInputType.streetAddress,
                       validator: _model.addressFieldControllerValidator
                           .asValidator(context),

@@ -210,7 +210,6 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
                             FlutterFlowTheme.of(context).secondaryBackground,
                       ),
                       style: FlutterFlowTheme.of(context).bodyLarge,
-                      maxLines: null,
                       keyboardType: TextInputType.emailAddress,
                       validator: _model.addressFieldControllerValidator
                           .asValidator(context),

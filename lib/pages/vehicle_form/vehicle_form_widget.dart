@@ -227,7 +227,6 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                             FlutterFlowTheme.of(context).secondaryBackground,
                       ),
                       style: FlutterFlowTheme.of(context).bodyLarge,
-                      maxLines: null,
                       keyboardType:
                           const TextInputType.numberWithOptions(decimal: true),
                       validator: _model.sizeFieldControllerValidator

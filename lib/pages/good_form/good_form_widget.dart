@@ -229,7 +229,6 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                             FlutterFlowTheme.of(context).secondaryBackground,
                       ),
                       style: FlutterFlowTheme.of(context).bodyLarge,
-                      maxLines: null,
                       keyboardType: TextInputType.multiline,
                       validator: _model.descriptionFieldControllerValidator
                           .asValidator(context),

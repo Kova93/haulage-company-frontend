@@ -47,7 +47,7 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
         ),
         Text(
           FFLocalizations.of(context).getText(
-            'krvh6z6u' /* No entries found */,
+            '40a1wgot' /* No entries found */,
           ),
           style: FlutterFlowTheme.of(context).displaySmall,
         ),

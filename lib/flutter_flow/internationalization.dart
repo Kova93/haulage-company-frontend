@@ -593,7 +593,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Order ID',
       'hu': 'Cím',
     },
-    'ccnyp1bu': {
+    '7ioqn1to': {
       'en': 'Vehicles',
       'hu': '',
     },
@@ -617,15 +617,39 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'hu': '',
     },
     'vl44ev4x': {
-      'en': 'Email',
+      'en': 'Username',
+      'hu': '',
+    },
+    'dpr4irhl': {
+      'en': '',
       'hu': '',
     },
     'us5q2fxx': {
       'en': 'Password',
       'hu': '',
     },
+    'ubc9rbad': {
+      'en': '',
+      'hu': '',
+    },
     'stea767j': {
       'en': 'Sign In',
+      'hu': '',
+    },
+    'p5mqn1vk': {
+      'en': 'Field is required',
+      'hu': '',
+    },
+    'z8tiqb9f': {
+      'en': 'Please choose an option from the dropdown',
+      'hu': '',
+    },
+    'dolneo52': {
+      'en': 'Field is required',
+      'hu': '',
+    },
+    '63ym3wjg': {
+      'en': 'Please choose an option from the dropdown',
       'hu': '',
     },
     'fqb4f957': {
@@ -689,7 +713,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // EmptyList
   {
-    'krvh6z6u': {
+    '40a1wgot': {
       'en': 'No entries found',
       'hu': '',
     },
