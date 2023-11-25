@@ -23,3 +23,4 @@ export '/pages/transport_form/transport_form_widget.dart'
 export '/pages/transports_list_page/transports_list_page_widget.dart'
     show TransportsListPageWidget;
 export '/pages/login_page/login_page_widget.dart' show LoginPageWidget;
+export '/pages/user_page/user_page_widget.dart' show UserPageWidget;

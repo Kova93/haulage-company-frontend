@@ -71,6 +71,21 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
+            borderColor: FlutterFlowTheme.of(context).primary,
+            borderRadius: 20.0,
+            borderWidth: 1.0,
+            buttonSize: 60.0,
+            fillColor: FlutterFlowTheme.of(context).accent1,
+            icon: Icon(
+              Icons.person,
+              color: FlutterFlowTheme.of(context).info,
+              size: 30.0,
+            ),
+            onPressed: () async {
+              context.pushNamed('UserPage');
+            },
+          ),
           title: Text(
             FFLocalizations.of(context).getText(
               'k0deejkp' /* Home */,

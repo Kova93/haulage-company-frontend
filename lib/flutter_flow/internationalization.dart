@@ -657,6 +657,29 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'hu': '',
     },
   },
+  // UserPage
+  {
+    'jeucsmrc': {
+      'en': 'Name',
+      'hu': '',
+    },
+    'kuscsjsz': {
+      'en': 'Roles',
+      'hu': '',
+    },
+    'nm2c8asj': {
+      'en': 'Last login',
+      'hu': '',
+    },
+    'yehju4d5': {
+      'en': 'Log out',
+      'hu': '',
+    },
+    'bjs0kckh': {
+      'en': 'Home',
+      'hu': '',
+    },
+  },
   // AddQuantityDialog
   {
     'vh0vbnw4': {
