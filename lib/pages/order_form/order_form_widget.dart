@@ -124,7 +124,7 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                   children: [
                     FutureBuilder<ApiCallResponse>(
                       future: HaulageCompanyAPIGroup.getAllShopsCall.call(
-                        bearerAuth: currentUserData?.accessToken,
+                        bearerAuth: currentAuthenticationToken,
                       ),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
@@ -263,7 +263,7 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                     Builder(
                       builder: (context) => FutureBuilder<ApiCallResponse>(
                         future: HaulageCompanyAPIGroup.getAllGoodsCall.call(
-                          bearerAuth: currentUserData?.accessToken,
+                          bearerAuth: currentAuthenticationToken,
                         ),
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.
@@ -400,7 +400,7 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                               _model.updateResult = await HaulageCompanyAPIGroup
                                   .updateOrderCall
                                   .call(
-                                bearerAuth: currentUserData?.accessToken,
+                                bearerAuth: currentAuthenticationToken,
                                 id: _model.order?.id,
                                 orderJsonJson: _model.order?.toMap(),
                               );
@@ -429,7 +429,7 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                               _model.createResult = await HaulageCompanyAPIGroup
                                   .createOrderCall
                                   .call(
-                                bearerAuth: currentUserData?.accessToken,
+                                bearerAuth: currentAuthenticationToken,
                                 orderJsonJson: _model.order?.toMap(),
                               );
                               if ((_model.createResult?.succeeded ?? true)) {

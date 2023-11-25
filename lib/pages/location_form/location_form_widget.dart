@@ -256,7 +256,7 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
                               _model.updateResult = await HaulageCompanyAPIGroup
                                   .updateLocationCall
                                   .call(
-                                bearerAuth: currentUserData?.accessToken,
+                                bearerAuth: currentAuthenticationToken,
                                 id: _model.location?.id,
                                 locationJsonJson: _model.location?.toMap(),
                               );
@@ -285,7 +285,7 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
                               _model.createResult = await HaulageCompanyAPIGroup
                                   .createLocationCall
                                   .call(
-                                bearerAuth: currentUserData?.accessToken,
+                                bearerAuth: currentAuthenticationToken,
                                 locationJsonJson: _model.location?.toMap(),
                               );
                               if ((_model.createResult?.succeeded ?? true)) {

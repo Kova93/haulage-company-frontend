@@ -66,7 +66,7 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
     return FutureBuilder<ApiCallResponse>(
       future: (_model.apiRequestCompleter ??= Completer<ApiCallResponse>()
             ..complete(HaulageCompanyAPIGroup.getLocationByIdCall.call(
-              bearerAuth: currentUserData?.accessToken,
+              bearerAuth: currentAuthenticationToken,
               id: widget.locationId,
             )))
           .future,
@@ -318,8 +318,7 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                                     .deleteVehicleCall
                                                                     .call(
                                                               bearerAuth:
-                                                                  currentUserData
-                                                                      ?.accessToken,
+                                                                  currentAuthenticationToken,
                                                               id: vehiclesListItem
                                                                   .id,
                                                             );
@@ -683,8 +682,7 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                                     .deleteGoodCall
                                                                     .call(
                                                               bearerAuth:
-                                                                  currentUserData
-                                                                      ?.accessToken,
+                                                                  currentAuthenticationToken,
                                                               id: goodsListItem
                                                                   .id,
                                                             );

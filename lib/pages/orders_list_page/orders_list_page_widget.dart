@@ -90,7 +90,7 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
                 future: (_model
                         .apiRequestCompleter ??= Completer<ApiCallResponse>()
                       ..complete(HaulageCompanyAPIGroup.getAllOrdersCall.call(
-                        bearerAuth: currentUserData?.accessToken,
+                        bearerAuth: currentAuthenticationToken,
                       )))
                     .future,
                 builder: (context, snapshot) {
@@ -284,8 +284,8 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
                                                     await HaulageCompanyAPIGroup
                                                         .deleteOrderCall
                                                         .call(
-                                                  bearerAuth: currentUserData
-                                                      ?.accessToken,
+                                                  bearerAuth:
+                                                      currentAuthenticationToken,
                                                   id: ordersListItem.id,
                                                 );
                                                 if ((_model.deleteResult

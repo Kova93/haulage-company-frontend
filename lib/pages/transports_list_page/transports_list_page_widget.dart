@@ -92,7 +92,7 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
                           ..complete(HaulageCompanyAPIGroup
                               .getAllTransportOperationsCall
                               .call(
-                            bearerAuth: currentUserData?.accessToken,
+                            bearerAuth: currentAuthenticationToken,
                           )))
                         .future,
                 builder: (context, snapshot) {
@@ -309,8 +309,8 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
                                                     await HaulageCompanyAPIGroup
                                                         .deleteTransportOperationCall
                                                         .call(
-                                                  bearerAuth: currentUserData
-                                                      ?.accessToken,
+                                                  bearerAuth:
+                                                      currentAuthenticationToken,
                                                   id: transportsListItem.id,
                                                 );
                                                 if ((_model.deleteResult

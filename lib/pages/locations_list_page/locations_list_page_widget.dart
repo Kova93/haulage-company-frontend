@@ -92,7 +92,7 @@ class _LocationsListPageWidgetState extends State<LocationsListPageWidget> {
                     (_model.apiRequestCompleter ??= Completer<ApiCallResponse>()
                           ..complete(
                               HaulageCompanyAPIGroup.getAllLocationsCall.call(
-                            bearerAuth: currentUserData?.accessToken,
+                            bearerAuth: currentAuthenticationToken,
                           )))
                         .future,
                 builder: (context, snapshot) {
@@ -277,8 +277,8 @@ class _LocationsListPageWidgetState extends State<LocationsListPageWidget> {
                                                     await HaulageCompanyAPIGroup
                                                         .deleteLocationCall
                                                         .call(
-                                                  bearerAuth: currentUserData
-                                                      ?.accessToken,
+                                                  bearerAuth:
+                                                      currentAuthenticationToken,
                                                   id: locationsListItem.id,
                                                 );
                                                 if ((_model.deleteResult

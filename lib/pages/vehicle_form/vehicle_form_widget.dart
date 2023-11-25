@@ -290,7 +290,7 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                     ),
                     FutureBuilder<ApiCallResponse>(
                       future: HaulageCompanyAPIGroup.getAllLocationsCall.call(
-                        bearerAuth: currentUserData?.accessToken,
+                        bearerAuth: currentAuthenticationToken,
                       ),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
@@ -412,7 +412,7 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                               _model.updateResult = await HaulageCompanyAPIGroup
                                   .updateVehicleCall
                                   .call(
-                                bearerAuth: currentUserData?.accessToken,
+                                bearerAuth: currentAuthenticationToken,
                                 id: _model.vehicle?.id,
                                 vehicleJsonJson: _model.vehicle?.toMap(),
                               );
@@ -441,7 +441,7 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                               _model.createResult = await HaulageCompanyAPIGroup
                                   .createVehicleCall
                                   .call(
-                                bearerAuth: currentUserData?.accessToken,
+                                bearerAuth: currentAuthenticationToken,
                                 vehicleJsonJson: _model.vehicle?.toMap(),
                               );
                               if ((_model.createResult?.succeeded ?? true)) {

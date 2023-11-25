@@ -256,7 +256,7 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
                               _model.updateResult = await HaulageCompanyAPIGroup
                                   .updateShopCall
                                   .call(
-                                bearerAuth: currentUserData?.accessToken,
+                                bearerAuth: currentAuthenticationToken,
                                 id: _model.shop?.id,
                                 shopJsonJson: _model.shop?.toMap(),
                               );
@@ -285,7 +285,7 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
                               _model.createResult = await HaulageCompanyAPIGroup
                                   .createShopCall
                                   .call(
-                                bearerAuth: currentUserData?.accessToken,
+                                bearerAuth: currentAuthenticationToken,
                                 shopJsonJson: _model.shop?.toMap(),
                               );
                               if ((_model.createResult?.succeeded ?? true)) {

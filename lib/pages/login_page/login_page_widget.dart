@@ -290,16 +290,34 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   if ((_model.loginResult?.succeeded ?? true)) {
                                     GoRouter.of(context).prepareAuthEvent();
                                     await authManager.signIn(
-                                      userData: (_model.loginResult?.jsonBody ??
-                                                      '') !=
-                                                  null &&
-                                              (_model.loginResult?.jsonBody ??
-                                                      '') !=
-                                                  ''
-                                          ? AuthResponseDTOStruct.fromMap(
-                                              (_model.loginResult?.jsonBody ??
-                                                  ''))
-                                          : null,
+                                      authenticationToken: ((_model.loginResult
+                                                              ?.jsonBody ??
+                                                          '') !=
+                                                      null &&
+                                                  (_model.loginResult
+                                                              ?.jsonBody ??
+                                                          '') !=
+                                                      ''
+                                              ? AuthResponseDTOStruct.fromMap(
+                                                  (_model.loginResult
+                                                          ?.jsonBody ??
+                                                      ''))
+                                              : null)
+                                          ?.accessToken,
+                                      authUid: ((_model.loginResult?.jsonBody ??
+                                                          '') !=
+                                                      null &&
+                                                  (_model.loginResult
+                                                              ?.jsonBody ??
+                                                          '') !=
+                                                      ''
+                                              ? AuthResponseDTOStruct.fromMap(
+                                                  (_model.loginResult
+                                                          ?.jsonBody ??
+                                                      ''))
+                                              : null)
+                                          ?.id
+                                          .toString(),
                                     );
                                     navigate = () => context.goNamedAuth(
                                         'HomePage', context.mounted);

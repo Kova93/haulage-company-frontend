@@ -440,7 +440,7 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                               _model.updateResult = await HaulageCompanyAPIGroup
                                   .updateGoodCall
                                   .call(
-                                bearerAuth: currentUserData?.accessToken,
+                                bearerAuth: currentAuthenticationToken,
                                 id: _model.good?.id,
                                 goodJsonJson: _model.good?.toMap(),
                               );
@@ -469,7 +469,7 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                               _model.createResult = await HaulageCompanyAPIGroup
                                   .createGoodCall
                                   .call(
-                                bearerAuth: currentUserData?.accessToken,
+                                bearerAuth: currentAuthenticationToken,
                                 goodJsonJson: _model.good?.toMap(),
                               );
                               if ((_model.createResult?.succeeded ?? true)) {

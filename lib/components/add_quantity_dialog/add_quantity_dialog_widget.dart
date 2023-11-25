@@ -166,7 +166,7 @@ class _AddQuantityDialogWidgetState extends State<AddQuantityDialogWidget> {
                     );
                     _model.updateResult =
                         await HaulageCompanyAPIGroup.updateGoodCall.call(
-                      bearerAuth: currentUserData?.accessToken,
+                      bearerAuth: currentAuthenticationToken,
                       id: _model.good?.id,
                       goodJsonJson: _model.good?.toMap(),
                     );

@@ -1,18 +1,12 @@
 import 'package:rxdart/rxdart.dart';
 
-import '/backend/schema/structs/index.dart';
 import 'custom_auth_manager.dart';
 
 class HaulageCompanyAuthUser {
-  HaulageCompanyAuthUser({
-    required this.loggedIn,
-    this.uid,
-    this.userData,
-  });
+  HaulageCompanyAuthUser({required this.loggedIn, this.uid});
 
   bool loggedIn;
   String? uid;
-  AuthResponseDTOStruct? userData;
 }
 
 /// Generates a stream of the authenticated user.

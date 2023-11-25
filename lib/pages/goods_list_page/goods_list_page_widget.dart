@@ -92,7 +92,7 @@ class _GoodsListPageWidgetState extends State<GoodsListPageWidget> {
                   future: (_model
                           .apiRequestCompleter ??= Completer<ApiCallResponse>()
                         ..complete(HaulageCompanyAPIGroup.getAllGoodsCall.call(
-                          bearerAuth: currentUserData?.accessToken,
+                          bearerAuth: currentAuthenticationToken,
                         )))
                       .future,
                   builder: (context, snapshot) {
@@ -288,8 +288,8 @@ class _GoodsListPageWidgetState extends State<GoodsListPageWidget> {
                                                       await HaulageCompanyAPIGroup
                                                           .deleteGoodCall
                                                           .call(
-                                                    bearerAuth: currentUserData
-                                                        ?.accessToken,
+                                                    bearerAuth:
+                                                        currentAuthenticationToken,
                                                     id: goodsListItem.id,
                                                   );
                                                   if ((_model.deleteResult
