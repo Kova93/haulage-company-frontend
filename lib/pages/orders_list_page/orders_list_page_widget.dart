@@ -113,16 +113,14 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
                   final listViewGetAllOrdersResponse = snapshot.data!;
                   return Builder(
                     builder: (context) {
-                      final ordersList = HaulageCompanyAPIGroup.getAllOrdersCall
+                      final ordersList = (HaulageCompanyAPIGroup.getAllOrdersCall
                               .rootList(
                                 listViewGetAllOrdersResponse.jsonBody,
-                              )
+                              ) as List?)
                               ?.map((e) => e != null && e != ''
                                   ? GetOrderDTOStruct.fromMap(e)
                                   : null)
-                              .withoutNulls
-                              .toList()
-                              ?.toList() ??
+                              .withoutNulls ??
                           [];
                       return RefreshIndicator(
                         onRefresh: () async {

@@ -47,7 +47,7 @@ class TransportOperationDTOStruct extends BaseStruct {
   static TransportOperationDTOStruct fromMap(Map<String, dynamic> data) =>
       TransportOperationDTOStruct(
         id: castToType<int>(data['id']),
-        date: data['date'] as DateTime?,
+        date: safeCastToDateTime(data['date']),
         usedVehicleDTOs: getStructList(
           data['usedVehicleDTOs'],
           VehicleDTOStruct.fromMap,
@@ -62,7 +62,7 @@ class TransportOperationDTOStruct extends BaseStruct {
 
   Map<String, dynamic> toMap() => {
         'id': _id,
-        'date': _date,
+        'date': _date?.toIso8601String(),
         'usedVehicleDTOs': _usedVehicleDTOs?.map((e) => e.toMap()).toList(),
         'orderDTO': _orderDTO?.toMap(),
       }.withoutNulls;

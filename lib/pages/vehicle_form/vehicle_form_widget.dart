@@ -320,18 +320,17 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                             _model.locationDropDownValue ??=
                                 widget.locationID ?? _model.vehicle?.lorrySiteID,
                           ),
-                          options: List<int>.from(HaulageCompanyAPIGroup
+                          options: (HaulageCompanyAPIGroup
                               .getAllLocationsCall
                               .rootList(
                                 locationDropDownGetAllLocationsResponse
                                     .jsonBody,
-                              )!
-                              .map((e) => (e != null && e != ''
+                              ) as List)
+                              .map((e) => (!(e ?? '').isEmpty
                                       ? LorrySiteDTOStruct.fromMap(e)
                                       : null)
                                   ?.id)
-                              .withoutNulls
-                              .toList()),
+                              .withoutNulls,
                           optionLabels: (HaulageCompanyAPIGroup
                                   .getAllLocationsCall
                                   .rootList(

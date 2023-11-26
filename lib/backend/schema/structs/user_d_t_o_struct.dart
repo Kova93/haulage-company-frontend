@@ -54,7 +54,7 @@ class UserDTOStruct extends BaseStruct {
         id: castToType<int>(data['id']),
         name: data['name'] as String?,
         username: data['username'] as String?,
-        entryDate: data['entryDate'] as DateTime?,
+        entryDate: safeCastToDateTime(data['entryDate']),
         roles: getDataList(data['roles']),
       );
 

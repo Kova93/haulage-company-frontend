@@ -101,3 +101,14 @@ extension MapDataExtensions on Map<String, dynamic> {
             .map((e) => MapEntry(e.key, e.value!)),
       );
 }
+
+// JSON can contain DateTime both as a timestamp string and as millis since epoch
+DateTime? safeCastToDateTime(dynamic value) {
+  if (value is int) {
+    return DateTime.fromMillisecondsSinceEpoch(value);
+  }
+  if (value is String) {
+    return DateTime.tryParse(value);
+  }
+  return null;
+}

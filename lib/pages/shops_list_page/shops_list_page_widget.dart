@@ -113,16 +113,14 @@ class _ShopsListPageWidgetState extends State<ShopsListPageWidget> {
                   final listViewGetAllShopsResponse = snapshot.data!;
                   return Builder(
                     builder: (context) {
-                      final shopsList = HaulageCompanyAPIGroup.getAllShopsCall
+                      final shopsList = (HaulageCompanyAPIGroup.getAllShopsCall
                               .rootList(
                                 listViewGetAllShopsResponse.jsonBody,
-                              )
+                              ) as List?)
                               ?.map((e) => e != null && e != ''
                                   ? ShopDTOStruct.fromMap(e)
                                   : null)
-                              .withoutNulls
-                              .toList()
-                              ?.toList() ??
+                              .withoutNulls ??
                           [];
                       return RefreshIndicator(
                         onRefresh: () async {

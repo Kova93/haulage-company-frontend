@@ -10,7 +10,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -242,28 +241,25 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                             _model.orderDropDownValue ??=
                                 _model.transportOperation?.orderDTO.id,
                           ),
-                          options: List<int>.from(HaulageCompanyAPIGroup
+                          options: (HaulageCompanyAPIGroup
                               .getAllOrdersCall
                               .rootList(
                                 formGetAllOrdersResponse.jsonBody,
-                              )!
-                              .map((e) => (e != null && e != ''
+                              ) as List?)
+                              ?.map((e) => (e != null && e != ''
                                       ? GetOrderDTOStruct.fromMap(e)
                                       : null)
                                   ?.id)
-                              .withoutNulls
-                              .toList()),
-                          optionLabels: functions.mapIdToString(
-                              HaulageCompanyAPIGroup.getAllOrdersCall
+                              .withoutNulls ?? [],
+                          optionLabels: (HaulageCompanyAPIGroup.getAllOrdersCall
                                   .rootList(
                                     formGetAllOrdersResponse.jsonBody,
-                                  )!
-                                  .map((e) => (e != null && e != ''
+                                  ) as List?)
+                                  ?.map((e) => (e != null && e != ''
                                           ? GetOrderDTOStruct.fromMap(e)
                                           : null)
-                                      ?.id)
-                                  .withoutNulls
-                                  .toList()),
+                                      ?.id.toString())
+                                  .withoutNulls,
                           onChanged: (val) =>
                               setState(() => _model.orderDropDownValue = val),
                           textStyle: FlutterFlowTheme.of(context).bodyLarge,
@@ -407,18 +403,17 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                                                 AddVehicleToTransportDialogWidget(
                                               transportParam:
                                                   _model.transportOperation!,
-                                              vehicles: HaulageCompanyAPIGroup
+                                              vehicles: (HaulageCompanyAPIGroup
                                                   .getAllVehiclesCall
                                                   .rootList(
                                                     buttonGetAllVehiclesResponse
                                                         .jsonBody,
-                                                  )!
-                                                  .map((e) => e != null && e != ''
+                                                  ) as List?)
+                                                  ?.map((e) => e != null && e != ''
                                                       ? VehicleDTOStruct.fromMap(
                                                           e)
                                                       : null)
-                                                  .withoutNulls
-                                                  .toList(),
+                                                  .withoutNulls ?? [],
                                             ),
                                           ),
                                         ),

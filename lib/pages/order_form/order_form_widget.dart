@@ -157,17 +157,16 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                             _model.shopDropDownValue ??=
                                 _model.getOrder?.shopDTO.id,
                           ),
-                          options: List<int>.from(HaulageCompanyAPIGroup
+                          options: (HaulageCompanyAPIGroup
                               .getAllShopsCall
                               .rootList(
                                 shopDropDownGetAllShopsResponse.jsonBody,
-                              )!
-                              .map((e) => (e != null && e != ''
+                              ) as List?)
+                              ?.map((e) => (e != null && e != ''
                                       ? ShopDTOStruct.fromMap(e)
                                       : null)
                                   ?.id)
-                              .withoutNulls
-                              .toList()),
+                              .withoutNulls ?? [],
                           optionLabels:
                               (HaulageCompanyAPIGroup.getAllShopsCall.rootList(
                             shopDropDownGetAllShopsResponse.jsonBody,
@@ -177,8 +176,7 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                                           ? ShopDTOStruct.fromMap(e)
                                           : null)
                                       ?.name)
-                                  .withoutNulls
-                                  .toList(),
+                                  .withoutNulls,
                           onChanged: (val) =>
                               setState(() => _model.shopDropDownValue = val),
                           textStyle: FlutterFlowTheme.of(context).bodyLarge,
@@ -216,7 +214,7 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                     Builder(
                       builder: (context) {
                         final goodsList =
-                            _model.getOrder?.goodDTOs.toList() ?? [];
+                            _model.getOrder?.goodDTOs ?? [];
                         return ListView.separated(
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
@@ -294,13 +292,13 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                                             : FocusScope.of(context).unfocus(),
                                         child: AddGoodToOrderDialogWidget(
                                           getOrderParam: _model.getOrder!,
-                                          goods: HaulageCompanyAPIGroup
+                                          goods: (HaulageCompanyAPIGroup
                                               .getAllGoodsCall
                                               .rootList(
                                                 addGoodButtonGetAllGoodsResponse
                                                     .jsonBody,
-                                              )!
-                                              .map((e) => e != null && e != ''
+                                              ) as List?)
+                                              ?.map((e) => e != null && e != ''
                                                   ? GoodDTOStruct.fromMap(e)
                                                   : null)
                                               .withoutNulls

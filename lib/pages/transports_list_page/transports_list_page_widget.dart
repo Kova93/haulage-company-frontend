@@ -117,18 +117,16 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
                       snapshot.data!;
                   return Builder(
                     builder: (context) {
-                      final transportsList = HaulageCompanyAPIGroup
+                      final transportsList = (HaulageCompanyAPIGroup
                               .getAllTransportOperationsCall
                               .rootList(
                                 listViewGetAllTransportOperationsResponse
                                     .jsonBody,
-                              )
+                              ) as List?)
                               ?.map((e) => e != null && e != ''
                                   ? TransportOperationDTOStruct.fromMap(e)
                                   : null)
-                              .withoutNulls
-                              .toList()
-                              ?.toList() ??
+                              .withoutNulls ??
                           [];
                       return RefreshIndicator(
                         onRefresh: () async {

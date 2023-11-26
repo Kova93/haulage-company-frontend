@@ -18,7 +18,3 @@ List<StackedGoodDTOStruct> mapToStackedGoodDTO(
           StackedGoodDTOStruct(goodId: e.goodDTO.id, quantity: e.quantity))
       .toList();
 }
-
-List<String> mapIdToString(List<int> idList) {
-  return idList.map((e) => e.toString()).toList();
-}

@@ -113,17 +113,15 @@ class _VehiclesListPageWidgetState extends State<VehiclesListPageWidget> {
                   final listViewGetAllVehiclesResponse = snapshot.data!;
                   return Builder(
                     builder: (context) {
-                      final vehiclesList = HaulageCompanyAPIGroup
+                      final vehiclesList = (HaulageCompanyAPIGroup
                               .getAllVehiclesCall
                               .rootList(
                                 listViewGetAllVehiclesResponse.jsonBody,
-                              )
-                              ?.map((e) => e != null && e != ''
+                              ) as List?)
+                              ?.map((e) => !(e ?? '').isEmpty
                                   ? VehicleDTOStruct.fromMap(e)
                                   : null)
-                              .withoutNulls
-                              .toList()
-                              ?.toList() ??
+                              .withoutNulls ??
                           [];
                       return RefreshIndicator(
                         onRefresh: () async {

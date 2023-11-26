@@ -115,17 +115,15 @@ class _LocationsListPageWidgetState extends State<LocationsListPageWidget> {
                   final listViewGetAllLocationsResponse = snapshot.data!;
                   return Builder(
                     builder: (context) {
-                      final locationsList = HaulageCompanyAPIGroup
+                      final locationsList = (HaulageCompanyAPIGroup
                               .getAllLocationsCall
                               .rootList(
                                 listViewGetAllLocationsResponse.jsonBody,
-                              )
-                              ?.map((e) => e != null && e != ''
+                              ) as List?)
+                              ?.map((e) => !(e ?? '').isEmpty
                                   ? LorrySiteDTOStruct.fromMap(e)
                                   : null)
-                              .withoutNulls
-                              .toList()
-                              ?.toList() ??
+                              .withoutNulls ??
                           [];
                       return RefreshIndicator(
                         onRefresh: () async {

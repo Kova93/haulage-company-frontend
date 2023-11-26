@@ -115,16 +115,14 @@ class _GoodsListPageWidgetState extends State<GoodsListPageWidget> {
                     final listViewGetAllGoodsResponse = snapshot.data!;
                     return Builder(
                       builder: (context) {
-                        final goodsList = HaulageCompanyAPIGroup.getAllGoodsCall
+                        final goodsList = (HaulageCompanyAPIGroup.getAllGoodsCall
                                 .rootList(
                                   listViewGetAllGoodsResponse.jsonBody,
-                                )
+                                ) as List?)
                                 ?.map((e) => e != null && e != ''
                                     ? GoodDTOStruct.fromMap(e)
                                     : null)
-                                .withoutNulls
-                                .toList()
-                                ?.toList() ??
+                                .withoutNulls ??
                             [];
                         return RefreshIndicator(
                           onRefresh: () async {
