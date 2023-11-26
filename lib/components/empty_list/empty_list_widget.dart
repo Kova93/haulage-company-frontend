@@ -36,7 +36,7 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.zero,
+      primary: true,
       scrollDirection: Axis.vertical,
       children: [
         Icon(
@@ -44,8 +44,7 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
           color: FlutterFlowTheme.of(context).secondaryText,
           size: 60.0,
         ),
-        Align(
-          alignment: const AlignmentDirectional(0.00, 0.00),
+        Center(
           child: Text(
             FFLocalizations.of(context).getText(
               '40a1wgot' /* No entries found */,

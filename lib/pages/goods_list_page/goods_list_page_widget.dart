@@ -124,216 +124,213 @@ class _GoodsListPageWidgetState extends State<GoodsListPageWidget> {
                                 .toList()
                                 ?.toList() ??
                             [];
-                        if (goodsList.isEmpty) {
-                          return const Center(
-                            child: EmptyListWidget(),
-                          );
-                        }
                         return RefreshIndicator(
                           onRefresh: () async {
                             setState(() => _model.apiRequestCompleter = null);
                             await _model.waitForApiRequestCompleted();
                           },
-                          child: ListView.separated(
-                            padding: EdgeInsets.zero,
-                            scrollDirection: Axis.vertical,
-                            itemCount: goodsList.length,
-                            separatorBuilder: (_, __) => const SizedBox(height: 10.0),
-                            itemBuilder: (context, goodsListIndex) {
-                              final goodsListItem = goodsList[goodsListIndex];
-                              return Container(
-                                decoration: const BoxDecoration(),
-                                child: ExpandableNotifier(
-                                  child: ExpandablePanel(
-                                    header: Text(
-                                      goodsListItem.name,
-                                      style: FlutterFlowTheme.of(context)
-                                          .titleLarge,
-                                    ),
-                                    collapsed: Container(),
-                                    expanded: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          10.0, 10.0, 10.0, 10.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              'lps7u20d' /* Description */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelLarge
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  fontStyle: FontStyle.italic,
-                                                ),
-                                          ),
-                                          Text(
-                                            goodsListItem.description,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyLarge,
-                                          ),
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              'va7bnt9b' /* Size */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelLarge
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  fontStyle: FontStyle.italic,
-                                                ),
-                                          ),
-                                          Text(
-                                            '${goodsListItem.size.toString()} m3',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyLarge,
-                                          ),
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              '4l8ry766' /* Weight */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelLarge
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  fontStyle: FontStyle.italic,
-                                                ),
-                                          ),
-                                          Text(
-                                            '${goodsListItem.weight.toString()} kg',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyLarge,
-                                          ),
-                                          Row(
+                          child: goodsList.isEmpty
+                            ? const EmptyListWidget()
+                            : ListView.separated(
+                                padding: EdgeInsets.zero,
+                                scrollDirection: Axis.vertical,
+                                itemCount: goodsList.length,
+                                separatorBuilder: (_, __) => const SizedBox(height: 10.0),
+                                itemBuilder: (context, goodsListIndex) {
+                                  final goodsListItem = goodsList[goodsListIndex];
+                                  return Container(
+                                    decoration: const BoxDecoration(),
+                                    child: ExpandableNotifier(
+                                      child: ExpandablePanel(
+                                        header: Text(
+                                          goodsListItem.name,
+                                          style: FlutterFlowTheme.of(context)
+                                              .titleLarge,
+                                        ),
+                                        collapsed: Container(),
+                                        expanded: Padding(
+                                          padding: const EdgeInsetsDirectional.fromSTEB(
+                                              10.0, 10.0, 10.0, 10.0),
+                                          child: Column(
                                             mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.end,
+                                                CrossAxisAlignment.start,
                                             children: [
-                                              FlutterFlowIconButton(
-                                                borderColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                borderRadius: 8.0,
-                                                borderWidth: 1.0,
-                                                buttonSize: 40.0,
-                                                fillColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .accent1,
-                                                icon: Icon(
-                                                  Icons.edit,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  size: 24.0,
+                                              Text(
+                                                FFLocalizations.of(context).getText(
+                                                  'lps7u20d' /* Description */,
                                                 ),
-                                                onPressed: () async {
-                                                  context.pushNamed(
-                                                    'GoodForm',
-                                                    queryParameters: {
-                                                      'isExisting':
-                                                          serializeParam(
-                                                        true,
-                                                        ParamType.bool,
-                                                      ),
-                                                      'goodJSON':
-                                                          serializeParam(
-                                                        goodsListItem.toMap(),
-                                                        ParamType.JSON,
-                                                      ),
-                                                    }.withoutNulls,
-                                                  );
-                                                },
+                                                style: FlutterFlowTheme.of(context)
+                                                    .labelLarge
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      fontStyle: FontStyle.italic,
+                                                    ),
                                               ),
-                                              FlutterFlowIconButton(
-                                                borderColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                borderRadius: 8.0,
-                                                borderWidth: 1.0,
-                                                buttonSize: 40.0,
-                                                fillColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .accent1,
-                                                icon: Icon(
-                                                  Icons.delete,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  size: 24.0,
+                                              Text(
+                                                goodsListItem.description,
+                                                style: FlutterFlowTheme.of(context)
+                                                    .bodyLarge,
+                                              ),
+                                              Text(
+                                                FFLocalizations.of(context).getText(
+                                                  'va7bnt9b' /* Size */,
                                                 ),
-                                                onPressed: () async {
-                                                  _model.deleteResult =
-                                                      await HaulageCompanyAPIGroup
-                                                          .deleteGoodCall
-                                                          .call(
-                                                    bearerAuth:
-                                                        currentAuthenticationToken,
-                                                    id: goodsListItem.id,
-                                                  );
-                                                  if ((_model.deleteResult
-                                                          ?.succeeded ??
-                                                      true)) {
-                                                    setState(() => _model
-                                                            .apiRequestCompleter =
-                                                        null);
-                                                    await _model
-                                                        .waitForApiRequestCompleted();
-                                                  } else {
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                      SnackBar(
-                                                        content: Text(
-                                                          'Failed to delete good',
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Readex Pro',
-                                                                color: FlutterFlowTheme.of(
+                                                style: FlutterFlowTheme.of(context)
+                                                    .labelLarge
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      fontStyle: FontStyle.italic,
+                                                    ),
+                                              ),
+                                              Text(
+                                                '${goodsListItem.size.toString()} m3',
+                                                style: FlutterFlowTheme.of(context)
+                                                    .bodyLarge,
+                                              ),
+                                              Text(
+                                                FFLocalizations.of(context).getText(
+                                                  '4l8ry766' /* Weight */,
+                                                ),
+                                                style: FlutterFlowTheme.of(context)
+                                                    .labelLarge
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      fontStyle: FontStyle.italic,
+                                                    ),
+                                              ),
+                                              Text(
+                                                '${goodsListItem.weight.toString()} kg',
+                                                style: FlutterFlowTheme.of(context)
+                                                    .bodyLarge,
+                                              ),
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.end,
+                                                children: [
+                                                  FlutterFlowIconButton(
+                                                    borderColor:
+                                                        FlutterFlowTheme.of(context)
+                                                            .primary,
+                                                    borderRadius: 8.0,
+                                                    borderWidth: 1.0,
+                                                    buttonSize: 40.0,
+                                                    fillColor:
+                                                        FlutterFlowTheme.of(context)
+                                                            .accent1,
+                                                    icon: Icon(
+                                                      Icons.edit,
+                                                      color: FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryText,
+                                                      size: 24.0,
+                                                    ),
+                                                    onPressed: () async {
+                                                      context.pushNamed(
+                                                        'GoodForm',
+                                                        queryParameters: {
+                                                          'isExisting':
+                                                              serializeParam(
+                                                            true,
+                                                            ParamType.bool,
+                                                          ),
+                                                          'goodJSON':
+                                                              serializeParam(
+                                                            goodsListItem.toMap(),
+                                                            ParamType.JSON,
+                                                          ),
+                                                        }.withoutNulls,
+                                                      );
+                                                    },
+                                                  ),
+                                                  FlutterFlowIconButton(
+                                                    borderColor:
+                                                        FlutterFlowTheme.of(context)
+                                                            .primary,
+                                                    borderRadius: 8.0,
+                                                    borderWidth: 1.0,
+                                                    buttonSize: 40.0,
+                                                    fillColor:
+                                                        FlutterFlowTheme.of(context)
+                                                            .accent1,
+                                                    icon: Icon(
+                                                      Icons.delete,
+                                                      color: FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryText,
+                                                      size: 24.0,
+                                                    ),
+                                                    onPressed: () async {
+                                                      _model.deleteResult =
+                                                          await HaulageCompanyAPIGroup
+                                                              .deleteGoodCall
+                                                              .call(
+                                                        bearerAuth:
+                                                            currentAuthenticationToken,
+                                                        id: goodsListItem.id,
+                                                      );
+                                                      if ((_model.deleteResult
+                                                              ?.succeeded ??
+                                                          true)) {
+                                                        setState(() => _model
+                                                                .apiRequestCompleter =
+                                                            null);
+                                                        await _model
+                                                            .waitForApiRequestCompleted();
+                                                      } else {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                          SnackBar(
+                                                            content: Text(
+                                                              'Failed to delete good',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Readex Pro',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryText,
+                                                                  ),
+                                                            ),
+                                                            duration: const Duration(
+                                                                milliseconds: 4000),
+                                                            backgroundColor:
+                                                                FlutterFlowTheme.of(
                                                                         context)
-                                                                    .primaryText,
-                                                              ),
-                                                        ),
-                                                        duration: const Duration(
-                                                            milliseconds: 4000),
-                                                        backgroundColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                      ),
-                                                    );
-                                                  }
+                                                                    .error,
+                                                          ),
+                                                        );
+                                                      }
 
-                                                  setState(() {});
-                                                },
+                                                      setState(() {});
+                                                    },
+                                                  ),
+                                                ].divide(const SizedBox(width: 10.0)),
                                               ),
-                                            ].divide(const SizedBox(width: 10.0)),
+                                            ],
                                           ),
-                                        ],
+                                        ),
+                                        theme: ExpandableThemeData(
+                                          tapHeaderToExpand: true,
+                                          tapBodyToExpand: false,
+                                          tapBodyToCollapse: false,
+                                          headerAlignment:
+                                              ExpandablePanelHeaderAlignment.center,
+                                          hasIcon: true,
+                                          iconColor: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                        ),
                                       ),
                                     ),
-                                    theme: ExpandableThemeData(
-                                      tapHeaderToExpand: true,
-                                      tapBodyToExpand: false,
-                                      tapBodyToCollapse: false,
-                                      headerAlignment:
-                                          ExpandablePanelHeaderAlignment.center,
-                                      hasIcon: true,
-                                      iconColor: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
+                                  );
+                                },
+                            ),
                         );
                       },
                     );
