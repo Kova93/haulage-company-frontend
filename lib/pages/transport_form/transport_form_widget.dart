@@ -134,7 +134,7 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                       children: [
                         Text(
                           FFLocalizations.of(context).getText(
-                            'xxp3onjs' /* Date */,
+                            'b1qnk99j' /* Date */,
                           ),
                           style:
                               FlutterFlowTheme.of(context).labelLarge.override(
@@ -226,7 +226,7 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                         ),
                         Text(
                           FFLocalizations.of(context).getText(
-                            'rp0wzjit' /* Order */,
+                            '0ekth3pl' /* Order */,
                           ),
                           style:
                               FlutterFlowTheme.of(context).labelLarge.override(
@@ -266,7 +266,7 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                               setState(() => _model.orderDropDownValue = val),
                           textStyle: FlutterFlowTheme.of(context).bodyLarge,
                           hintText: FFLocalizations.of(context).getText(
-                            'leyr6wpc' /* Select order... */,
+                            'bxu7vwpj' /* Select order... */,
                           ),
                           icon: Icon(
                             Icons.keyboard_arrow_down_rounded,
@@ -287,7 +287,7 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                         ),
                         Text(
                           FFLocalizations.of(context).getText(
-                            '1pihzsfy' /* Vehicles */,
+                            'au7srnr6' /* Vehicles */,
                           ),
                           style:
                               FlutterFlowTheme.of(context).labelLarge.override(
@@ -423,7 +423,7 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                                   ).then((value) => setState(() {}));
                                 },
                                 text: FFLocalizations.of(context).getText(
-                                  '48tcihke' /* Add vehicle */,
+                                  'm0xzz2di' /* Add vehicle */,
                                 ),
                                 icon: Icon(
                                   Icons.add,
