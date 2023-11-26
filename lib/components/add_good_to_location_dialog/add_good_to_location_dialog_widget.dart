@@ -78,7 +78,7 @@ class _AddGoodToLocationDialogWidgetState
               onChanged: (val) => setState(() => _model.dropDownValue = val),
               textStyle: FlutterFlowTheme.of(context).bodyLarge,
               hintText: FFLocalizations.of(context).getText(
-                'x2iiojtb' /* Select good... */,
+                'opwloor3' /* Select good... */,
               ),
               icon: Icon(
                 Icons.keyboard_arrow_down_rounded,

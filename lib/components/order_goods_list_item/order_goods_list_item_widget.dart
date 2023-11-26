@@ -91,7 +91,7 @@ class _OrderGoodsListItemWidgetState extends State<OrderGoodsListItemWidget> {
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: FFLocalizations.of(context).getText(
-                      'y0ckghf2' /* Quantity */,
+                      'bycsi417' /* Quantity */,
                     ),
                     labelStyle: FlutterFlowTheme.of(context).labelLarge,
                     hintStyle: FlutterFlowTheme.of(context).labelMedium,
