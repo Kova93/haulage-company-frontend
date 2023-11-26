@@ -234,7 +234,7 @@ class GetAllGoodsCall {
 
   dynamic rootList(dynamic response) => getJsonField(
         response,
-        r'''$[*]''',
+        r'$',
         true,
       );
 }
@@ -378,7 +378,7 @@ class GetAllLocationsCall {
 
   dynamic rootList(dynamic response) => getJsonField(
         response,
-        r'''$[*]''',
+        r'$',
         true,
       );
 }
@@ -497,7 +497,7 @@ class GetAllOrdersCall {
 
   dynamic rootList(dynamic response) => getJsonField(
         response,
-        r'''$[*]''',
+        r'$',
         true,
       );
 }
@@ -616,7 +616,7 @@ class GetAllShopsCall {
 
   dynamic rootList(dynamic response) => getJsonField(
         response,
-        r'''$[*]''',
+        r'$',
         true,
       );
 }
@@ -735,7 +735,7 @@ class GetAllTransportOperationsCall {
 
   dynamic rootList(dynamic response) => getJsonField(
         response,
-        r'''$[*]''',
+        r'$',
         true,
       );
 }
@@ -854,7 +854,7 @@ class GetAllVehiclesCall {
 
   dynamic rootList(dynamic response) => getJsonField(
         response,
-        r'''$[*]''',
+        r'$',
         true,
       );
 }
