@@ -78,7 +78,7 @@ class _AddGoodToLocationDialogWidgetState
               onChanged: (val) => setState(() => _model.dropDownValue = val),
               textStyle: FlutterFlowTheme.of(context).bodyLarge,
               hintText: FFLocalizations.of(context).getText(
-                'tqfbqbrz' /* Select good... */,
+                'veabf1i8' /* Select good... */,
               ),
               icon: Icon(
                 Icons.keyboard_arrow_down_rounded,
@@ -179,6 +179,7 @@ class _AddGoodToLocationDialogWidgetState
                       return;
                     }
                     if (_model.dropDownValue == null) {
+                      ScaffoldMessenger.of(context).clearSnackBars();
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
@@ -216,6 +217,7 @@ class _AddGoodToLocationDialogWidgetState
                     if ((_model.updateResult?.succeeded ?? true)) {
                       Navigator.pop(context);
                     } else {
+                      ScaffoldMessenger.of(context).clearSnackBars();
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(

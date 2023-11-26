@@ -35,21 +35,23 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return ListView(
+      padding: EdgeInsets.zero,
+      scrollDirection: Axis.vertical,
       children: [
         Icon(
           Icons.list,
           color: FlutterFlowTheme.of(context).secondaryText,
           size: 60.0,
         ),
-        Text(
-          FFLocalizations.of(context).getText(
-            '40a1wgot' /* No entries found */,
+        Align(
+          alignment: const AlignmentDirectional(0.00, 0.00),
+          child: Text(
+            FFLocalizations.of(context).getText(
+              '40a1wgot' /* No entries found */,
+            ),
+            style: FlutterFlowTheme.of(context).displaySmall,
           ),
-          style: FlutterFlowTheme.of(context).displaySmall,
         ),
       ],
     );

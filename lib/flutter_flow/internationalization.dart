@@ -402,7 +402,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Maximum weight',
       'hu': '',
     },
-    'u4d3a9j3': {
+    'qkrv35e8': {
       'en': 'Location',
       'hu': '',
     },
@@ -511,7 +511,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // OrderForm
   {
-    '10hjvvx7': {
+    'r1duazyj': {
       'en': 'Shop',
       'hu': '',
     },
@@ -539,11 +539,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Confirm',
       'hu': '',
     },
-    'mloueach': {
+    'mmd4c4rx': {
       'en': 'Field is required',
       'hu': '',
     },
-    'igg6r3rq': {
+    'qkdfblb6': {
       'en': 'Please choose an option from the dropdown',
       'hu': '',
     },
@@ -554,11 +554,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // TransportForm
   {
-    'bcxu3o0x': {
+    'xxp3onjs': {
       'en': 'Date',
       'hu': '',
     },
-    'nrv9lhil': {
+    'rp0wzjit': {
       'en': 'Order',
       'hu': '',
     },
@@ -566,19 +566,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Option 1',
       'hu': '',
     },
-    '20s9i05m': {
+    'leyr6wpc': {
       'en': 'Select order...',
       'hu': '',
     },
-    '16yop8jh': {
+    'cg7a89ss': {
       'en': 'Search for an item...',
       'hu': '',
     },
-    'z6h4yeft': {
+    '1pihzsfy': {
       'en': 'Vehicles',
       'hu': '',
     },
-    'fl6z18xj': {
+    '48tcihke': {
       'en': 'Add vehicle',
       'hu': '',
     },
@@ -613,7 +613,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Shop',
       'hu': '',
     },
-    'sf7rzy9b': {
+    '594yzth4': {
       'en': 'Goods',
       'hu': '',
     },
@@ -714,11 +714,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Option 1',
       'hu': '',
     },
-    'tqfbqbrz': {
+    'veabf1i8': {
       'en': 'Select good...',
       'hu': '',
     },
-    'er26wtlg': {
+    'ok0is0ks': {
       'en': 'Search for an item...',
       'hu': '',
     },
@@ -798,15 +798,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // OrderGoodsListItem
   {
-    'p6l4fmmk': {
+    'ccr1wu7n': {
       'en': 'Quantity',
       'hu': '',
     },
-    'ay45zgih': {
+    '96qhr2ja': {
       'en': 'Field is required',
       'hu': '',
     },
-    'fopv7cgg': {
+    '9h7zp574': {
       'en': 'Please choose an option from the dropdown',
       'hu': '',
     },
@@ -841,7 +841,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Search for an item...',
       'hu': '',
     },
-    'k6wwzxt0': {
+    'h4ql6wox': {
       'en': 'Button',
       'hu': '',
     },

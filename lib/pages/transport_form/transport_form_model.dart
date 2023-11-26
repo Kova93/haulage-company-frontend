@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
@@ -20,6 +21,10 @@ class TransportFormModel extends FlutterFlowModel<TransportFormWidget> {
   // State field(s) for OrderDropDown widget.
   int? orderDropDownValue;
   FormFieldController<int>? orderDropDownValueController;
+  // Stores action output result for [Backend Call - API (updateTransportOperation)] action in ConfirmButton widget.
+  ApiCallResponse? updateResult;
+  // Stores action output result for [Backend Call - API (createTransportOperation)] action in ConfirmButton widget.
+  ApiCallResponse? createResult;
 
   /// Initialization and disposal methods.
 

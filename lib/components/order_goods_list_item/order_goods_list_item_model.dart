@@ -21,7 +21,7 @@ class OrderGoodsListItemModel
   String? _quantityFieldControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        'ay45zgih' /* Field is required */,
+        '96qhr2ja' /* Field is required */,
       );
     }
 

@@ -1,6 +1,5 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
-import '/components/empty_list/empty_list_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -128,11 +127,6 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
                               .toList()
                               ?.toList() ??
                           [];
-                      if (transportsList.isEmpty) {
-                        return const Center(
-                          child: EmptyListWidget(),
-                        );
-                      }
                       return RefreshIndicator(
                         onRefresh: () async {
                           setState(() => _model.apiRequestCompleter = null);
@@ -233,7 +227,7 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
                                               Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
-                                                  'sf7rzy9b' /* Goods */,
+                                                  '594yzth4' /* Goods */,
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
