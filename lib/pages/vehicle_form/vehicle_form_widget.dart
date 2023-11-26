@@ -284,7 +284,7 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                     ),
                     Text(
                       FFLocalizations.of(context).getText(
-                        'flrexcc1' /* Location */,
+                        'w1fzlztg' /* Location */,
                       ),
                       style: FlutterFlowTheme.of(context).labelLarge.override(
                             fontFamily: 'Readex Pro',

@@ -1,5 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
+import '/components/order_goods_list_item/order_goods_list_item_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'order_form_widget.dart' show OrderFormWidget;
@@ -23,20 +24,9 @@ class OrderFormModel extends FlutterFlowModel<OrderFormWidget> {
   // State field(s) for ShopDropDown widget.
   int? shopDropDownValue;
   FormFieldController<int>? shopDropDownValueController;
-  // State field(s) for QuantityField widget.
-  FocusNode? quantityFieldFocusNode;
-  TextEditingController? quantityFieldController;
-  String? Function(BuildContext, String?)? quantityFieldControllerValidator;
-  String? _quantityFieldControllerValidator(BuildContext context, String? val) {
-    if (val == null || val.isEmpty) {
-      return FFLocalizations.of(context).getText(
-        'q5h320ej' /* Field is required */,
-      );
-    }
-
-    return null;
-  }
-
+  // Models for orderGoodsListItem dynamic component.
+  late FlutterFlowDynamicModels<OrderGoodsListItemModel>
+      orderGoodsListItemModels;
   // Stores action output result for [Backend Call - API (updateOrder)] action in ConfirmButton widget.
   ApiCallResponse? updateResult;
   // Stores action output result for [Backend Call - API (createOrder)] action in ConfirmButton widget.
@@ -46,14 +36,14 @@ class OrderFormModel extends FlutterFlowModel<OrderFormWidget> {
 
   @override
   void initState(BuildContext context) {
-    quantityFieldControllerValidator = _quantityFieldControllerValidator;
+    orderGoodsListItemModels =
+        FlutterFlowDynamicModels(() => OrderGoodsListItemModel());
   }
 
   @override
   void dispose() {
     unfocusNode.dispose();
-    quantityFieldFocusNode?.dispose();
-    quantityFieldController?.dispose();
+    orderGoodsListItemModels.dispose();
   }
 
   /// Action blocks are added here.

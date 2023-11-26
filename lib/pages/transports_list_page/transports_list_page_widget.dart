@@ -227,7 +227,7 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
                                               Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
-                                                  '2lmklo01' /* Goods */,
+                                                  'z6phf7pj' /* Goods */,
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)

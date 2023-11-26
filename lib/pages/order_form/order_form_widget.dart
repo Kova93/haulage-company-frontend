@@ -2,6 +2,7 @@ import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/add_good_to_order_dialog/add_good_to_order_dialog_widget.dart';
+import '/components/order_goods_list_item/order_goods_list_item_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -34,7 +35,6 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
   late OrderFormModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  bool quantityFieldFocusListenerRegistered = false;
 
   @override
   void initState() {
@@ -56,8 +56,6 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
         });
       }
     });
-
-    _model.quantityFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -124,7 +122,7 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                   children: [
                     Text(
                       FFLocalizations.of(context).getText(
-                        'ihfarulk' /* Shop */,
+                        'ow2fxk1t' /* Shop */,
                       ),
                       style: FlutterFlowTheme.of(context).labelLarge.override(
                             fontFamily: 'Readex Pro',
@@ -230,155 +228,18 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                                 color: FlutterFlowTheme.of(context)
                                     .primaryBackground,
                               ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    goodsListItem.goodDTO.name,
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyLarge,
+                              child: wrapWithModel(
+                                model: _model.orderGoodsListItemModels.getModel(
+                                  goodsListItem.goodDTO.id.toString(),
+                                  goodsListIndex,
+                                ),
+                                updateCallback: () => setState(() {}),
+                                child: OrderGoodsListItemWidget(
+                                  key: Key(
+                                    'Keyjvc_${goodsListItem.goodDTO.id.toString()}',
                                   ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: Builder(builder: (_) {
-                                          if (!quantityFieldFocusListenerRegistered) {
-                                            quantityFieldFocusListenerRegistered =
-                                                true;
-                                            _model.quantityFieldFocusNode!
-                                                .addListener(
-                                              () async {
-                                                _model.updateGetOrderStruct(
-                                                  (e) => e
-                                                    ..updateGoodDTOs(
-                                                      (e) => e[goodsListIndex]
-                                                        ..quantity =
-                                                            int.tryParse(_model
-                                                                .quantityFieldController
-                                                                .text),
-                                                    ),
-                                                );
-                                              },
-                                            );
-                                          }
-                                          return TextFormField(
-                                            controller: _model
-                                                    .quantityFieldController ??=
-                                                TextEditingController(
-                                              text: goodsListItem.quantity
-                                                  .toString(),
-                                            ),
-                                            focusNode:
-                                                _model.quantityFieldFocusNode,
-                                            autofocus: true,
-                                            textInputAction:
-                                                TextInputAction.next,
-                                            obscureText: false,
-                                            decoration: InputDecoration(
-                                              labelText:
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                'hxnnask5' /* Quantity */,
-                                              ),
-                                              labelStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelLarge,
-                                              hintStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium,
-                                              enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .alternate,
-                                                  width: 2.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                              ),
-                                              focusedBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  width: 2.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                              ),
-                                              errorBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  width: 2.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                              ),
-                                              focusedErrorBorder:
-                                                  OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  width: 2.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                              ),
-                                              filled: true,
-                                              fillColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyLarge,
-                                            keyboardType: TextInputType.number,
-                                            validator: _model
-                                                .quantityFieldControllerValidator
-                                                .asValidator(context),
-                                            inputFormatters: [
-                                              FilteringTextInputFormatter.allow(
-                                                  RegExp('[0-9]'))
-                                            ],
-                                          );
-                                        }),
-                                      ),
-                                      FlutterFlowIconButton(
-                                        borderColor:
-                                            FlutterFlowTheme.of(context)
-                                                .primary,
-                                        borderRadius: 8.0,
-                                        borderWidth: 1.0,
-                                        buttonSize: 40.0,
-                                        fillColor: FlutterFlowTheme.of(context)
-                                            .accent1,
-                                        icon: Icon(
-                                          Icons.delete,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          size: 24.0,
-                                        ),
-                                        onPressed: () async {
-                                          setState(() {
-                                            _model.updateGetOrderStruct(
-                                              (e) => e
-                                                ..updateGoodDTOs(
-                                                  (e) => e
-                                                      .removeAt(goodsListIndex),
-                                                ),
-                                            );
-                                          });
-                                        },
-                                      ),
-                                    ].divide(const SizedBox(width: 10.0)),
-                                  ),
-                                ].divide(const SizedBox(height: 10.0)),
+                                  stackedGoodParam: goodsListItem,
+                                ),
                               ),
                             );
                           },
