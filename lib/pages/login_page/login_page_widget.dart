@@ -1,3 +1,5 @@
+import 'package:haulage_company/util/show_error_snack_bar.dart';
+
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
@@ -325,27 +327,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     if ((_model.loginResult?.statusCode ??
                                             200) ==
                                         404) {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            'Login failed: user does not exist',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                ),
-                                          ),
-                                          duration:
-                                              const Duration(milliseconds: 4000),
-                                          backgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .error,
-                                        ),
-                                      );
+                                      showErrorSnackBar(context, 'Login failed: user does not exist');
                                       setState(() {
                                         _model.usernameController?.clear();
                                         _model.passwordController?.clear();
@@ -354,54 +336,12 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       if ((_model.loginResult?.statusCode ??
                                               200) ==
                                           401) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              'Login failed: wrong password',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                  ),
-                                            ),
-                                            duration:
-                                                const Duration(milliseconds: 4000),
-                                            backgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .error,
-                                          ),
-                                        );
+                                        showErrorSnackBar(context, 'Login failed: wrong password');
                                         setState(() {
                                           _model.passwordController?.clear();
                                         });
                                       } else {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              'Login failed: unknown error',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                  ),
-                                            ),
-                                            duration:
-                                                const Duration(milliseconds: 4000),
-                                            backgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .error,
-                                          ),
-                                        );
+                                        showErrorSnackBar(context, 'Login failed: unknown error');
                                       }
                                     }
                                   }

@@ -1,3 +1,5 @@
+import 'package:haulage_company/util/show_error_snack_bar.dart';
+
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
@@ -486,24 +488,7 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                                   return;
                                 }
                                 if (_model.orderDropDownValue == null) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'No order selected',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                            ),
-                                      ),
-                                      duration: const Duration(milliseconds: 4000),
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context).error,
-                                    ),
-                                  );
+                                  showErrorSnackBar(context, 'No order selected');
                                   return;
                                 }
                                 _model.updateTransportOperationStruct(
@@ -571,24 +556,7 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                                       true)) {
                                     context.safePop();
                                   } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          'Failed to update transport operation',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Readex Pro',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                              ),
-                                        ),
-                                        duration: const Duration(milliseconds: 4000),
-                                        backgroundColor:
-                                            FlutterFlowTheme.of(context).error,
-                                      ),
-                                    );
+                                    showErrorSnackBar(context, 'Failed to update transport operation');
                                   }
                                 } else {
                                   _model.createResult =
@@ -603,24 +571,7 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                                       true)) {
                                     context.safePop();
                                   } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          'Failed to create transport operation',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Readex Pro',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                              ),
-                                        ),
-                                        duration: const Duration(milliseconds: 4000),
-                                        backgroundColor:
-                                            FlutterFlowTheme.of(context).error,
-                                      ),
-                                    );
+                                    showErrorSnackBar(context, 'Failed to create transport operation');
                                   }
                                 }
 

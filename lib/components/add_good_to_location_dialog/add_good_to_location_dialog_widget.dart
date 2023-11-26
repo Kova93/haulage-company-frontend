@@ -1,3 +1,5 @@
+import 'package:haulage_company/util/show_error_snack_bar.dart';
+
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
@@ -179,23 +181,7 @@ class _AddGoodToLocationDialogWidgetState
                       return;
                     }
                     if (_model.dropDownValue == null) {
-                      ScaffoldMessenger.of(context).clearSnackBars();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            'No good selected',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                ),
-                          ),
-                          duration: const Duration(milliseconds: 4000),
-                          backgroundColor: FlutterFlowTheme.of(context).error,
-                        ),
-                      );
+                      showErrorSnackBar(context, 'No good selected');
                       return;
                     }
                     _model.updateStackedGoodStruct(
@@ -217,23 +203,7 @@ class _AddGoodToLocationDialogWidgetState
                     if ((_model.updateResult?.succeeded ?? true)) {
                       Navigator.pop(context);
                     } else {
-                      ScaffoldMessenger.of(context).clearSnackBars();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            'Failed to update quantity',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                ),
-                          ),
-                          duration: const Duration(milliseconds: 4000),
-                          backgroundColor: FlutterFlowTheme.of(context).error,
-                        ),
-                      );
+                      showErrorSnackBar(context, 'Failed to update quantity');
                     }
 
                     setState(() {});
