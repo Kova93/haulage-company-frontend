@@ -1,5 +1,6 @@
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'transport_form_widget.dart' show TransportFormWidget;
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,10 @@ class TransportFormModel extends FlutterFlowModel<TransportFormWidget> {
 
   final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
+  DateTime? datePicked;
+  // State field(s) for OrderDropDown widget.
+  int? orderDropDownValue;
+  FormFieldController<int>? orderDropDownValueController;
 
   /// Initialization and disposal methods.
 

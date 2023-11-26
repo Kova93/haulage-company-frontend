@@ -16,8 +16,6 @@ class LocationDetailsModel extends FlutterFlowModel<LocationDetailsWidget> {
   Completer<ApiCallResponse>? apiRequestCompleter;
   // Stores action output result for [Backend Call - API (deleteVehicle)] action in DeleteButton widget.
   ApiCallResponse? deleteVehicleResult;
-  // Stores action output result for [Backend Call - API (deleteGood)] action in DeleteButton widget.
-  ApiCallResponse? deleteGoodResult;
 
   /// Initialization and disposal methods.
 

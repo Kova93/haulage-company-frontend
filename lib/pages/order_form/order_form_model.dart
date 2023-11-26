@@ -23,6 +23,20 @@ class OrderFormModel extends FlutterFlowModel<OrderFormWidget> {
   // State field(s) for ShopDropDown widget.
   int? shopDropDownValue;
   FormFieldController<int>? shopDropDownValueController;
+  // State field(s) for QuantityField widget.
+  FocusNode? quantityFieldFocusNode;
+  TextEditingController? quantityFieldController;
+  String? Function(BuildContext, String?)? quantityFieldControllerValidator;
+  String? _quantityFieldControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return FFLocalizations.of(context).getText(
+        'q5h320ej' /* Field is required */,
+      );
+    }
+
+    return null;
+  }
+
   // Stores action output result for [Backend Call - API (updateOrder)] action in ConfirmButton widget.
   ApiCallResponse? updateResult;
   // Stores action output result for [Backend Call - API (createOrder)] action in ConfirmButton widget.
@@ -31,11 +45,15 @@ class OrderFormModel extends FlutterFlowModel<OrderFormWidget> {
   /// Initialization and disposal methods.
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    quantityFieldControllerValidator = _quantityFieldControllerValidator;
+  }
 
   @override
   void dispose() {
     unfocusNode.dispose();
+    quantityFieldFocusNode?.dispose();
+    quantityFieldController?.dispose();
   }
 
   /// Action blocks are added here.

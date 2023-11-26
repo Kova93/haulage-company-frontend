@@ -152,75 +152,76 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
                                         FlutterFlowTheme.of(context).titleLarge,
                                   ),
                                   collapsed: Container(),
-                                  expanded: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        FFLocalizations.of(context).getText(
-                                          'cofgmggp' /* Shop */,
+                                  expanded: Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        10.0, 10.0, 10.0, 10.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          FFLocalizations.of(context).getText(
+                                            'cofgmggp' /* Shop */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelLarge
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                fontStyle: FontStyle.italic,
+                                              ),
                                         ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelLarge
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              fontStyle: FontStyle.italic,
-                                            ),
-                                      ),
-                                      Text(
-                                        valueOrDefault<String>(
-                                          ordersListItem.shopDTO.name,
-                                          'shopid',
+                                        Text(
+                                          valueOrDefault<String>(
+                                            ordersListItem.shopDTO.name,
+                                            'shopid',
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyLarge,
                                         ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyLarge,
-                                      ),
-                                      Text(
-                                        FFLocalizations.of(context).getText(
-                                          'n2tuz4j5' /* Goods */,
+                                        Text(
+                                          FFLocalizations.of(context).getText(
+                                            'n2tuz4j5' /* Goods */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelLarge
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                fontStyle: FontStyle.italic,
+                                              ),
                                         ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelLarge
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              fontStyle: FontStyle.italic,
-                                            ),
-                                      ),
-                                      Builder(
-                                        builder: (context) {
-                                          final goodsList =
-                                              ordersListItem.goodDTOs.toList();
-                                          return ListView.builder(
-                                            padding: EdgeInsets.zero,
-                                            shrinkWrap: true,
-                                            scrollDirection: Axis.vertical,
-                                            itemCount: goodsList.length,
-                                            itemBuilder:
-                                                (context, goodsListIndex) {
-                                              final goodsListItem =
-                                                  goodsList[goodsListIndex];
-                                              return Container(
-                                                decoration: BoxDecoration(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryBackground,
-                                                ),
-                                                child: Text(
-                                                  'x${goodsListItem.quantity.toString()} ${goodsListItem.name}',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyLarge,
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 10.0, 10.0, 10.0),
-                                        child: Row(
+                                        Builder(
+                                          builder: (context) {
+                                            final goodsList = ordersListItem
+                                                .goodDTOs
+                                                .toList();
+                                            return ListView.builder(
+                                              padding: EdgeInsets.zero,
+                                              shrinkWrap: true,
+                                              scrollDirection: Axis.vertical,
+                                              itemCount: goodsList.length,
+                                              itemBuilder:
+                                                  (context, goodsListIndex) {
+                                                final goodsListItem =
+                                                    goodsList[goodsListIndex];
+                                                return Container(
+                                                  decoration: BoxDecoration(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryBackground,
+                                                  ),
+                                                  child: Text(
+                                                    'x${goodsListItem.quantity.toString()} ${goodsListItem.goodDTO.name}',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyLarge,
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          },
+                                        ),
+                                        Row(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
@@ -329,16 +330,18 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
                                             ),
                                           ].divide(const SizedBox(width: 10.0)),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                  theme: const ExpandableThemeData(
+                                  theme: ExpandableThemeData(
                                     tapHeaderToExpand: true,
                                     tapBodyToExpand: false,
                                     tapBodyToCollapse: false,
                                     headerAlignment:
                                         ExpandablePanelHeaderAlignment.center,
                                     hasIcon: true,
+                                    iconColor: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                   ),
                                 ),
                               ),

@@ -1,30 +1,32 @@
-import '/auth/custom_auth/auth_util.dart';
-import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'add_quantity_dialog_model.dart';
-export 'add_quantity_dialog_model.dart';
+import 'add_vehicle_to_transport_dialog_model.dart';
+export 'add_vehicle_to_transport_dialog_model.dart';
 
-class AddQuantityDialogWidget extends StatefulWidget {
-  const AddQuantityDialogWidget({
+class AddVehicleToTransportDialogWidget extends StatefulWidget {
+  const AddVehicleToTransportDialogWidget({
     super.key,
-    required this.goodParam,
+    required this.transportParam,
+    required this.vehicles,
   });
 
-  final GoodDTOStruct? goodParam;
+  final TransportOperationDTOStruct? transportParam;
+  final List<VehicleDTOStruct>? vehicles;
 
   @override
-  _AddQuantityDialogWidgetState createState() =>
-      _AddQuantityDialogWidgetState();
+  _AddVehicleToTransportDialogWidgetState createState() =>
+      _AddVehicleToTransportDialogWidgetState();
 }
 
-class _AddQuantityDialogWidgetState extends State<AddQuantityDialogWidget> {
-  late AddQuantityDialogModel _model;
+class _AddVehicleToTransportDialogWidgetState
+    extends State<AddVehicleToTransportDialogWidget> {
+  late AddVehicleToTransportDialogModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -35,22 +37,12 @@ class _AddQuantityDialogWidgetState extends State<AddQuantityDialogWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AddQuantityDialogModel());
+    _model = createModel(context, () => AddVehicleToTransportDialogModel());
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.good = widget.goodParam;
+      _model.transport = widget.transportParam;
     });
-
-    _model.quantityFieldController ??= TextEditingController();
-    _model.quantityFieldFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
-          _model.quantityFieldController?.text =
-              FFLocalizations.of(context).getText(
-            'pzmh44tk' /* 0 */,
-          );
-        }));
   }
 
   @override
@@ -72,60 +64,39 @@ class _AddQuantityDialogWidgetState extends State<AddQuantityDialogWidget> {
           children: [
             Text(
               FFLocalizations.of(context).getText(
-                'vh0vbnw4' /* Add quantity to good */,
+                'ykrhgey3' /* Add vehicle to transport */,
               ),
               style: FlutterFlowTheme.of(context).titleLarge,
             ),
-            TextFormField(
-              controller: _model.quantityFieldController,
-              focusNode: _model.quantityFieldFocusNode,
-              autofocus: true,
-              textInputAction: TextInputAction.next,
-              obscureText: false,
-              decoration: InputDecoration(
-                labelText: FFLocalizations.of(context).getText(
-                  'igis03u3' /* Quantity */,
-                ),
-                labelStyle: FlutterFlowTheme.of(context).labelLarge,
-                hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: FlutterFlowTheme.of(context).alternate,
-                    width: 2.0,
-                  ),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: FlutterFlowTheme.of(context).primary,
-                    width: 2.0,
-                  ),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: FlutterFlowTheme.of(context).error,
-                    width: 2.0,
-                  ),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: FlutterFlowTheme.of(context).error,
-                    width: 2.0,
-                  ),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                filled: true,
-                fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+            FlutterFlowDropDown<int>(
+              controller: _model.vehicleDropDownValueController ??=
+                  FormFieldController<int>(
+                _model.vehicleDropDownValue ??= null,
               ),
-              style: FlutterFlowTheme.of(context).bodyLarge,
-              keyboardType: TextInputType.number,
-              validator:
-                  _model.quantityFieldControllerValidator.asValidator(context),
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp('[0-9]'))
-              ],
+              options:
+                  List<int>.from(widget.vehicles!.map((e) => e.id).toList()),
+              optionLabels:
+                  widget.vehicles!.map((e) => e.licensePlate).toList(),
+              onChanged: (val) =>
+                  setState(() => _model.vehicleDropDownValue = val),
+              textStyle: FlutterFlowTheme.of(context).bodyLarge,
+              hintText: FFLocalizations.of(context).getText(
+                'bkfxcw5w' /* Select vehicle... */,
+              ),
+              icon: Icon(
+                Icons.keyboard_arrow_down_rounded,
+                color: FlutterFlowTheme.of(context).secondaryText,
+                size: 24.0,
+              ),
+              fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+              elevation: 2.0,
+              borderColor: FlutterFlowTheme.of(context).alternate,
+              borderWidth: 2.0,
+              borderRadius: 8.0,
+              margin: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+              hidesUnderline: true,
+              isSearchable: false,
+              isMultiSelect: false,
             ),
             Row(
               mainAxisSize: MainAxisSize.max,
@@ -136,7 +107,7 @@ class _AddQuantityDialogWidgetState extends State<AddQuantityDialogWidget> {
                     Navigator.pop(context);
                   },
                   text: FFLocalizations.of(context).getText(
-                    'ge0jne1u' /* Cancel */,
+                    '28ubdu6f' /* Cancel */,
                   ),
                   options: FFButtonOptions(
                     padding:
@@ -159,24 +130,46 @@ class _AddQuantityDialogWidgetState extends State<AddQuantityDialogWidget> {
                         !_model.formKey.currentState!.validate()) {
                       return;
                     }
-                    _model.updateGoodStruct(
-                      (e) => e
-                        ..quantity = _model.good!.quantity +
-                            int.parse(_model.quantityFieldController.text),
-                    );
-                    _model.updateResult =
-                        await HaulageCompanyAPIGroup.updateGoodCall.call(
-                      bearerAuth: currentAuthenticationToken,
-                      id: _model.good?.id,
-                      goodJsonJson: _model.good?.toMap(),
-                    );
-                    if ((_model.updateResult?.succeeded ?? true)) {
+                    if (_model.vehicleDropDownValue == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'No vehicle selected',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                          ),
+                          duration: const Duration(milliseconds: 4000),
+                          backgroundColor: FlutterFlowTheme.of(context).error,
+                        ),
+                      );
+                      return;
+                    }
+                    if (_model.transport?.usedVehicleDTOs
+                            .where((e) => e.id == _model.vehicleDropDownValue)
+                            .toList().isEmpty) {
+                      _model.updatePage(() {
+                        _model.updateTransportStruct(
+                          (e) => e
+                            ..updateUsedVehicleDTOs(
+                              (e) => e.add(widget.vehicles!
+                                  .where((e) =>
+                                      e.id == _model.vehicleDropDownValue)
+                                  .toList()
+                                  .first),
+                            ),
+                        );
+                      });
                       Navigator.pop(context);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            'Failed to update quantity',
+                            'Selected vehicle already added to transport',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
@@ -190,11 +183,9 @@ class _AddQuantityDialogWidgetState extends State<AddQuantityDialogWidget> {
                         ),
                       );
                     }
-
-                    setState(() {});
                   },
                   text: FFLocalizations.of(context).getText(
-                    '2vyzkjln' /* Confirm */,
+                    '32pulq4n' /* Confirm */,
                   ),
                   options: FFButtonOptions(
                     padding:

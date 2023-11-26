@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_getters_setters
 
+import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -11,13 +12,13 @@ class VehicleDTOStruct extends BaseStruct {
     double? size,
     double? maxWeight,
     int? lorrySiteID,
-    List<TransportOperationDTOStruct>? transportOperationDTOs,
+    List<int>? transportOperationIDs,
   })  : _id = id,
         _licensePlate = licensePlate,
         _size = size,
         _maxWeight = maxWeight,
         _lorrySiteID = lorrySiteID,
-        _transportOperationDTOs = transportOperationDTOs;
+        _transportOperationIDs = transportOperationIDs;
 
   // "id" field.
   int? _id;
@@ -53,16 +54,13 @@ class VehicleDTOStruct extends BaseStruct {
   void incrementLorrySiteID(int amount) => _lorrySiteID = lorrySiteID + amount;
   bool hasLorrySiteID() => _lorrySiteID != null;
 
-  // "transportOperationDTOs" field.
-  List<TransportOperationDTOStruct>? _transportOperationDTOs;
-  List<TransportOperationDTOStruct> get transportOperationDTOs =>
-      _transportOperationDTOs ?? const [];
-  set transportOperationDTOs(List<TransportOperationDTOStruct>? val) =>
-      _transportOperationDTOs = val;
-  void updateTransportOperationDTOs(
-          Function(List<TransportOperationDTOStruct>) updateFn) =>
-      updateFn(_transportOperationDTOs ??= []);
-  bool hasTransportOperationDTOs() => _transportOperationDTOs != null;
+  // "transportOperationIDs" field.
+  List<int>? _transportOperationIDs;
+  List<int> get transportOperationIDs => _transportOperationIDs ?? const [];
+  set transportOperationIDs(List<int>? val) => _transportOperationIDs = val;
+  void updateTransportOperationIDs(Function(List<int>) updateFn) =>
+      updateFn(_transportOperationIDs ??= []);
+  bool hasTransportOperationIDs() => _transportOperationIDs != null;
 
   static VehicleDTOStruct fromMap(Map<String, dynamic> data) =>
       VehicleDTOStruct(
@@ -71,10 +69,7 @@ class VehicleDTOStruct extends BaseStruct {
         size: castToType<double>(data['size']),
         maxWeight: castToType<double>(data['maxWeight']),
         lorrySiteID: castToType<int>(data['lorrySiteID']),
-        transportOperationDTOs: getStructList(
-          data['transportOperationDTOs'],
-          TransportOperationDTOStruct.fromMap,
-        ),
+        transportOperationIDs: getDataList(data['transportOperationIDs']),
       );
 
   static VehicleDTOStruct? maybeFromMap(dynamic data) =>
@@ -86,8 +81,7 @@ class VehicleDTOStruct extends BaseStruct {
         'size': _size,
         'maxWeight': _maxWeight,
         'lorrySiteID': _lorrySiteID,
-        'transportOperationDTOs':
-            _transportOperationDTOs?.map((e) => e.toMap()).toList(),
+        'transportOperationIDs': _transportOperationIDs,
       }.withoutNulls;
 
   @override
@@ -112,9 +106,9 @@ class VehicleDTOStruct extends BaseStruct {
           _lorrySiteID,
           ParamType.int,
         ),
-        'transportOperationDTOs': serializeParam(
-          _transportOperationDTOs,
-          ParamType.DataStruct,
+        'transportOperationIDs': serializeParam(
+          _transportOperationIDs,
+          ParamType.int,
           true,
         ),
       }.withoutNulls;
@@ -146,12 +140,10 @@ class VehicleDTOStruct extends BaseStruct {
           ParamType.int,
           false,
         ),
-        transportOperationDTOs:
-            deserializeStructParam<TransportOperationDTOStruct>(
-          data['transportOperationDTOs'],
-          ParamType.DataStruct,
+        transportOperationIDs: deserializeParam<int>(
+          data['transportOperationIDs'],
+          ParamType.int,
           true,
-          structBuilder: TransportOperationDTOStruct.fromSerializableMap,
         ),
       );
 
@@ -167,13 +159,12 @@ class VehicleDTOStruct extends BaseStruct {
         size == other.size &&
         maxWeight == other.maxWeight &&
         lorrySiteID == other.lorrySiteID &&
-        listEquality.equals(
-            transportOperationDTOs, other.transportOperationDTOs);
+        listEquality.equals(transportOperationIDs, other.transportOperationIDs);
   }
 
   @override
   int get hashCode => const ListEquality().hash(
-      [id, licensePlate, size, maxWeight, lorrySiteID, transportOperationDTOs]);
+      [id, licensePlate, size, maxWeight, lorrySiteID, transportOperationIDs]);
 }
 
 VehicleDTOStruct createVehicleDTOStruct({

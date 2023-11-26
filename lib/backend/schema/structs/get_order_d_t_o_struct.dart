@@ -8,7 +8,7 @@ class GetOrderDTOStruct extends BaseStruct {
   GetOrderDTOStruct({
     int? id,
     ShopDTOStruct? shopDTO,
-    List<GoodDTOStruct>? goodDTOs,
+    List<GetStackedGoodDTOStruct>? goodDTOs,
     int? transportOperationID,
   })  : _id = id,
         _shopDTO = shopDTO,
@@ -31,10 +31,10 @@ class GetOrderDTOStruct extends BaseStruct {
   bool hasShopDTO() => _shopDTO != null;
 
   // "goodDTOs" field.
-  List<GoodDTOStruct>? _goodDTOs;
-  List<GoodDTOStruct> get goodDTOs => _goodDTOs ?? const [];
-  set goodDTOs(List<GoodDTOStruct>? val) => _goodDTOs = val;
-  void updateGoodDTOs(Function(List<GoodDTOStruct>) updateFn) =>
+  List<GetStackedGoodDTOStruct>? _goodDTOs;
+  List<GetStackedGoodDTOStruct> get goodDTOs => _goodDTOs ?? const [];
+  set goodDTOs(List<GetStackedGoodDTOStruct>? val) => _goodDTOs = val;
+  void updateGoodDTOs(Function(List<GetStackedGoodDTOStruct>) updateFn) =>
       updateFn(_goodDTOs ??= []);
   bool hasGoodDTOs() => _goodDTOs != null;
 
@@ -52,7 +52,7 @@ class GetOrderDTOStruct extends BaseStruct {
         shopDTO: ShopDTOStruct.maybeFromMap(data['shopDTO']),
         goodDTOs: getStructList(
           data['goodDTOs'],
-          GoodDTOStruct.fromMap,
+          GetStackedGoodDTOStruct.fromMap,
         ),
         transportOperationID: castToType<int>(data['transportOperationID']),
       );
@@ -101,11 +101,11 @@ class GetOrderDTOStruct extends BaseStruct {
           false,
           structBuilder: ShopDTOStruct.fromSerializableMap,
         ),
-        goodDTOs: deserializeStructParam<GoodDTOStruct>(
+        goodDTOs: deserializeStructParam<GetStackedGoodDTOStruct>(
           data['goodDTOs'],
           ParamType.DataStruct,
           true,
-          structBuilder: GoodDTOStruct.fromSerializableMap,
+          structBuilder: GetStackedGoodDTOStruct.fromSerializableMap,
         ),
         transportOperationID: deserializeParam(
           data['transportOperationID'],

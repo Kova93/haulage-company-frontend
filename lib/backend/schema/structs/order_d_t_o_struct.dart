@@ -1,6 +1,5 @@
 // ignore_for_file: unnecessary_getters_setters
 
-import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -9,11 +8,11 @@ class OrderDTOStruct extends BaseStruct {
   OrderDTOStruct({
     int? id,
     int? shopID,
-    List<int>? goodIDs,
+    List<StackedGoodDTOStruct>? stackedGoodDTOs,
     int? transportOperationID,
   })  : _id = id,
         _shopID = shopID,
-        _goodIDs = goodIDs,
+        _stackedGoodDTOs = stackedGoodDTOs,
         _transportOperationID = transportOperationID;
 
   // "id" field.
@@ -30,12 +29,15 @@ class OrderDTOStruct extends BaseStruct {
   void incrementShopID(int amount) => _shopID = shopID + amount;
   bool hasShopID() => _shopID != null;
 
-  // "goodIDs" field.
-  List<int>? _goodIDs;
-  List<int> get goodIDs => _goodIDs ?? const [];
-  set goodIDs(List<int>? val) => _goodIDs = val;
-  void updateGoodIDs(Function(List<int>) updateFn) => updateFn(_goodIDs ??= []);
-  bool hasGoodIDs() => _goodIDs != null;
+  // "stackedGoodDTOs" field.
+  List<StackedGoodDTOStruct>? _stackedGoodDTOs;
+  List<StackedGoodDTOStruct> get stackedGoodDTOs =>
+      _stackedGoodDTOs ?? const [];
+  set stackedGoodDTOs(List<StackedGoodDTOStruct>? val) =>
+      _stackedGoodDTOs = val;
+  void updateStackedGoodDTOs(Function(List<StackedGoodDTOStruct>) updateFn) =>
+      updateFn(_stackedGoodDTOs ??= []);
+  bool hasStackedGoodDTOs() => _stackedGoodDTOs != null;
 
   // "transportOperationID" field.
   int? _transportOperationID;
@@ -48,7 +50,10 @@ class OrderDTOStruct extends BaseStruct {
   static OrderDTOStruct fromMap(Map<String, dynamic> data) => OrderDTOStruct(
         id: castToType<int>(data['id']),
         shopID: castToType<int>(data['shopID']),
-        goodIDs: getDataList(data['goodIDs']),
+        stackedGoodDTOs: getStructList(
+          data['stackedGoodDTOs'],
+          StackedGoodDTOStruct.fromMap,
+        ),
         transportOperationID: castToType<int>(data['transportOperationID']),
       );
 
@@ -58,7 +63,7 @@ class OrderDTOStruct extends BaseStruct {
   Map<String, dynamic> toMap() => {
         'id': _id,
         'shopID': _shopID,
-        'goodIDs': _goodIDs,
+        'stackedGoodDTOs': _stackedGoodDTOs?.map((e) => e.toMap()).toList(),
         'transportOperationID': _transportOperationID,
       }.withoutNulls;
 
@@ -72,9 +77,9 @@ class OrderDTOStruct extends BaseStruct {
           _shopID,
           ParamType.int,
         ),
-        'goodIDs': serializeParam(
-          _goodIDs,
-          ParamType.int,
+        'stackedGoodDTOs': serializeParam(
+          _stackedGoodDTOs,
+          ParamType.DataStruct,
           true,
         ),
         'transportOperationID': serializeParam(
@@ -95,10 +100,11 @@ class OrderDTOStruct extends BaseStruct {
           ParamType.int,
           false,
         ),
-        goodIDs: deserializeParam<int>(
-          data['goodIDs'],
-          ParamType.int,
+        stackedGoodDTOs: deserializeStructParam<StackedGoodDTOStruct>(
+          data['stackedGoodDTOs'],
+          ParamType.DataStruct,
           true,
+          structBuilder: StackedGoodDTOStruct.fromSerializableMap,
         ),
         transportOperationID: deserializeParam(
           data['transportOperationID'],
@@ -116,13 +122,13 @@ class OrderDTOStruct extends BaseStruct {
     return other is OrderDTOStruct &&
         id == other.id &&
         shopID == other.shopID &&
-        listEquality.equals(goodIDs, other.goodIDs) &&
+        listEquality.equals(stackedGoodDTOs, other.stackedGoodDTOs) &&
         transportOperationID == other.transportOperationID;
   }
 
   @override
-  int get hashCode =>
-      const ListEquality().hash([id, shopID, goodIDs, transportOperationID]);
+  int get hashCode => const ListEquality()
+      .hash([id, shopID, stackedGoodDTOs, transportOperationID]);
 }
 
 OrderDTOStruct createOrderDTOStruct({

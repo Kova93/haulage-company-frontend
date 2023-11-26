@@ -221,7 +221,7 @@ class ThemeTypography extends Typography {
         'Outfit',
         color: theme.info,
         fontWeight: FontWeight.w500,
-        fontSize: 24.0,
+        fontSize: 20.0,
       );
   String get titleLargeFamily => 'Outfit';
   TextStyle get titleLarge => GoogleFonts.getFont(

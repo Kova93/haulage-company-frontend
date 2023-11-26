@@ -153,37 +153,37 @@ class _LocationsListPageWidgetState extends State<LocationsListPageWidget> {
                                         FlutterFlowTheme.of(context).titleLarge,
                                   ),
                                   collapsed: Container(),
-                                  expanded: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Align(
-                                        alignment:
-                                            const AlignmentDirectional(-1.00, 0.00),
-                                        child: Text(
-                                          FFLocalizations.of(context).getText(
-                                            '9ttt5kh6' /* Address */,
+                                  expanded: Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        10.0, 10.0, 10.0, 10.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Align(
+                                          alignment:
+                                              const AlignmentDirectional(-1.00, 0.00),
+                                          child: Text(
+                                            FFLocalizations.of(context).getText(
+                                              '9ttt5kh6' /* Address */,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelLarge
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  fontStyle: FontStyle.italic,
+                                                ),
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelLarge
-                                              .override(
-                                                fontFamily: 'Readex Pro',
-                                                fontStyle: FontStyle.italic,
-                                              ),
                                         ),
-                                      ),
-                                      Align(
-                                        alignment:
-                                            const AlignmentDirectional(-1.00, 0.00),
-                                        child: Text(
-                                          locationsListItem.address,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyLarge,
+                                        Align(
+                                          alignment:
+                                              const AlignmentDirectional(-1.00, 0.00),
+                                          child: Text(
+                                            locationsListItem.address,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyLarge,
+                                          ),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 10.0, 10.0, 10.0),
-                                        child: Row(
+                                        Row(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
@@ -322,16 +322,18 @@ class _LocationsListPageWidgetState extends State<LocationsListPageWidget> {
                                             ),
                                           ].divide(const SizedBox(width: 10.0)),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                  theme: const ExpandableThemeData(
+                                  theme: ExpandableThemeData(
                                     tapHeaderToExpand: true,
                                     tapBodyToExpand: false,
                                     tapBodyToCollapse: false,
                                     headerAlignment:
                                         ExpandablePanelHeaderAlignment.center,
                                     hasIcon: true,
+                                    iconColor: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                   ),
                                 ),
                               ),

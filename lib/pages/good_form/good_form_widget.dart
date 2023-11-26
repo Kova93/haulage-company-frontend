@@ -16,12 +16,10 @@ class GoodFormWidget extends StatefulWidget {
     super.key,
     required this.isExisting,
     this.goodJSON,
-    this.lorrySiteID,
   });
 
   final bool? isExisting;
   final dynamic goodJSON;
-  final int? lorrySiteID;
 
   @override
   _GoodFormWidgetState createState() => _GoodFormWidgetState();
@@ -54,9 +52,6 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
       setState(() {
         _model.weightFieldController?.text = _model.good!.weight.toString();
       });
-      setState(() {
-        _model.quantityFieldController?.text = _model.good!.quantity.toString();
-      });
     });
 
     _model.nameFieldController ??= TextEditingController();
@@ -70,9 +65,6 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
 
     _model.weightFieldController ??= TextEditingController();
     _model.weightFieldFocusNode ??= FocusNode();
-
-    _model.quantityFieldController ??= TextEditingController();
-    _model.quantityFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -339,58 +331,6 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                         FilteringTextInputFormatter.allow(RegExp('(\\d|\\.)'))
                       ],
                     ),
-                    TextFormField(
-                      controller: _model.quantityFieldController,
-                      focusNode: _model.quantityFieldFocusNode,
-                      autofocus: true,
-                      textInputAction: TextInputAction.next,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        labelText: FFLocalizations.of(context).getText(
-                          'zri4zv3q' /* Quantity */,
-                        ),
-                        labelStyle: FlutterFlowTheme.of(context).labelLarge,
-                        hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primary,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        filled: true,
-                        fillColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyLarge,
-                      keyboardType: TextInputType.number,
-                      validator: _model.quantityFieldControllerValidator
-                          .asValidator(context),
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp('[0-9]'))
-                      ],
-                    ),
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -432,9 +372,7 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                                 ..size = double.tryParse(
                                     _model.sizeFieldController.text)
                                 ..weight = double.tryParse(
-                                    _model.weightFieldController.text)
-                                ..quantity = int.tryParse(
-                                    _model.quantityFieldController.text),
+                                    _model.weightFieldController.text),
                             );
                             if (widget.isExisting!) {
                               _model.updateResult = await HaulageCompanyAPIGroup

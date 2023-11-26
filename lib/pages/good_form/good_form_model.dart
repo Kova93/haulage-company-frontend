@@ -72,20 +72,6 @@ class GoodFormModel extends FlutterFlowModel<GoodFormWidget> {
     return null;
   }
 
-  // State field(s) for QuantityField widget.
-  FocusNode? quantityFieldFocusNode;
-  TextEditingController? quantityFieldController;
-  String? Function(BuildContext, String?)? quantityFieldControllerValidator;
-  String? _quantityFieldControllerValidator(BuildContext context, String? val) {
-    if (val == null || val.isEmpty) {
-      return FFLocalizations.of(context).getText(
-        'd2gnrgle' /* Field is required */,
-      );
-    }
-
-    return null;
-  }
-
   // Stores action output result for [Backend Call - API (updateGood)] action in ConfirmButton widget.
   ApiCallResponse? updateResult;
   // Stores action output result for [Backend Call - API (createGood)] action in ConfirmButton widget.
@@ -99,7 +85,6 @@ class GoodFormModel extends FlutterFlowModel<GoodFormWidget> {
     descriptionFieldControllerValidator = _descriptionFieldControllerValidator;
     sizeFieldControllerValidator = _sizeFieldControllerValidator;
     weightFieldControllerValidator = _weightFieldControllerValidator;
-    quantityFieldControllerValidator = _quantityFieldControllerValidator;
   }
 
   @override
@@ -116,9 +101,6 @@ class GoodFormModel extends FlutterFlowModel<GoodFormWidget> {
 
     weightFieldFocusNode?.dispose();
     weightFieldController?.dispose();
-
-    quantityFieldFocusNode?.dispose();
-    quantityFieldController?.dispose();
   }
 
   /// Action blocks are added here.

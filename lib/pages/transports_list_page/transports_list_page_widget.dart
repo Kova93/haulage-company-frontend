@@ -153,98 +153,176 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
                                         FlutterFlowTheme.of(context).titleLarge,
                                   ),
                                   collapsed: Container(),
-                                  expanded: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        FFLocalizations.of(context).getText(
-                                          '0xavmslk' /* Date */,
+                                  expanded: Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        10.0, 10.0, 10.0, 10.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Text(
+                                          FFLocalizations.of(context).getText(
+                                            '0xavmslk' /* Date */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelLarge
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                fontStyle: FontStyle.italic,
+                                              ),
                                         ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelLarge
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              fontStyle: FontStyle.italic,
-                                            ),
-                                      ),
-                                      Text(
-                                        dateTimeFormat(
-                                          'yMMMd',
-                                          transportsListItem.date!,
-                                          locale: FFLocalizations.of(context)
-                                              .languageCode,
+                                        Text(
+                                          dateTimeFormat(
+                                            'yMMMd',
+                                            transportsListItem.date!,
+                                            locale: FFLocalizations.of(context)
+                                                .languageCode,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyLarge,
                                         ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyLarge,
-                                      ),
-                                      Text(
-                                        FFLocalizations.of(context).getText(
-                                          '64v251nc' /* Order ID */,
+                                        Text(
+                                          FFLocalizations.of(context).getText(
+                                            '64v251nc' /* Order */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelLarge
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                fontStyle: FontStyle.italic,
+                                              ),
                                         ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelLarge
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              fontStyle: FontStyle.italic,
-                                            ),
-                                      ),
-                                      Text(
-                                        valueOrDefault<String>(
-                                          transportsListItem.orderID.toString(),
-                                          'orderid',
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyLarge,
-                                      ),
-                                      Text(
-                                        FFLocalizations.of(context).getText(
-                                          '7ioqn1to' /* Vehicles */,
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelLarge
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              fontStyle: FontStyle.italic,
-                                            ),
-                                      ),
-                                      Builder(
-                                        builder: (context) {
-                                          final vehiclesList =
-                                              transportsListItem.usedVehicleIDs
-                                                  .toList();
-                                          return ListView.builder(
-                                            padding: EdgeInsets.zero,
-                                            shrinkWrap: true,
-                                            scrollDirection: Axis.vertical,
-                                            itemCount: vehiclesList.length,
-                                            itemBuilder:
-                                                (context, vehiclesListIndex) {
-                                              final vehiclesListItem =
-                                                  vehiclesList[
-                                                      vehiclesListIndex];
-                                              return Container(
-                                                decoration: BoxDecoration(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryBackground,
+                                        Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  10.0, 0.0, 10.0, 0.0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              Text(
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  'msy78n8t' /* Shop */,
                                                 ),
-                                                child: Text(
-                                                  vehiclesListItem.toString(),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyLarge,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelLarge
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          fontStyle:
+                                                              FontStyle.italic,
+                                                        ),
+                                              ),
+                                              Text(
+                                                transportsListItem
+                                                    .orderDTO.shopDTO.name,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge,
+                                              ),
+                                              Text(
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  '2lmklo01' /* Goods */,
                                                 ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 10.0, 10.0, 10.0),
-                                        child: Row(
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelLarge
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          fontStyle:
+                                                              FontStyle.italic,
+                                                        ),
+                                              ),
+                                              Builder(
+                                                builder: (context) {
+                                                  final goodsList =
+                                                      transportsListItem
+                                                          .orderDTO.goodDTOs
+                                                          .toList();
+                                                  return ListView.builder(
+                                                    padding: EdgeInsets.zero,
+                                                    shrinkWrap: true,
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    itemCount: goodsList.length,
+                                                    itemBuilder: (context,
+                                                        goodsListIndex) {
+                                                      final goodsListItem =
+                                                          goodsList[
+                                                              goodsListIndex];
+                                                      return Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryBackground,
+                                                        ),
+                                                        child: Text(
+                                                          'x${goodsListItem.quantity.toString()} ${goodsListItem.goodDTO.name}',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium,
+                                                        ),
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Text(
+                                          FFLocalizations.of(context).getText(
+                                            '7ioqn1to' /* Vehicles */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelLarge
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                fontStyle: FontStyle.italic,
+                                              ),
+                                        ),
+                                        Builder(
+                                          builder: (context) {
+                                            final vehiclesList =
+                                                transportsListItem
+                                                    .usedVehicleDTOs
+                                                    .toList();
+                                            return ListView.builder(
+                                              padding: EdgeInsets.zero,
+                                              shrinkWrap: true,
+                                              scrollDirection: Axis.vertical,
+                                              itemCount: vehiclesList.length,
+                                              itemBuilder:
+                                                  (context, vehiclesListIndex) {
+                                                final vehiclesListItem =
+                                                    vehiclesList[
+                                                        vehiclesListIndex];
+                                                return Container(
+                                                  decoration: BoxDecoration(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryBackground,
+                                                  ),
+                                                  child: Text(
+                                                    vehiclesListItem
+                                                        .licensePlate,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyLarge,
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          },
+                                        ),
+                                        Row(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
@@ -354,16 +432,18 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
                                             ),
                                           ].divide(const SizedBox(width: 10.0)),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                  theme: const ExpandableThemeData(
+                                  theme: ExpandableThemeData(
                                     tapHeaderToExpand: true,
                                     tapBodyToExpand: false,
                                     tapBodyToCollapse: false,
                                     headerAlignment:
                                         ExpandablePanelHeaderAlignment.center,
                                     hasIcon: true,
+                                    iconColor: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                   ),
                                 ),
                               ),

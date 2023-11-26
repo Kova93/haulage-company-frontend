@@ -56,6 +56,7 @@ class HaulageCompanyAPIGroup {
   static GetVehicleByIdCall getVehicleByIdCall = GetVehicleByIdCall();
   static UpdateVehicleCall updateVehicleCall = UpdateVehicleCall();
   static DeleteVehicleCall deleteVehicleCall = DeleteVehicleCall();
+  static AddGoodToLocationCall addGoodToLocationCall = AddGoodToLocationCall();
 }
 
 class RegisterANewUserCall {
@@ -240,7 +241,6 @@ class GetAllGoodsCall {
 
 class CreateGoodCall {
   Future<ApiCallResponse> call({
-    int? lorrySiteId,
     String? bearerAuth = '',
     dynamic goodJsonJson,
   }) async {
@@ -248,7 +248,7 @@ class CreateGoodCall {
     final ffApiRequestBody = goodJson;
     return ApiManager.instance.makeApiCall(
       callName: 'createGood',
-      apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/goods/$lorrySiteId',
+      apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/goods',
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer $bearerAuth',
@@ -919,6 +919,32 @@ class DeleteVehicleCall {
         'Authorization': 'Bearer $bearerAuth',
       },
       params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class AddGoodToLocationCall {
+  Future<ApiCallResponse> call({
+    int? id,
+    String? bearerAuth = '',
+    dynamic stackedGoodJsonJson,
+  }) async {
+    final stackedGoodJson = _serializeJson(stackedGoodJsonJson);
+    final ffApiRequestBody = stackedGoodJson;
+    return ApiManager.instance.makeApiCall(
+      callName: 'addGoodToLocation',
+      apiUrl: '${HaulageCompanyAPIGroup.baseUrl}/locations/$id/addGood',
+      callType: ApiCallType.PUT,
+      headers: {
+        'Authorization': 'Bearer $bearerAuth',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

@@ -151,47 +151,47 @@ class _VehiclesListPageWidgetState extends State<VehiclesListPageWidget> {
                                         FlutterFlowTheme.of(context).titleLarge,
                                   ),
                                   collapsed: Container(),
-                                  expanded: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        FFLocalizations.of(context).getText(
-                                          'ka0ypk0o' /* Size */,
+                                  expanded: Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        10.0, 10.0, 10.0, 10.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          FFLocalizations.of(context).getText(
+                                            'ka0ypk0o' /* Size */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelLarge
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                fontStyle: FontStyle.italic,
+                                              ),
                                         ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelLarge
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              fontStyle: FontStyle.italic,
-                                            ),
-                                      ),
-                                      Text(
-                                        '${vehiclesListItem.size.toString()}m3',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyLarge,
-                                      ),
-                                      Text(
-                                        FFLocalizations.of(context).getText(
-                                          'i2pzntbt' /* Max weight */,
+                                        Text(
+                                          '${vehiclesListItem.size.toString()} m3',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyLarge,
                                         ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelLarge
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              fontStyle: FontStyle.italic,
-                                            ),
-                                      ),
-                                      Text(
-                                        '${vehiclesListItem.maxWeight.toString()}kg',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyLarge,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 10.0, 10.0, 10.0),
-                                        child: Row(
+                                        Text(
+                                          FFLocalizations.of(context).getText(
+                                            'i2pzntbt' /* Max weight */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelLarge
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                fontStyle: FontStyle.italic,
+                                              ),
+                                        ),
+                                        Text(
+                                          '${vehiclesListItem.maxWeight.toString()} kg',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyLarge,
+                                        ),
+                                        Row(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
@@ -300,16 +300,18 @@ class _VehiclesListPageWidgetState extends State<VehiclesListPageWidget> {
                                             ),
                                           ].divide(const SizedBox(width: 10.0)),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                  theme: const ExpandableThemeData(
+                                  theme: ExpandableThemeData(
                                     tapHeaderToExpand: true,
                                     tapBodyToExpand: false,
                                     tapBodyToCollapse: false,
                                     headerAlignment:
                                         ExpandablePanelHeaderAlignment.center,
                                     hasIcon: true,
+                                    iconColor: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                   ),
                                 ),
                               ),

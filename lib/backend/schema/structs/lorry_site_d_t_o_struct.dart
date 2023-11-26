@@ -9,7 +9,7 @@ class LorrySiteDTOStruct extends BaseStruct {
     int? id,
     String? name,
     String? address,
-    List<GoodDTOStruct>? goodDTOs,
+    List<GetStackedGoodDTOStruct>? goodDTOs,
     List<VehicleDTOStruct>? vehicleDTOs,
   })  : _id = id,
         _name = name,
@@ -37,10 +37,10 @@ class LorrySiteDTOStruct extends BaseStruct {
   bool hasAddress() => _address != null;
 
   // "goodDTOs" field.
-  List<GoodDTOStruct>? _goodDTOs;
-  List<GoodDTOStruct> get goodDTOs => _goodDTOs ?? const [];
-  set goodDTOs(List<GoodDTOStruct>? val) => _goodDTOs = val;
-  void updateGoodDTOs(Function(List<GoodDTOStruct>) updateFn) =>
+  List<GetStackedGoodDTOStruct>? _goodDTOs;
+  List<GetStackedGoodDTOStruct> get goodDTOs => _goodDTOs ?? const [];
+  set goodDTOs(List<GetStackedGoodDTOStruct>? val) => _goodDTOs = val;
+  void updateGoodDTOs(Function(List<GetStackedGoodDTOStruct>) updateFn) =>
       updateFn(_goodDTOs ??= []);
   bool hasGoodDTOs() => _goodDTOs != null;
 
@@ -59,7 +59,7 @@ class LorrySiteDTOStruct extends BaseStruct {
         address: data['address'] as String?,
         goodDTOs: getStructList(
           data['goodDTOs'],
-          GoodDTOStruct.fromMap,
+          GetStackedGoodDTOStruct.fromMap,
         ),
         vehicleDTOs: getStructList(
           data['vehicleDTOs'],
@@ -121,11 +121,11 @@ class LorrySiteDTOStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
-        goodDTOs: deserializeStructParam<GoodDTOStruct>(
+        goodDTOs: deserializeStructParam<GetStackedGoodDTOStruct>(
           data['goodDTOs'],
           ParamType.DataStruct,
           true,
-          structBuilder: GoodDTOStruct.fromSerializableMap,
+          structBuilder: GetStackedGoodDTOStruct.fromSerializableMap,
         ),
         vehicleDTOs: deserializeStructParam<VehicleDTOStruct>(
           data['vehicleDTOs'],

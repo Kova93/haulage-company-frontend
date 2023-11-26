@@ -6,11 +6,11 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'add_good_dialog_model.dart';
-export 'add_good_dialog_model.dart';
+import 'add_good_to_order_dialog_model.dart';
+export 'add_good_to_order_dialog_model.dart';
 
-class AddGoodDialogWidget extends StatefulWidget {
-  const AddGoodDialogWidget({
+class AddGoodToOrderDialogWidget extends StatefulWidget {
+  const AddGoodToOrderDialogWidget({
     super.key,
     required this.getOrderParam,
     required this.goods,
@@ -20,11 +20,13 @@ class AddGoodDialogWidget extends StatefulWidget {
   final List<GoodDTOStruct>? goods;
 
   @override
-  _AddGoodDialogWidgetState createState() => _AddGoodDialogWidgetState();
+  _AddGoodToOrderDialogWidgetState createState() =>
+      _AddGoodToOrderDialogWidgetState();
 }
 
-class _AddGoodDialogWidgetState extends State<AddGoodDialogWidget> {
-  late AddGoodDialogModel _model;
+class _AddGoodToOrderDialogWidgetState
+    extends State<AddGoodToOrderDialogWidget> {
+  late AddGoodToOrderDialogModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -35,7 +37,7 @@ class _AddGoodDialogWidgetState extends State<AddGoodDialogWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AddGoodDialogModel());
+    _model = createModel(context, () => AddGoodToOrderDialogModel());
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -68,7 +70,9 @@ class _AddGoodDialogWidgetState extends State<AddGoodDialogWidget> {
             ),
             FlutterFlowDropDown<int>(
               controller: _model.goodDropDownValueController ??=
-                  FormFieldController<int>(null),
+                  FormFieldController<int>(
+                _model.goodDropDownValue ??= null,
+              ),
               options: List<int>.from(widget.goods!.map((e) => e.id).toList()),
               optionLabels: widget.goods!.map((e) => e.name).toList(),
               onChanged: (val) =>
@@ -124,18 +128,62 @@ class _AddGoodDialogWidgetState extends State<AddGoodDialogWidget> {
                         !_model.formKey.currentState!.validate()) {
                       return;
                     }
-                    _model.updatePage(() {
-                      _model.updateGetOrderStruct(
-                        (e) => e
-                          ..updateGoodDTOs(
-                            (e) => e.add(widget.goods!
-                                .where((e) => e.id == _model.goodDropDownValue)
-                                .toList()
-                                .first),
+                    if (_model.goodDropDownValue == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'No good selected',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
                           ),
+                          duration: const Duration(milliseconds: 4000),
+                          backgroundColor: FlutterFlowTheme.of(context).error,
+                        ),
                       );
-                    });
-                    Navigator.pop(context);
+                      return;
+                    }
+                    if (_model.getOrder?.goodDTOs
+                            .where(
+                                (e) => e.goodDTO.id == _model.goodDropDownValue)
+                            .toList().isEmpty) {
+                      _model.updatePage(() {
+                        _model.updateGetOrderStruct(
+                          (e) => e
+                            ..updateGoodDTOs(
+                              (e) => e.add(GetStackedGoodDTOStruct(
+                                goodDTO: widget.goods
+                                    ?.where(
+                                        (e) => e.id == _model.goodDropDownValue)
+                                    .toList()
+                                    .first,
+                              )),
+                            ),
+                        );
+                      });
+                      Navigator.pop(context);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Selected good already added to order',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                          ),
+                          duration: const Duration(milliseconds: 4000),
+                          backgroundColor: FlutterFlowTheme.of(context).error,
+                        ),
+                      );
+                    }
                   },
                   text: FFLocalizations.of(context).getText(
                     'f1kd0bog' /* Confirm */,

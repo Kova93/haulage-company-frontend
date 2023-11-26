@@ -12,13 +12,11 @@ class GoodDTOStruct extends BaseStruct {
     String? description,
     double? size,
     double? weight,
-    int? quantity,
   })  : _id = id,
         _name = name,
         _description = description,
         _size = size,
-        _weight = weight,
-        _quantity = quantity;
+        _weight = weight;
 
   // "id" field.
   int? _id;
@@ -53,20 +51,12 @@ class GoodDTOStruct extends BaseStruct {
   void incrementWeight(double amount) => _weight = weight + amount;
   bool hasWeight() => _weight != null;
 
-  // "quantity" field.
-  int? _quantity;
-  int get quantity => _quantity ?? 0;
-  set quantity(int? val) => _quantity = val;
-  void incrementQuantity(int amount) => _quantity = quantity + amount;
-  bool hasQuantity() => _quantity != null;
-
   static GoodDTOStruct fromMap(Map<String, dynamic> data) => GoodDTOStruct(
         id: castToType<int>(data['id']),
         name: data['name'] as String?,
         description: data['description'] as String?,
         size: castToType<double>(data['size']),
         weight: castToType<double>(data['weight']),
-        quantity: castToType<int>(data['quantity']),
       );
 
   static GoodDTOStruct? maybeFromMap(dynamic data) =>
@@ -78,7 +68,6 @@ class GoodDTOStruct extends BaseStruct {
         'description': _description,
         'size': _size,
         'weight': _weight,
-        'quantity': _quantity,
       }.withoutNulls;
 
   @override
@@ -102,10 +91,6 @@ class GoodDTOStruct extends BaseStruct {
         'weight': serializeParam(
           _weight,
           ParamType.double,
-        ),
-        'quantity': serializeParam(
-          _quantity,
-          ParamType.int,
         ),
       }.withoutNulls;
 
@@ -136,11 +121,6 @@ class GoodDTOStruct extends BaseStruct {
           ParamType.double,
           false,
         ),
-        quantity: deserializeParam(
-          data['quantity'],
-          ParamType.int,
-          false,
-        ),
       );
 
   @override
@@ -153,13 +133,12 @@ class GoodDTOStruct extends BaseStruct {
         name == other.name &&
         description == other.description &&
         size == other.size &&
-        weight == other.weight &&
-        quantity == other.quantity;
+        weight == other.weight;
   }
 
   @override
-  int get hashCode => const ListEquality()
-      .hash([id, name, description, size, weight, quantity]);
+  int get hashCode =>
+      const ListEquality().hash([id, name, description, size, weight]);
 }
 
 GoodDTOStruct createGoodDTOStruct({
@@ -168,7 +147,6 @@ GoodDTOStruct createGoodDTOStruct({
   String? description,
   double? size,
   double? weight,
-  int? quantity,
 }) =>
     GoodDTOStruct(
       id: id,
@@ -176,5 +154,4 @@ GoodDTOStruct createGoodDTOStruct({
       description: description,
       size: size,
       weight: weight,
-      quantity: quantity,
     );

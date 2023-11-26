@@ -151,80 +151,63 @@ class _GoodsListPageWidgetState extends State<GoodsListPageWidget> {
                                           .titleLarge,
                                     ),
                                     collapsed: Container(),
-                                    expanded: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          FFLocalizations.of(context).getText(
-                                            'lps7u20d' /* Description */,
+                                    expanded: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          10.0, 10.0, 10.0, 10.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            FFLocalizations.of(context).getText(
+                                              'lps7u20d' /* Description */,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelLarge
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  fontStyle: FontStyle.italic,
+                                                ),
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelLarge
-                                              .override(
-                                                fontFamily: 'Readex Pro',
-                                                fontStyle: FontStyle.italic,
-                                              ),
-                                        ),
-                                        Text(
-                                          goodsListItem.description,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyLarge,
-                                        ),
-                                        Text(
-                                          FFLocalizations.of(context).getText(
-                                            'va7bnt9b' /* Size */,
+                                          Text(
+                                            goodsListItem.description,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyLarge,
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelLarge
-                                              .override(
-                                                fontFamily: 'Readex Pro',
-                                                fontStyle: FontStyle.italic,
-                                              ),
-                                        ),
-                                        Text(
-                                          goodsListItem.size.toString(),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyLarge,
-                                        ),
-                                        Text(
-                                          FFLocalizations.of(context).getText(
-                                            '4l8ry766' /* Weight */,
+                                          Text(
+                                            FFLocalizations.of(context).getText(
+                                              'va7bnt9b' /* Size */,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelLarge
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  fontStyle: FontStyle.italic,
+                                                ),
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelLarge
-                                              .override(
-                                                fontFamily: 'Readex Pro',
-                                                fontStyle: FontStyle.italic,
-                                              ),
-                                        ),
-                                        Text(
-                                          goodsListItem.weight.toString(),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyLarge,
-                                        ),
-                                        Text(
-                                          FFLocalizations.of(context).getText(
-                                            'pa793lkm' /* Quantity */,
+                                          Text(
+                                            '${goodsListItem.size.toString()} m3',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyLarge,
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelLarge
-                                              .override(
-                                                fontFamily: 'Readex Pro',
-                                                fontStyle: FontStyle.italic,
-                                              ),
-                                        ),
-                                        Text(
-                                          goodsListItem.quantity.toString(),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyLarge,
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  10.0, 10.0, 10.0, 10.0),
-                                          child: Row(
+                                          Text(
+                                            FFLocalizations.of(context).getText(
+                                              '4l8ry766' /* Weight */,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelLarge
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  fontStyle: FontStyle.italic,
+                                                ),
+                                          ),
+                                          Text(
+                                            '${goodsListItem.weight.toString()} kg',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyLarge,
+                                          ),
+                                          Row(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
                                                 MainAxisAlignment.end,
@@ -333,8 +316,8 @@ class _GoodsListPageWidgetState extends State<GoodsListPageWidget> {
                                               ),
                                             ].divide(const SizedBox(width: 10.0)),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                     theme: ExpandableThemeData(
                                       tapHeaderToExpand: true,

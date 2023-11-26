@@ -54,12 +54,6 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
         _model.weightFieldController?.text =
             _model.vehicle!.maxWeight.toString();
       });
-      setState(() {
-        _model.locationDropDownValueController?.value =
-            (widget.locationID != null
-                ? widget.locationID!
-                : _model.vehicle!.id);
-      });
     });
 
     _model.licensePlateFieldController ??= TextEditingController();
@@ -288,6 +282,15 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                         FilteringTextInputFormatter.allow(RegExp('(\\d|\\.)'))
                       ],
                     ),
+                    Text(
+                      FFLocalizations.of(context).getText(
+                        'flrexcc1' /* Location */,
+                      ),
+                      style: FlutterFlowTheme.of(context).labelLarge.override(
+                            fontFamily: 'Readex Pro',
+                            fontStyle: FontStyle.italic,
+                          ),
+                    ),
                     FutureBuilder<ApiCallResponse>(
                       future: HaulageCompanyAPIGroup.getAllLocationsCall.call(
                         bearerAuth: currentAuthenticationToken,
@@ -311,7 +314,10 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                             snapshot.data!;
                         return FlutterFlowDropDown<int>(
                           controller: _model.locationDropDownValueController ??=
-                              FormFieldController<int>(null),
+                              FormFieldController<int>(
+                            _model.locationDropDownValue ??=
+                                widget.locationID ?? _model.vehicle?.lorrySiteID,
+                          ),
                           options: List<int>.from(HaulageCompanyAPIGroup
                               .getAllLocationsCall
                               .rootList(
@@ -396,6 +402,23 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                               return;
                             }
                             if (_model.locationDropDownValue == null) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'No location selected',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                        ),
+                                  ),
+                                  duration: const Duration(milliseconds: 4000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).error,
+                                ),
+                              );
                               return;
                             }
                             _model.updateVehicleStruct(

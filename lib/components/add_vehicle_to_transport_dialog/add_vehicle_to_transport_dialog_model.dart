@@ -1,22 +1,24 @@
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'add_good_dialog_widget.dart' show AddGoodDialogWidget;
+import 'add_vehicle_to_transport_dialog_widget.dart'
+    show AddVehicleToTransportDialogWidget;
 import 'package:flutter/material.dart';
 
-class AddGoodDialogModel extends FlutterFlowModel<AddGoodDialogWidget> {
+class AddVehicleToTransportDialogModel
+    extends FlutterFlowModel<AddVehicleToTransportDialogWidget> {
   ///  Local state fields for this component.
 
-  GetOrderDTOStruct? getOrder;
-  void updateGetOrderStruct(Function(GetOrderDTOStruct) updateFn) =>
-      updateFn(getOrder ??= GetOrderDTOStruct());
+  TransportOperationDTOStruct? transport;
+  void updateTransportStruct(Function(TransportOperationDTOStruct) updateFn) =>
+      updateFn(transport ??= TransportOperationDTOStruct());
 
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();
-  // State field(s) for GoodDropDown widget.
-  int? goodDropDownValue;
-  FormFieldController<int>? goodDropDownValueController;
+  // State field(s) for VehicleDropDown widget.
+  int? vehicleDropDownValue;
+  FormFieldController<int>? vehicleDropDownValueController;
 
   /// Initialization and disposal methods.
 

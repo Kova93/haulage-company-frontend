@@ -120,7 +120,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                   children: [
                     Text(
                       FFLocalizations.of(context).getText(
-                        'jeucsmrc' /* Name */,
+                        '23ga16pi' /* Name */,
                       ),
                       style: FlutterFlowTheme.of(context).labelLarge.override(
                             fontFamily: 'Readex Pro',
@@ -135,7 +135,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                     ),
                     Text(
                       FFLocalizations.of(context).getText(
-                        'kuscsjsz' /* Roles */,
+                        'l3suxdvh' /* Roles */,
                       ),
                       style: FlutterFlowTheme.of(context).labelLarge.override(
                             fontFamily: 'Readex Pro',
@@ -178,7 +178,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                     ),
                     Text(
                       FFLocalizations.of(context).getText(
-                        'nm2c8asj' /* Last login */,
+                        'h17zb47k' /* Last login */,
                       ),
                       style: FlutterFlowTheme.of(context).labelLarge.override(
                             fontFamily: 'Readex Pro',
@@ -204,7 +204,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                         context.goNamedAuth('LoginPage', context.mounted);
                       },
                       text: FFLocalizations.of(context).getText(
-                        'yehju4d5' /* Log out */,
+                        'hivvvhex' /* Log out */,
                       ),
                       options: FFButtonOptions(
                         padding: const EdgeInsetsDirectional.fromSTEB(
