@@ -113,7 +113,7 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                   children: [
                     Text(
                       FFLocalizations.of(context).getText(
-                        'tnyrwtzp' /* Date */,
+                        'bcxu3o0x' /* Date */,
                       ),
                       style: FlutterFlowTheme.of(context).labelLarge.override(
                             fontFamily: 'Readex Pro',
@@ -203,7 +203,7 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                     ),
                     Text(
                       FFLocalizations.of(context).getText(
-                        '8dl1y18q' /* Order */,
+                        'nrv9lhil' /* Order */,
                       ),
                       style: FlutterFlowTheme.of(context).labelLarge.override(
                             fontFamily: 'Readex Pro',
@@ -263,7 +263,7 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                               setState(() => _model.orderDropDownValue = val),
                           textStyle: FlutterFlowTheme.of(context).bodyLarge,
                           hintText: FFLocalizations.of(context).getText(
-                            'syf9jtoe' /* Select order... */,
+                            '20s9i05m' /* Select order... */,
                           ),
                           icon: Icon(
                             Icons.keyboard_arrow_down_rounded,
@@ -286,7 +286,7 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                     ),
                     Text(
                       FFLocalizations.of(context).getText(
-                        'df7ao1zp' /* Vehicles */,
+                        'z6h4yeft' /* Vehicles */,
                       ),
                       style: FlutterFlowTheme.of(context).labelLarge.override(
                             fontFamily: 'Readex Pro',
@@ -411,7 +411,7 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                               ).then((value) => setState(() {}));
                             },
                             text: FFLocalizations.of(context).getText(
-                              'd0qiyqt0' /* Add vehicle */,
+                              'fl6z18xj' /* Add vehicle */,
                             ),
                             icon: Icon(
                               Icons.add,

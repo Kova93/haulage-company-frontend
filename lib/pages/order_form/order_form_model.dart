@@ -24,7 +24,7 @@ class OrderFormModel extends FlutterFlowModel<OrderFormWidget> {
   // State field(s) for ShopDropDown widget.
   int? shopDropDownValue;
   FormFieldController<int>? shopDropDownValueController;
-  // Models for orderGoodsListItem dynamic component.
+  // Models for OrderGoodsListItem dynamic component.
   late FlutterFlowDynamicModels<OrderGoodsListItemModel>
       orderGoodsListItemModels;
   // Stores action output result for [Backend Call - API (updateOrder)] action in ConfirmButton widget.

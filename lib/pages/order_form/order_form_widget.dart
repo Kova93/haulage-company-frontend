@@ -122,7 +122,7 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                   children: [
                     Text(
                       FFLocalizations.of(context).getText(
-                        'webc65k3' /* Shop */,
+                        '10hjvvx7' /* Shop */,
                       ),
                       style: FlutterFlowTheme.of(context).labelLarge.override(
                             fontFamily: 'Readex Pro',

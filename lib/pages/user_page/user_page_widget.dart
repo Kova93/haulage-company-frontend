@@ -165,7 +165,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                             return Container(
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
+                                    .primaryBackground,
                               ),
                               child: Text(
                                 rolesListItem,
