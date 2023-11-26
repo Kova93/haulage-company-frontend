@@ -662,10 +662,10 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                             await showAlignedDialog(
                                               barrierColor:
                                                   FlutterFlowTheme.of(context)
-                                                      .accent4,
+                                                      .primaryBackground,
                                               context: context,
                                               isGlobal: true,
-                                              avoidOverflow: false,
+                                              avoidOverflow: true,
                                               targetAnchor:
                                                   const AlignmentDirectional(0.0, 0.0)
                                                       .resolve(
@@ -676,42 +676,43 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                       .resolve(
                                                           Directionality.of(
                                                               context)),
-                                              builder: (dialogContext) {
-                                                return Material(
-                                                  color: Colors.transparent,
-                                                  child: GestureDetector(
-                                                    onTap: () => _model
-                                                            .unfocusNode
-                                                            .canRequestFocus
-                                                        ? FocusScope.of(context)
-                                                            .requestFocus(_model
-                                                                .unfocusNode)
-                                                        : FocusScope.of(context)
-                                                            .unfocus(),
-                                                    child:
-                                                        AddGoodToLocationDialogWidget(
-                                                      locationId:
-                                                          widget.locationId!,
-                                                      goods:
-                                                          HaulageCompanyAPIGroup
-                                                              .getAllGoodsCall
-                                                              .rootList(
-                                                                addButtonGetAllGoodsResponse
-                                                                    .jsonBody,
-                                                              )!
-                                                              .map((e) => e !=
-                                                                          null &&
-                                                                      e != ''
-                                                                  ? GoodDTOStruct
-                                                                      .fromMap(
-                                                                          e)
-                                                                  : null)
-                                                              .withoutNulls
-                                                              .toList(),
+                                              builder: (dialogContext) => ScaffoldMessenger(
+                                                child: Builder(
+                                                  builder: (dialogContext) => Scaffold(
+                                                    backgroundColor: Colors.transparent,
+                                                    body: GestureDetector(
+                                                      onTap: () => _model
+                                                              .unfocusNode
+                                                              .canRequestFocus
+                                                          ? FocusScope.of(context)
+                                                              .requestFocus(_model
+                                                                  .unfocusNode)
+                                                          : FocusScope.of(context)
+                                                              .unfocus(),
+                                                      child: AddGoodToLocationDialogWidget(
+                                                        locationId:
+                                                            widget.locationId!,
+                                                        goods:
+                                                            (HaulageCompanyAPIGroup
+                                                                .getAllGoodsCall
+                                                                .rootList(
+                                                                  addButtonGetAllGoodsResponse
+                                                                      .jsonBody,
+                                                                ) as List?)
+                                                                ?.map((e) => e !=
+                                                                            null &&
+                                                                        e != ''
+                                                                    ? GoodDTOStruct
+                                                                        .fromMap(
+                                                                            e)
+                                                                    : null)
+                                                                .withoutNulls
+                                                                .toList(),
+                                                      ),
                                                     ),
                                                   ),
-                                                );
-                                              },
+                                                ),
+                                              ),
                                             ).then((value) => setState(() {}));
                                           },
                                         );

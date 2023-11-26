@@ -389,37 +389,39 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                                     followerAnchor: const AlignmentDirectional(
                                             0.0, 0.0)
                                         .resolve(Directionality.of(context)),
-                                    builder: (dialogContext) {
-                                      return Material(
-                                        color: Colors.transparent,
-                                        child: GestureDetector(
-                                          onTap: () => _model
-                                                  .unfocusNode.canRequestFocus
-                                              ? FocusScope.of(context)
-                                                  .requestFocus(
-                                                      _model.unfocusNode)
-                                              : FocusScope.of(context)
-                                                  .unfocus(),
-                                          child:
-                                              AddVehicleToTransportDialogWidget(
-                                            transportParam:
-                                                _model.transportOperation!,
-                                            vehicles: HaulageCompanyAPIGroup
-                                                .getAllVehiclesCall
-                                                .rootList(
-                                                  buttonGetAllVehiclesResponse
-                                                      .jsonBody,
-                                                )!
-                                                .map((e) => e != null && e != ''
-                                                    ? VehicleDTOStruct.fromMap(
-                                                        e)
-                                                    : null)
-                                                .withoutNulls
-                                                .toList(),
+                                    builder: (dialogContext) => ScaffoldMessenger(
+                                      child: Builder(
+                                        builder: (dialogContext) => Scaffold(
+                                          backgroundColor: Colors.transparent,
+                                          body: GestureDetector(
+                                            onTap: () => _model
+                                                    .unfocusNode.canRequestFocus
+                                                ? FocusScope.of(context)
+                                                    .requestFocus(
+                                                        _model.unfocusNode)
+                                                : FocusScope.of(context)
+                                                    .unfocus(),
+                                            child:
+                                                AddVehicleToTransportDialogWidget(
+                                              transportParam:
+                                                  _model.transportOperation!,
+                                              vehicles: HaulageCompanyAPIGroup
+                                                  .getAllVehiclesCall
+                                                  .rootList(
+                                                    buttonGetAllVehiclesResponse
+                                                        .jsonBody,
+                                                  )!
+                                                  .map((e) => e != null && e != ''
+                                                      ? VehicleDTOStruct.fromMap(
+                                                          e)
+                                                      : null)
+                                                  .withoutNulls
+                                                  .toList(),
+                                            ),
                                           ),
                                         ),
-                                      );
-                                    },
+                                      ),
+                                    ),
                                   ).then((value) => setState(() {}));
                                 },
                                 text: FFLocalizations.of(context).getText(
