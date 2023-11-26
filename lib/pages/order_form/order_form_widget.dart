@@ -26,7 +26,7 @@ class OrderFormWidget extends StatefulWidget {
     this.getOrderJSON,
   });
 
-  final bool? isExisting;
+  final bool isExisting;
   final dynamic getOrderJSON;
 
   @override
@@ -103,7 +103,7 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
             },
           ),
           title: Text(
-            widget.isExisting! ? 'Edit order' : 'Add order',
+            widget.isExisting ? 'Edit order' : 'Add order',
             style: FlutterFlowTheme.of(context).headlineLarge,
           ),
           actions: const [],
@@ -155,7 +155,7 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                           controller: _model.shopDropDownValueController ??=
                               FormFieldController<int>(
                             _model.shopDropDownValue ??=
-                                _model.getOrder?.shopDTO.id,
+                                widget.isExisting ? _model.getOrder!.shopDTO.id : null,
                           ),
                           options: (HaulageCompanyAPIGroup
                               .getAllShopsCall
@@ -238,7 +238,8 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                                   key: Key(
                                     'Keyjvc_${goodsListItem.goodDTO.id.toString()}',
                                   ),
-                                  stackedGoodParam: goodsListItem,
+                                  stackedGood: goodsListItem,
+                                  deleteAction: () => setState(() => _model.getOrder?.goodDTOs.removeAt(goodsListIndex))
                                 ),
                               ),
                             );
@@ -374,6 +375,10 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                               showErrorSnackBar(context, 'No shop selected');
                               return;
                             }
+                            if (_model.getOrder?.goodDTOs.isEmpty ?? true) {
+                              showErrorSnackBar(context, 'No goods added');
+                              return;
+                            }
                             _model.updateOrderStruct(
                               (e) => e
                                 ..id = _model.getOrder?.id
@@ -383,7 +388,7 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                                         _model.getOrder!.goodDTOs.toList())
                                     .toList(),
                             );
-                            if (widget.isExisting!) {
+                            if (widget.isExisting) {
                               _model.updateResult = await HaulageCompanyAPIGroup
                                   .updateOrderCall
                                   .call(

@@ -11,10 +11,12 @@ export 'order_goods_list_item_model.dart';
 class OrderGoodsListItemWidget extends StatefulWidget {
   const OrderGoodsListItemWidget({
     super.key,
-    required this.stackedGoodParam,
+    required this.stackedGood,
+    required this.deleteAction,
   });
 
-  final GetStackedGoodDTOStruct? stackedGoodParam;
+  final GetStackedGoodDTOStruct stackedGood;
+  final void Function() deleteAction;
 
   @override
   _OrderGoodsListItemWidgetState createState() =>
@@ -35,22 +37,12 @@ class _OrderGoodsListItemWidgetState extends State<OrderGoodsListItemWidget> {
     super.initState();
     _model = createModel(context, () => OrderGoodsListItemModel());
 
-    // On component load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        _model.stackedGood = widget.stackedGoodParam;
-      });
-    });
-
     _model.quantityFieldController ??= TextEditingController(
-        text: widget.stackedGoodParam?.quantity.toString());
+        text: widget.stackedGood.quantity.toString());
     _model.quantityFieldFocusNode ??= FocusNode();
     _model.quantityFieldFocusNode!.addListener(
       () async {
-        _model.updateStackedGoodStruct(
-          (e) =>
-              e..quantity = int.tryParse(_model.quantityFieldController.text),
-        );
+        widget.stackedGood.quantity = int.tryParse(_model.quantityFieldController.text);
       },
     );
   }
@@ -72,10 +64,7 @@ class _OrderGoodsListItemWidgetState extends State<OrderGoodsListItemWidget> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            valueOrDefault<String>(
-              widget.stackedGoodParam?.goodDTO.name,
-              'Good',
-            ),
+            widget.stackedGood.goodDTO.name,
             style: FlutterFlowTheme.of(context).bodyLarge,
           ),
           Row(
@@ -147,7 +136,7 @@ class _OrderGoodsListItemWidgetState extends State<OrderGoodsListItemWidget> {
                   size: 24.0,
                 ),
                 onPressed: () {
-                  print('DeleteButton pressed ...');
+                  widget.deleteAction();
                 },
               ),
             ].divide(const SizedBox(width: 10.0)),

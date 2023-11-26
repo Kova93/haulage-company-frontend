@@ -5,12 +5,6 @@ import 'package:flutter/material.dart';
 
 class OrderGoodsListItemModel
     extends FlutterFlowModel<OrderGoodsListItemWidget> {
-  ///  Local state fields for this component.
-
-  GetStackedGoodDTOStruct? stackedGood;
-  void updateStackedGoodStruct(Function(GetStackedGoodDTOStruct) updateFn) =>
-      updateFn(stackedGood ??= GetStackedGoodDTOStruct());
-
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();
