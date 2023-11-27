@@ -10,7 +10,7 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 /// Start Haulage Company API Group Code
 
 class HaulageCompanyAPIGroup {
-  static String baseUrl = '/api';
+  static String baseUrl = 'https://haulage-company-backend-d17c4ad56799.herokuapp.com/api';
   static Map<String, String> headers = {};
   static RegisterANewUserCall registerANewUserCall = RegisterANewUserCall();
   static LogInAUserCall logInAUserCall = LogInAUserCall();
