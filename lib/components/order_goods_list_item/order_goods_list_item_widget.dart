@@ -42,11 +42,6 @@ class _OrderGoodsListItemWidgetState extends State<OrderGoodsListItemWidget> {
     _model.quantityFieldController ??= TextEditingController(
         text: widget.stackedGood.quantity.toString());
     _model.quantityFieldFocusNode ??= FocusNode();
-    _model.quantityFieldFocusNode!.addListener(
-      () async {
-        widget.stackedGood.quantity = int.tryParse(_model.quantityFieldController.text);
-      },
-    );
   }
 
   @override

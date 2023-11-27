@@ -13,7 +13,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -386,6 +385,11 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                                 !_model.formKey.currentState!.validate()) {
                               return;
                             }
+                            if (!_model.orderGoodsListItemModels.getValues(
+                                    (e) => e.formKey.currentState?.validate() ?? false
+                                ).every((e) => e)) {
+                              return;
+                            }
                             if (_model.shopDropDownValue == null) {
                               showErrorSnackBar(context, FFLocalizations.of(context).getText(
                                   'errors.validation.dropdown.empty'
@@ -410,10 +414,14 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                               (e) => e
                                 ..id = _model.getOrder?.id
                                 ..shopID = _model.shopDropDownValue
-                                ..stackedGoodDTOs = functions
-                                    .mapToStackedGoodDTO(
-                                        _model.getOrder!.goodDTOs.toList())
-                                    .toList(),
+                                ..stackedGoodDTOs = _model.orderGoodsListItemModels.getValues(
+                                    (e) => int.tryParse(e.quantityFieldController.text)
+                                ).mapIndexed(
+                                    (i, quantity) => StackedGoodDTOStruct(
+                                        goodId: _model.getOrder?.goodDTOs[i].goodDTO.id,
+                                        quantity: quantity,
+                                    )
+                                )
                             );
                             if (widget.isExisting) {
                               _model.updateResult = await HaulageCompanyAPIGroup
