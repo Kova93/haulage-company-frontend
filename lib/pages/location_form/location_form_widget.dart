@@ -1,4 +1,6 @@
+import 'package:format/format.dart';
 import 'package:haulage_company/util/show_error_snack_bar.dart';
+import 'package:haulage_company/util/string_capitalize.dart';
 
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
@@ -100,7 +102,13 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
             },
           ),
           title: Text(
-            widget.isExisting! ? 'Edit location' : 'Add location',
+            FFLocalizations.of(context).getText(
+                widget.isExisting! ? 'forms.edit.title' : 'forms.add.title'
+            ).format(
+                FFLocalizations.of(context).getText(
+                    'entities.location'
+                )
+            ).capitalize(),
             style: FlutterFlowTheme.of(context).headlineLarge,
           ),
           actions: const [],
@@ -127,8 +135,8 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          '4a3lwtgv' /* Name */,
-                        ),
+                          'attributes.common.name',
+                        ).capitalize(),
                         labelStyle: FlutterFlowTheme.of(context).labelLarge,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
@@ -175,8 +183,8 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          'fwid9dfb' /* Address */,
-                        ),
+                          'attributes.common.address',
+                        ).capitalize(),
                         labelStyle: FlutterFlowTheme.of(context).labelLarge,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
@@ -225,8 +233,8 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
                             context.safePop();
                           },
                           text: FFLocalizations.of(context).getText(
-                            '4kz9a0m4' /* Cancel */,
-                          ),
+                            'widgets.common.cancel',
+                          ).capitalize(),
                           options: FFButtonOptions(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 24.0, 24.0, 24.0, 24.0),
@@ -265,7 +273,13 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
                               if ((_model.updateResult?.succeeded ?? true)) {
                                 context.safePop();
                               } else {
-                                showErrorSnackBar(context, 'Failed to update location');
+                                showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                    'errors.failure.update'
+                                ).format(
+                                    FFLocalizations.of(context).getText(
+                                        'entities.location'
+                                    )
+                                ).capitalize());
                               }
                             } else {
                               _model.createResult = await HaulageCompanyAPIGroup
@@ -277,15 +291,21 @@ class _LocationFormWidgetState extends State<LocationFormWidget> {
                               if ((_model.createResult?.succeeded ?? true)) {
                                 context.safePop();
                               } else {
-                                showErrorSnackBar(context, 'Failed to create location');
+                                showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                    'errors.failure.create'
+                                ).format(
+                                    FFLocalizations.of(context).getText(
+                                        'entities.location'
+                                    )
+                                ).capitalize());
                               }
                             }
 
                             setState(() {});
                           },
                           text: FFLocalizations.of(context).getText(
-                            '3mmqzp9d' /* Confirm */,
-                          ),
+                            'widgets.common.confirm',
+                          ).capitalize(),
                           options: FFButtonOptions(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 24.0, 24.0, 24.0, 24.0),

@@ -1,3 +1,6 @@
+import 'package:format/format.dart';
+import 'package:haulage_company/util/string_capitalize.dart';
+
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_language_selector.dart';
@@ -126,8 +129,8 @@ class _SettingsPageWidgetState extends State<SettingsPageWidget>
           ),
           title: Text(
             FFLocalizations.of(context).getText(
-              'dlmxdzb8' /* Settings */,
-            ),
+              'pages.settings.title',
+            ).capitalize(),
             style: FlutterFlowTheme.of(context).headlineLarge,
           ),
           actions: const [],
@@ -177,8 +180,12 @@ class _SettingsPageWidgetState extends State<SettingsPageWidget>
                               children: [
                                 Text(
                                   FFLocalizations.of(context).getText(
-                                    'qazgnn0b' /* Switch to Dark Mode */,
-                                  ),
+                                    'pages.settings.theme.common',
+                                  ).format(
+                                      FFLocalizations.of(context).getText(
+                                          'pages.settings.theme.dark'
+                                      )
+                                  ).capitalize(),
                                   style: FlutterFlowTheme.of(context).bodyLarge,
                                 ),
                                 Container(
@@ -273,8 +280,12 @@ class _SettingsPageWidgetState extends State<SettingsPageWidget>
                               children: [
                                 Text(
                                   FFLocalizations.of(context).getText(
-                                    'avbvj58g' /* Switch to Light Mode */,
-                                  ),
+                                    'pages.settings.theme.common',
+                                  ).format(
+                                    FFLocalizations.of(context).getText(
+                                      'pages.settings.theme.light'
+                                    )
+                                  ).capitalize(),
                                   style: FlutterFlowTheme.of(context).bodyLarge,
                                 ),
                                 Container(
@@ -353,8 +364,8 @@ class _SettingsPageWidgetState extends State<SettingsPageWidget>
                     children: [
                       Text(
                         FFLocalizations.of(context).getText(
-                          'e0q9cs80' /* Language */,
-                        ),
+                          'pages.settings.language',
+                        ).capitalize(),
                         style: FlutterFlowTheme.of(context).bodyLarge,
                       ),
                       FlutterFlowLanguageSelector(

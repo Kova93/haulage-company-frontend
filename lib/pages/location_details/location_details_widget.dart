@@ -1,4 +1,6 @@
+import 'package:format/format.dart';
 import 'package:haulage_company/util/show_error_snack_bar.dart';
+import 'package:haulage_company/util/string_capitalize.dart';
 
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
@@ -124,7 +126,9 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                               locationDetailsGetLocationByIdResponse.jsonBody)
                           : null)
                       ?.name,
-                  'Location',
+                  FFLocalizations.of(context).getText(
+                    'entities.location'
+                  ).capitalize(),
                 ),
                 style: FlutterFlowTheme.of(context).headlineLarge,
               ),
@@ -202,8 +206,8 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                           FFLocalizations.of(
                                                                   context)
                                                               .getText(
-                                                            'i2j9a9p5' /* Size */,
-                                                          ),
+                                                            'attributes.common.size',
+                                                          ).capitalize(),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .labelLarge
@@ -225,8 +229,8 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                           FFLocalizations.of(
                                                                   context)
                                                               .getText(
-                                                            'zhemtemq' /* Max weight */,
-                                                          ),
+                                                            'attributes.vehicle.maxWeight',
+                                                          ).capitalize(),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .labelLarge
@@ -338,7 +342,13 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                                   await _model
                                                                       .waitForApiRequestCompleted();
                                                                 } else {
-                                                                  showErrorSnackBar(context, 'Failed to delete vehicle');
+                                                                  showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                                                      'errors.failure.delete'
+                                                                  ).format(
+                                                                      FFLocalizations.of(context).getText(
+                                                                          'entities.vehicle'
+                                                                      )
+                                                                  ).capitalize());
                                                                 }
 
                                                                 setState(() {});
@@ -474,8 +484,8 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                           FFLocalizations.of(
                                                                   context)
                                                               .getText(
-                                                            '1d2hpj62' /* Description */,
-                                                          ),
+                                                            'attributes.good.description',
+                                                          ).capitalize(),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .labelLarge
@@ -498,8 +508,8 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                           FFLocalizations.of(
                                                                   context)
                                                               .getText(
-                                                            'yhvofjt3' /* Size */,
-                                                          ),
+                                                            'attributes.common.size',
+                                                          ).capitalize(),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .labelLarge
@@ -521,8 +531,8 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                           FFLocalizations.of(
                                                                   context)
                                                               .getText(
-                                                            'xtwc8hqd' /* Weight */,
-                                                          ),
+                                                            'attributes.good.weight',
+                                                          ).capitalize(),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .labelLarge
@@ -544,8 +554,8 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                                                           FFLocalizations.of(
                                                                   context)
                                                               .getText(
-                                                            'f476pkes' /* Quantity */,
-                                                          ),
+                                                            'attributes.good.quantity',
+                                                          ).capitalize(),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .labelLarge
@@ -728,13 +738,13 @@ class _LocationDetailsWidgetState extends State<LocationDetailsWidget>
                       tabs: [
                         Tab(
                           text: FFLocalizations.of(context).getText(
-                            '532l404n' /* Vehicles */,
-                          ),
+                            'entities.vehicle.plural',
+                          ).capitalize(),
                         ),
                         Tab(
                           text: FFLocalizations.of(context).getText(
-                            '6okyo9mm' /* Goods */,
-                          ),
+                            'entities.good.plural',
+                          ).capitalize(),
                         ),
                       ],
                       controller: _model.tabBarController,

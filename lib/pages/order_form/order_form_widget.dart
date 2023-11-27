@@ -1,4 +1,6 @@
+import 'package:format/format.dart';
 import 'package:haulage_company/util/show_error_snack_bar.dart';
+import 'package:haulage_company/util/string_capitalize.dart';
 
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
@@ -103,7 +105,13 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
             },
           ),
           title: Text(
-            widget.isExisting ? 'Edit order' : 'Add order',
+              FFLocalizations.of(context).getText(
+                  widget.isExisting ? 'forms.edit.title' : 'forms.add.title'
+              ).format(
+                  FFLocalizations.of(context).getText(
+                      'entities.order'
+                  )
+              ).capitalize(),
             style: FlutterFlowTheme.of(context).headlineLarge,
           ),
           actions: const [],
@@ -124,8 +132,8 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                   children: [
                     Text(
                       FFLocalizations.of(context).getText(
-                        '54o63x4o' /* Shop */,
-                      ),
+                        'entities.shop',
+                      ).capitalize(),
                       style: FlutterFlowTheme.of(context).labelLarge.override(
                             fontFamily: 'Readex Pro',
                             fontStyle: FontStyle.italic,
@@ -180,8 +188,12 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                               setState(() => _model.shopDropDownValue = val),
                           textStyle: FlutterFlowTheme.of(context).bodyLarge,
                           hintText: FFLocalizations.of(context).getText(
-                            'l4d5zy7g' /* Select shop... */,
-                          ),
+                            'widgets.common.dropdown.hint',
+                          ).format(
+                              FFLocalizations.of(context).getText(
+                                  'entities.shop'
+                              )
+                          ).capitalize(),
                           icon: Icon(
                             Icons.keyboard_arrow_down_rounded,
                             color: FlutterFlowTheme.of(context).secondaryText,
@@ -203,8 +215,8 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                     ),
                     Text(
                       FFLocalizations.of(context).getText(
-                        'aimy0v0e' /* Goods */,
-                      ),
+                        'entities.good.plural',
+                      ).capitalize(),
                       style: FlutterFlowTheme.of(context).labelLarge.override(
                             fontFamily: 'Readex Pro',
                             fontStyle: FontStyle.italic,
@@ -311,8 +323,12 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                               ).then((value) => setState(() {}));
                             },
                             text: FFLocalizations.of(context).getText(
-                              '5bfmx2a6' /* Add good */,
-                            ),
+                              'widgets.common.add',
+                            ).format(
+                              FFLocalizations.of(context).getText(
+                                'entities.good'
+                              )
+                            ).capitalize(),
                             icon: Icon(
                               Icons.add,
                               color: FlutterFlowTheme.of(context).info,
@@ -346,8 +362,8 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                             context.safePop();
                           },
                           text: FFLocalizations.of(context).getText(
-                            'w80oozv0' /* Cancel */,
-                          ),
+                            'widgets.common.cancel',
+                          ).capitalize(),
                           options: FFButtonOptions(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 24.0, 24.0, 24.0, 24.0),
@@ -371,11 +387,23 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                               return;
                             }
                             if (_model.shopDropDownValue == null) {
-                              showErrorSnackBar(context, 'No shop selected');
+                              showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                  'errors.validation.dropdown.empty'
+                              ).format(
+                                  FFLocalizations.of(context).getText(
+                                      'entities.shop'
+                                  )
+                              ).capitalize());
                               return;
                             }
                             if (_model.getOrder?.goodDTOs.isEmpty ?? true) {
-                              showErrorSnackBar(context, 'No goods added');
+                              showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                  'errors.validation.list.empty'
+                              ).format(
+                                  FFLocalizations.of(context).getText(
+                                      'entities.good.plural'
+                                  )
+                              ).capitalize());
                               return;
                             }
                             _model.updateOrderStruct(
@@ -398,7 +426,13 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                               if ((_model.updateResult?.succeeded ?? true)) {
                                 context.safePop();
                               } else {
-                                showErrorSnackBar(context, 'Failed to update order');
+                                showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                    'errors.failure.update'
+                                ).format(
+                                    FFLocalizations.of(context).getText(
+                                        'entities.order'
+                                    )
+                                ).capitalize());
                               }
                             } else {
                               _model.createResult = await HaulageCompanyAPIGroup
@@ -410,15 +444,21 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                               if ((_model.createResult?.succeeded ?? true)) {
                                 context.safePop();
                               } else {
-                                showErrorSnackBar(context, 'Failed to create order');
+                                showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                    'errors.failure.create'
+                                ).format(
+                                    FFLocalizations.of(context).getText(
+                                        'entities.order'
+                                    )
+                                ).capitalize());
                               }
                             }
 
                             setState(() {});
                           },
                           text: FFLocalizations.of(context).getText(
-                            'r3zwqkn4' /* Confirm */,
-                          ),
+                            'widgets.common.confirm',
+                          ).capitalize(),
                           options: FFButtonOptions(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 24.0, 24.0, 24.0, 24.0),

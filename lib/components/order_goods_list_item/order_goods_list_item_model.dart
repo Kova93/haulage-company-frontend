@@ -1,4 +1,5 @@
-import '/backend/schema/structs/index.dart';
+import 'package:haulage_company/util/string_capitalize.dart';
+
 import '/flutter_flow/flutter_flow_util.dart';
 import 'order_goods_list_item_widget.dart' show OrderGoodsListItemWidget;
 import 'package:flutter/material.dart';
@@ -15,8 +16,8 @@ class OrderGoodsListItemModel
   String? _quantityFieldControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        'blmq4vo9' /* Field is required */,
-      );
+        'widgets.common.textField.required',
+      ).capitalize();
     }
 
     return null;

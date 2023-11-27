@@ -1,4 +1,6 @@
+import 'package:format/format.dart';
 import 'package:haulage_company/util/show_error_snack_bar.dart';
+import 'package:haulage_company/util/string_capitalize.dart';
 
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
@@ -66,8 +68,8 @@ class _AddGoodToLocationDialogWidgetState
           children: [
             Text(
               FFLocalizations.of(context).getText(
-                'vh0vbnw4' /* Add good to location */,
-              ),
+                'dialogs.addGoodToLocation.title',
+              ).capitalize(),
               style: FlutterFlowTheme.of(context).titleLarge,
             ),
             FlutterFlowDropDown<int>(
@@ -80,8 +82,12 @@ class _AddGoodToLocationDialogWidgetState
               onChanged: (val) => setState(() => _model.dropDownValue = val),
               textStyle: FlutterFlowTheme.of(context).bodyLarge,
               hintText: FFLocalizations.of(context).getText(
-                '58bpxpny' /* Select good... */,
-              ),
+                'widgets.common.dropdown.hint',
+              ).format(
+                FFLocalizations.of(context).getText(
+                  'entities.good',
+                )
+              ).capitalize(),
               icon: Icon(
                 Icons.keyboard_arrow_down_rounded,
                 color: FlutterFlowTheme.of(context).secondaryText,
@@ -105,8 +111,8 @@ class _AddGoodToLocationDialogWidgetState
               obscureText: false,
               decoration: InputDecoration(
                 labelText: FFLocalizations.of(context).getText(
-                  'igis03u3' /* Quantity */,
-                ),
+                  'attributes.good.quantity',
+                ).capitalize(),
                 labelStyle: FlutterFlowTheme.of(context).labelLarge,
                 hintStyle: FlutterFlowTheme.of(context).labelMedium,
                 enabledBorder: OutlineInputBorder(
@@ -157,8 +163,8 @@ class _AddGoodToLocationDialogWidgetState
                     Navigator.pop(context);
                   },
                   text: FFLocalizations.of(context).getText(
-                    'ge0jne1u' /* Cancel */,
-                  ),
+                    'widgets.common.cancel',
+                  ).capitalize(),
                   options: FFButtonOptions(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 24.0),
@@ -181,7 +187,11 @@ class _AddGoodToLocationDialogWidgetState
                       return;
                     }
                     if (_model.dropDownValue == null) {
-                      showErrorSnackBar(context, 'No good selected');
+                      showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                          'errors.validation.dropdown.empty'
+                      ).format(FFLocalizations.of(context).getText(
+                          'entities.good'
+                      )).capitalize());
                       return;
                     }
                     _model.updateStackedGoodStruct(
@@ -203,14 +213,20 @@ class _AddGoodToLocationDialogWidgetState
                     if ((_model.updateResult?.succeeded ?? true)) {
                       Navigator.pop(context);
                     } else {
-                      showErrorSnackBar(context, 'Failed to update quantity');
+                      showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                          'errors.failure.update'
+                      ).format(
+                          FFLocalizations.of(context).getText(
+                              'attributes.good.quantity'
+                          )
+                      ).capitalize());
                     }
 
                     setState(() {});
                   },
                   text: FFLocalizations.of(context).getText(
-                    '2vyzkjln' /* Confirm */,
-                  ),
+                    'widgets.common.confirm',
+                  ).capitalize(),
                   options: FFButtonOptions(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 24.0),

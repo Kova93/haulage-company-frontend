@@ -1,3 +1,5 @@
+import 'package:haulage_company/util/string_capitalize.dart';
+
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -22,8 +24,8 @@ class LocationFormModel extends FlutterFlowModel<LocationFormWidget> {
   String? _nameFieldControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        'dmikg5n0' /* Field is required */,
-      );
+        'widgets.common.textField.required',
+      ).capitalize();
     }
 
     return null;
@@ -36,8 +38,8 @@ class LocationFormModel extends FlutterFlowModel<LocationFormWidget> {
   String? _addressFieldControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        'h1p54kcu' /* Field is required */,
-      );
+        'widgets.common.textField.required',
+      ).capitalize();
     }
 
     return null;

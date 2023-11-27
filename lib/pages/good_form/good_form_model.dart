@@ -1,3 +1,5 @@
+import 'package:haulage_company/util/string_capitalize.dart';
+
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -22,8 +24,8 @@ class GoodFormModel extends FlutterFlowModel<GoodFormWidget> {
   String? _nameFieldControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        '74f3sbir' /* Field is required */,
-      );
+        'widgets.common.textField.required',
+      ).capitalize();
     }
 
     return null;
@@ -37,8 +39,8 @@ class GoodFormModel extends FlutterFlowModel<GoodFormWidget> {
       BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        '52fqlu5p' /* Field is required */,
-      );
+        'widgets.common.textField.required',
+      ).capitalize();
     }
 
     return null;
@@ -51,8 +53,8 @@ class GoodFormModel extends FlutterFlowModel<GoodFormWidget> {
   String? _sizeFieldControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        '6u1b29sa' /* Field is required */,
-      );
+        'widgets.common.textField.required',
+      ).capitalize();
     }
 
     return null;
@@ -65,8 +67,8 @@ class GoodFormModel extends FlutterFlowModel<GoodFormWidget> {
   String? _weightFieldControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        'yf7bbmgl' /* Field is required */,
-      );
+        'widgets.common.textField.required',
+      ).capitalize();
     }
 
     return null;

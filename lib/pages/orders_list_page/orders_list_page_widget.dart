@@ -1,4 +1,6 @@
+import 'package:format/format.dart';
 import 'package:haulage_company/util/show_error_snack_bar.dart';
+import 'package:haulage_company/util/string_capitalize.dart';
 
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
@@ -76,8 +78,8 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
           ),
           title: Text(
             FFLocalizations.of(context).getText(
-              'zsao3dgx' /* Orders */,
-            ),
+              'entities.order.plural',
+            ).capitalize(),
             style: FlutterFlowTheme.of(context).headlineLarge,
           ),
           actions: const [],
@@ -159,8 +161,8 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
                                           children: [
                                             Text(
                                               FFLocalizations.of(context).getText(
-                                                'cofgmggp' /* Shop */,
-                                              ),
+                                                'entities.shop',
+                                              ).capitalize(),
                                               style: FlutterFlowTheme.of(context)
                                                   .labelLarge
                                                   .override(
@@ -178,8 +180,8 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
                                             ),
                                             Text(
                                               FFLocalizations.of(context).getText(
-                                                'n2tuz4j5' /* Goods */,
-                                              ),
+                                                'entities.good.plural',
+                                              ).capitalize(),
                                               style: FlutterFlowTheme.of(context)
                                                   .labelLarge
                                                   .override(
@@ -295,7 +297,13 @@ class _OrdersListPageWidgetState extends State<OrdersListPageWidget> {
                                                       await _model
                                                           .waitForApiRequestCompleted();
                                                     } else {
-                                                      showErrorSnackBar(context, 'Failed to delete order');
+                                                      showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                                          'errors.failure.delete'
+                                                      ).format(
+                                                          FFLocalizations.of(context).getText(
+                                                              'entities.order'
+                                                          )
+                                                      ).capitalize());
                                                     }
 
                                                     setState(() {});

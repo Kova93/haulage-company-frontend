@@ -1,4 +1,6 @@
+import 'package:format/format.dart';
 import 'package:haulage_company/util/show_error_snack_bar.dart';
+import 'package:haulage_company/util/string_capitalize.dart';
 
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
@@ -77,8 +79,8 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
           ),
           title: Text(
             FFLocalizations.of(context).getText(
-              '2gn12uuw' /* Transports */,
-            ),
+              'entities.transport.plural',
+            ).capitalize(),
             style: FlutterFlowTheme.of(context).headlineLarge,
           ),
           actions: const [],
@@ -166,8 +168,8 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
                                           children: [
                                             Text(
                                               FFLocalizations.of(context).getText(
-                                                '0xavmslk' /* Date */,
-                                              ),
+                                                'attributes.transport.date',
+                                              ).capitalize(),
                                               style: FlutterFlowTheme.of(context)
                                                   .labelLarge
                                                   .override(
@@ -187,8 +189,8 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
                                             ),
                                             Text(
                                               FFLocalizations.of(context).getText(
-                                                '64v251nc' /* Order */,
-                                              ),
+                                                'entities.order',
+                                              ).capitalize(),
                                               style: FlutterFlowTheme.of(context)
                                                   .labelLarge
                                                   .override(
@@ -208,8 +210,8 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
                                                   Text(
                                                     FFLocalizations.of(context)
                                                         .getText(
-                                                      'msy78n8t' /* Shop */,
-                                                    ),
+                                                      'entities.shop',
+                                                    ).capitalize(),
                                                     style:
                                                         FlutterFlowTheme.of(context)
                                                             .labelLarge
@@ -230,8 +232,8 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
                                                   Text(
                                                     FFLocalizations.of(context)
                                                         .getText(
-                                                      'sf7rzy9b' /* Goods */,
-                                                    ),
+                                                      'entities.good.plural',
+                                                    ).capitalize(),
                                                     style:
                                                         FlutterFlowTheme.of(context)
                                                             .labelLarge
@@ -282,8 +284,8 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
                                             ),
                                             Text(
                                               FFLocalizations.of(context).getText(
-                                                '7ioqn1to' /* Vehicles */,
-                                              ),
+                                                'entities.vehicle.plural',
+                                              ).capitalize(),
                                               style: FlutterFlowTheme.of(context)
                                                   .labelLarge
                                                   .override(
@@ -403,7 +405,13 @@ class _TransportsListPageWidgetState extends State<TransportsListPageWidget> {
                                                       await _model
                                                           .waitForApiRequestCompleted();
                                                     } else {
-                                                      showErrorSnackBar(context, 'Failed to delete transport');
+                                                      showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                                          'errors.failure.delete'
+                                                      ).format(
+                                                          FFLocalizations.of(context).getText(
+                                                              'entities.transport'
+                                                          )
+                                                      ).capitalize());
                                                     }
 
                                                     setState(() {});

@@ -1,3 +1,5 @@
+import 'package:haulage_company/util/string_capitalize.dart';
+
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -80,8 +82,8 @@ class _OrderGoodsListItemWidgetState extends State<OrderGoodsListItemWidget> {
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: FFLocalizations.of(context).getText(
-                      'wftuluyw' /* Quantity */,
-                    ),
+                      'attributes.good.quantity',
+                    ).capitalize(),
                     labelStyle: FlutterFlowTheme.of(context).labelLarge,
                     hintStyle: FlutterFlowTheme.of(context).labelMedium,
                     enabledBorder: OutlineInputBorder(

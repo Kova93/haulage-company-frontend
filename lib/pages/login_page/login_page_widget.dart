@@ -1,4 +1,6 @@
+import 'package:format/format.dart';
 import 'package:haulage_company/util/show_error_snack_bar.dart';
+import 'package:haulage_company/util/string_capitalize.dart';
 
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
@@ -87,8 +89,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                     alignment: const AlignmentDirectional(0.00, 0.00),
                     child: Text(
                       FFLocalizations.of(context).getText(
-                        'rpjhe0mk' /* Haulage Company */,
-                      ),
+                        'pages.login.title',
+                      ).capitalize(),
                       textAlign: TextAlign.center,
                       style:
                           FlutterFlowTheme.of(context).headlineLarge.override(
@@ -134,16 +136,16 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                             children: [
                               Text(
                                 FFLocalizations.of(context).getText(
-                                  'err0vg6r' /* Welcome Back */,
-                                ),
+                                  'pages.login.welcome',
+                                ).capitalize(),
                                 textAlign: TextAlign.center,
                                 style:
                                     FlutterFlowTheme.of(context).displayMedium,
                               ),
                               Text(
                                 FFLocalizations.of(context).getText(
-                                  '0cuh8ea3' /* Fill out the information below... */,
-                                ),
+                                  'pages.login.instructions',
+                                ).capitalize(),
                                 textAlign: TextAlign.center,
                                 style: FlutterFlowTheme.of(context).labelMedium,
                               ),
@@ -156,8 +158,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                 decoration: InputDecoration(
                                   labelText:
                                       FFLocalizations.of(context).getText(
-                                    'vl44ev4x' /* Username */,
-                                  ),
+                                    'pages.login.username',
+                                  ).capitalize(),
                                   labelStyle:
                                       FlutterFlowTheme.of(context).labelLarge,
                                   hintStyle:
@@ -209,8 +211,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                 decoration: InputDecoration(
                                   labelText:
                                       FFLocalizations.of(context).getText(
-                                    'us5q2fxx' /* Password */,
-                                  ),
+                                    'pages.login.password',
+                                  ).capitalize(),
                                   labelStyle:
                                       FlutterFlowTheme.of(context).labelLarge,
                                   hintStyle:
@@ -327,7 +329,13 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     if ((_model.loginResult?.statusCode ??
                                             200) ==
                                         404) {
-                                      showErrorSnackBar(context, 'Login failed: user does not exist');
+                                      showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                        'pages.login.errors.common'
+                                      ).format(
+                                        FFLocalizations.of(context).getText(
+                                          'pages.login.errors.userNotExists'
+                                        )
+                                      ).capitalize());
                                       setState(() {
                                         _model.usernameController?.clear();
                                         _model.passwordController?.clear();
@@ -336,12 +344,24 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       if ((_model.loginResult?.statusCode ??
                                               200) ==
                                           401) {
-                                        showErrorSnackBar(context, 'Login failed: wrong password');
+                                        showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                            'pages.login.errors.common'
+                                        ).format(
+                                            FFLocalizations.of(context).getText(
+                                                'pages.login.errors.wrongPassword'
+                                            )
+                                        ).capitalize());
                                         setState(() {
                                           _model.passwordController?.clear();
                                         });
                                       } else {
-                                        showErrorSnackBar(context, 'Login failed: unknown error');
+                                        showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                            'pages.login.errors.common'
+                                        ).format(
+                                            FFLocalizations.of(context).getText(
+                                                'pages.login.errors.unknown'
+                                            )
+                                        ).capitalize());
                                       }
                                     }
                                   }
@@ -351,8 +371,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   setState(() {});
                                 },
                                 text: FFLocalizations.of(context).getText(
-                                  'stea767j' /* Sign In */,
-                                ),
+                                  'pages.login.signIn',
+                                ).capitalize(),
                                 options: FFButtonOptions(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       24.0, 24.0, 24.0, 24.0),

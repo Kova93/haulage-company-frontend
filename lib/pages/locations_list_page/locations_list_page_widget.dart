@@ -1,4 +1,6 @@
+import 'package:format/format.dart';
 import 'package:haulage_company/util/show_error_snack_bar.dart';
+import 'package:haulage_company/util/string_capitalize.dart';
 
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
@@ -77,8 +79,8 @@ class _LocationsListPageWidgetState extends State<LocationsListPageWidget> {
           ),
           title: Text(
             FFLocalizations.of(context).getText(
-              '9z4pndiu' /* Locations */,
-            ),
+              'entities.location.plural',
+            ).capitalize(),
             style: FlutterFlowTheme.of(context).headlineLarge,
           ),
           actions: const [],
@@ -161,8 +163,8 @@ class _LocationsListPageWidgetState extends State<LocationsListPageWidget> {
                                                   const AlignmentDirectional(-1.00, 0.00),
                                               child: Text(
                                                 FFLocalizations.of(context).getText(
-                                                  '9ttt5kh6' /* Address */,
-                                                ),
+                                                  'attributes.common.address',
+                                                ).capitalize(),
                                                 style: FlutterFlowTheme.of(context)
                                                     .labelLarge
                                                     .override(
@@ -287,7 +289,13 @@ class _LocationsListPageWidgetState extends State<LocationsListPageWidget> {
                                                       await _model
                                                           .waitForApiRequestCompleted();
                                                     } else {
-                                                      showErrorSnackBar(context, 'Failed to delete location');
+                                                      showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                                          'errors.failure.delete'
+                                                      ).format(
+                                                          FFLocalizations.of(context).getText(
+                                                              'entities.location'
+                                                          )
+                                                      ).capitalize());
                                                     }
 
                                                     setState(() {});

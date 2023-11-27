@@ -1,3 +1,5 @@
+import 'package:haulage_company/util/string_capitalize.dart';
+
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -87,8 +89,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           ),
           title: Text(
             FFLocalizations.of(context).getText(
-              'k0deejkp' /* Home */,
-            ),
+              'pages.home.title',
+            ).capitalize(),
             style: FlutterFlowTheme.of(context).headlineLarge,
           ),
           actions: [
@@ -130,8 +132,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     context.pushNamed('LocationsListPage');
                   },
                   text: FFLocalizations.of(context).getText(
-                    'h3sr1n8x' /* Locations */,
-                  ),
+                    'entities.location.plural',
+                  ).capitalize(),
                   options: FFButtonOptions(
                     width: 60.0,
                     height: 60.0,
@@ -154,8 +156,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     context.pushNamed('VehiclesListPage');
                   },
                   text: FFLocalizations.of(context).getText(
-                    '5x7tej1g' /* Vehicles */,
-                  ),
+                    'entities.vehicle.plural',
+                  ).capitalize(),
                   options: FFButtonOptions(
                     height: 40.0,
                     padding:
@@ -177,8 +179,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     context.pushNamed('ShopsListPage');
                   },
                   text: FFLocalizations.of(context).getText(
-                    'kscesao7' /* Shops */,
-                  ),
+                    'entities.shop.plural',
+                  ).capitalize(),
                   options: FFButtonOptions(
                     height: 40.0,
                     padding:
@@ -200,8 +202,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     context.pushNamed('GoodsListPage');
                   },
                   text: FFLocalizations.of(context).getText(
-                    '84jcapfj' /* Goods */,
-                  ),
+                    'entities.good.plural',
+                  ).capitalize(),
                   options: FFButtonOptions(
                     height: 39.0,
                     padding:
@@ -223,8 +225,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     context.pushNamed('OrdersListPage');
                   },
                   text: FFLocalizations.of(context).getText(
-                    'q0nvi86i' /* Orders */,
-                  ),
+                    'entities.order.plural',
+                  ).capitalize(),
                   options: FFButtonOptions(
                     height: 40.0,
                     padding:
@@ -246,8 +248,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     context.pushNamed('TransportsListPage');
                   },
                   text: FFLocalizations.of(context).getText(
-                    'usnqp34g' /* Transports */,
-                  ),
+                    'entities.transport.plural',
+                  ).capitalize(),
                   options: FFButtonOptions(
                     height: 40.0,
                     padding:

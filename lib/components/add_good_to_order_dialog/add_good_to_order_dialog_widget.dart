@@ -1,4 +1,6 @@
+import 'package:format/format.dart';
 import 'package:haulage_company/util/show_error_snack_bar.dart';
+import 'package:haulage_company/util/string_capitalize.dart';
 
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -66,8 +68,8 @@ class _AddGoodToOrderDialogWidgetState
           children: [
             Text(
               FFLocalizations.of(context).getText(
-                'kla312ft' /* Add good to order */,
-              ),
+                'dialogs.addGoodToOrder.title',
+              ).capitalize(),
               style: FlutterFlowTheme.of(context).titleLarge,
             ),
             FlutterFlowDropDown<int>(
@@ -81,8 +83,12 @@ class _AddGoodToOrderDialogWidgetState
                   setState(() => _model.goodDropDownValue = val),
               textStyle: FlutterFlowTheme.of(context).bodyLarge,
               hintText: FFLocalizations.of(context).getText(
-                'z7lglw3a' /* Select good... */,
-              ),
+                'widgets.common.dropdown.hint',
+              ).format(
+                FFLocalizations.of(context).getText(
+                    'entities.good'
+                )
+              ).capitalize(),
               icon: Icon(
                 Icons.keyboard_arrow_down_rounded,
                 color: FlutterFlowTheme.of(context).secondaryText,
@@ -107,8 +113,8 @@ class _AddGoodToOrderDialogWidgetState
                     Navigator.pop(context);
                   },
                   text: FFLocalizations.of(context).getText(
-                    '4kdyikj7' /* Cancel */,
-                  ),
+                    'widgets.common.cancel',
+                  ).capitalize(),
                   options: FFButtonOptions(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 24.0),
@@ -131,7 +137,13 @@ class _AddGoodToOrderDialogWidgetState
                       return;
                     }
                     if (_model.goodDropDownValue == null) {
-                      showErrorSnackBar(context, 'No good selected');
+                      showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                          'errors.validation.dropdown.empty'
+                      ).format(
+                          FFLocalizations.of(context).getText(
+                              'entities.good'
+                          )
+                      ).capitalize());
                       return;
                     }
                     if (_model.getOrder?.goodDTOs
@@ -154,12 +166,14 @@ class _AddGoodToOrderDialogWidgetState
                       });
                       Navigator.pop(context);
                     } else {
-                      showErrorSnackBar(context, 'Selected good already added to order');
+                      showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                          'dialogs.addGoodToOrder.errors.goodAlreadyAdded'
+                      ).capitalize());
                     }
                   },
                   text: FFLocalizations.of(context).getText(
-                    'f1kd0bog' /* Confirm */,
-                  ),
+                    'widgets.common.confirm',
+                  ).capitalize(),
                   options: FFButtonOptions(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 24.0),

@@ -1,3 +1,5 @@
+import 'package:haulage_company/util/string_capitalize.dart';
+
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -102,7 +104,9 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                               userPageGetUserByIDResponse.jsonBody)
                           : null)
                       ?.username,
-                  'User',
+                  FFLocalizations.of(context).getText(
+                      'pages.user.title'
+                  ).capitalize(),
                 ),
                 style: FlutterFlowTheme.of(context).headlineLarge,
               ),
@@ -120,8 +124,8 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                   children: [
                     Text(
                       FFLocalizations.of(context).getText(
-                        '23ga16pi' /* Name */,
-                      ),
+                        'attributes.common.name',
+                      ).capitalize(),
                       style: FlutterFlowTheme.of(context).labelLarge.override(
                             fontFamily: 'Readex Pro',
                             fontStyle: FontStyle.italic,
@@ -135,8 +139,8 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                     ),
                     Text(
                       FFLocalizations.of(context).getText(
-                        'l3suxdvh' /* Roles */,
-                      ),
+                        'pages.user.roles',
+                      ).capitalize(),
                       style: FlutterFlowTheme.of(context).labelLarge.override(
                             fontFamily: 'Readex Pro',
                             fontStyle: FontStyle.italic,
@@ -178,8 +182,8 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                     ),
                     Text(
                       FFLocalizations.of(context).getText(
-                        'h17zb47k' /* Last login */,
-                      ),
+                        'pages.user.lastLogin',
+                      ).capitalize(),
                       style: FlutterFlowTheme.of(context).labelLarge.override(
                             fontFamily: 'Readex Pro',
                             fontStyle: FontStyle.italic,
@@ -204,8 +208,8 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                         context.goNamedAuth('LoginPage', context.mounted);
                       },
                       text: FFLocalizations.of(context).getText(
-                        'hivvvhex' /* Log out */,
-                      ),
+                        'pages.user.logout',
+                      ).capitalize(),
                       options: FFButtonOptions(
                         padding: const EdgeInsetsDirectional.fromSTEB(
                             24.0, 24.0, 24.0, 24.0),

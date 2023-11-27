@@ -1,4 +1,6 @@
+import 'package:format/format.dart';
 import 'package:haulage_company/util/show_error_snack_bar.dart';
+import 'package:haulage_company/util/string_capitalize.dart';
 
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
@@ -112,7 +114,13 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
             },
           ),
           title: Text(
-            widget.isExisting! ? 'Edit good' : 'Add good',
+              FFLocalizations.of(context).getText(
+                  widget.isExisting! ? 'forms.edit.title' : 'forms.add.title'
+                ).format(
+                  FFLocalizations.of(context).getText(
+                    'entities.good'
+                  )
+                ).capitalize(),
             style: FlutterFlowTheme.of(context).headlineLarge,
           ),
           actions: const [],
@@ -139,8 +147,8 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          'jkfsatci' /* Name */,
-                        ),
+                          'attributes.common.name',
+                        ).capitalize(),
                         labelStyle: FlutterFlowTheme.of(context).labelLarge,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
@@ -186,8 +194,8 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          'ydiaobyf' /* Description */,
-                        ),
+                          'attributes.good.description',
+                        ).capitalize(),
                         labelStyle: FlutterFlowTheme.of(context).labelLarge,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
@@ -235,8 +243,8 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          'i2zn0py0' /* Size */,
-                        ),
+                          'attributes.common.size',
+                        ).capitalize(),
                         labelStyle: FlutterFlowTheme.of(context).labelLarge,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
@@ -288,8 +296,8 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          'jftkvkoj' /* Weight */,
-                        ),
+                          'attributes.good.weight',
+                        ).capitalize(),
                         labelStyle: FlutterFlowTheme.of(context).labelLarge,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
@@ -342,8 +350,8 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                             context.safePop();
                           },
                           text: FFLocalizations.of(context).getText(
-                            'g4a3gj69' /* Cancel */,
-                          ),
+                            'widgets.common.cancel',
+                          ).capitalize(),
                           options: FFButtonOptions(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 24.0, 24.0, 24.0, 24.0),
@@ -387,7 +395,13 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                               if ((_model.updateResult?.succeeded ?? true)) {
                                 context.safePop();
                               } else {
-                                showErrorSnackBar(context, 'Failed to update good');
+                                showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                  'errors.failure.update'
+                                ).format(
+                                  FFLocalizations.of(context).getText(
+                                    'entities.good'
+                                  )
+                                ).capitalize());
                               }
                             } else {
                               _model.createResult = await HaulageCompanyAPIGroup
@@ -399,15 +413,21 @@ class _GoodFormWidgetState extends State<GoodFormWidget> {
                               if ((_model.createResult?.succeeded ?? true)) {
                                 context.safePop();
                               } else {
-                                showErrorSnackBar(context, 'Failed to create good');
+                                showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                    'errors.failure.create'
+                                ).format(
+                                    FFLocalizations.of(context).getText(
+                                        'entities.good'
+                                    )
+                                ).capitalize());
                               }
                             }
 
                             setState(() {});
                           },
                           text: FFLocalizations.of(context).getText(
-                            's9qf5sui' /* Confirm */,
-                          ),
+                            'widgets.common.confirm',
+                          ).capitalize(),
                           options: FFButtonOptions(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 24.0, 24.0, 24.0, 24.0),

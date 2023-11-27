@@ -1,4 +1,6 @@
+import 'package:format/format.dart';
 import 'package:haulage_company/util/show_error_snack_bar.dart';
+import 'package:haulage_company/util/string_capitalize.dart';
 
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
@@ -100,7 +102,13 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
             },
           ),
           title: Text(
-            widget.isExisting! ? 'Edit shop' : 'Add shop',
+            FFLocalizations.of(context).getText(
+                widget.isExisting! ? 'forms.edit.title' : 'forms.add.title'
+            ).format(
+                FFLocalizations.of(context).getText(
+                    'entities.shop'
+                )
+            ).capitalize(),
             style: FlutterFlowTheme.of(context).headlineLarge,
           ),
           actions: const [],
@@ -127,8 +135,8 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          'iv8udkd2' /* Name */,
-                        ),
+                          'attributes.common.name',
+                        ).capitalize(),
                         labelStyle: FlutterFlowTheme.of(context).labelLarge,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
@@ -175,8 +183,8 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          '8t2guohp' /* Address */,
-                        ),
+                          'attributes.common.address',
+                        ).capitalize(),
                         labelStyle: FlutterFlowTheme.of(context).labelLarge,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
@@ -225,8 +233,8 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
                             context.safePop();
                           },
                           text: FFLocalizations.of(context).getText(
-                            'rm84sigc' /* Cancel */,
-                          ),
+                            'widgets.common.cancel',
+                          ).capitalize(),
                           options: FFButtonOptions(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 24.0, 24.0, 24.0, 24.0),
@@ -265,7 +273,13 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
                               if ((_model.updateResult?.succeeded ?? true)) {
                                 context.safePop();
                               } else {
-                                showErrorSnackBar(context, 'Failed to update shop');
+                                showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                    'errors.failure.update'
+                                ).format(
+                                    FFLocalizations.of(context).getText(
+                                        'entities.shop'
+                                    )
+                                ).capitalize());
                               }
                             } else {
                               _model.createResult = await HaulageCompanyAPIGroup
@@ -277,15 +291,21 @@ class _ShopFormWidgetState extends State<ShopFormWidget> {
                               if ((_model.createResult?.succeeded ?? true)) {
                                 context.safePop();
                               } else {
-                                showErrorSnackBar(context, 'Failed to create shop');
+                                showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                    'errors.failure.create'
+                                ).format(
+                                    FFLocalizations.of(context).getText(
+                                        'entities.shop'
+                                    )
+                                ).capitalize());
                               }
                             }
 
                             setState(() {});
                           },
                           text: FFLocalizations.of(context).getText(
-                            '2rfpf045' /* Confirm */,
-                          ),
+                            'widgets.common.confirm',
+                          ).capitalize(),
                           options: FFButtonOptions(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 24.0, 24.0, 24.0, 24.0),

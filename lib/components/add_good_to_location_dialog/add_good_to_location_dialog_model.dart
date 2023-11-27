@@ -1,3 +1,5 @@
+import 'package:haulage_company/util/string_capitalize.dart';
+
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -27,8 +29,8 @@ class AddGoodToLocationDialogModel
   String? _quantityFieldControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        'w4btgtad' /* Field is required */,
-      );
+        'widgets.common.textField.required',
+      ).capitalize();
     }
 
     return null;

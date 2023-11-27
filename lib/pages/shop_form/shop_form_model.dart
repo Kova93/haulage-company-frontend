@@ -1,3 +1,5 @@
+import 'package:haulage_company/util/string_capitalize.dart';
+
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -22,8 +24,8 @@ class ShopFormModel extends FlutterFlowModel<ShopFormWidget> {
   String? _nameFieldControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        'kjz33d80' /* Field is required */,
-      );
+        'widgets.common.textField.required',
+      ).capitalize();
     }
 
     return null;
@@ -36,8 +38,8 @@ class ShopFormModel extends FlutterFlowModel<ShopFormWidget> {
   String? _addressFieldControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        'lia2uahk' /* Field is required */,
-      );
+        'widgets.common.textField.required',
+      ).capitalize();
     }
 
     return null;

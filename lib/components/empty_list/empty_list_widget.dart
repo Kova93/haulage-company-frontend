@@ -1,3 +1,5 @@
+import 'package:haulage_company/util/string_capitalize.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -47,8 +49,8 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
         Center(
           child: Text(
             FFLocalizations.of(context).getText(
-              '40a1wgot' /* No entries found */,
-            ),
+              'widgets.common.emptyList',
+            ).capitalize(),
             style: FlutterFlowTheme.of(context).displaySmall,
           ),
         ),

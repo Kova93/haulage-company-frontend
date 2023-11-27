@@ -1,4 +1,6 @@
+import 'package:format/format.dart';
 import 'package:haulage_company/util/show_error_snack_bar.dart';
+import 'package:haulage_company/util/string_capitalize.dart';
 
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
@@ -76,8 +78,8 @@ class _VehiclesListPageWidgetState extends State<VehiclesListPageWidget> {
           ),
           title: Text(
             FFLocalizations.of(context).getText(
-              '5sqto8jw' /* Vehicles */,
-            ),
+              'entities.vehicle.plural',
+            ).capitalize(),
             style: FlutterFlowTheme.of(context).headlineLarge,
           ),
           actions: const [],
@@ -158,8 +160,8 @@ class _VehiclesListPageWidgetState extends State<VehiclesListPageWidget> {
                                           children: [
                                             Text(
                                               FFLocalizations.of(context).getText(
-                                                'ka0ypk0o' /* Size */,
-                                              ),
+                                                'attributes.common.size',
+                                              ).capitalize(),
                                               style: FlutterFlowTheme.of(context)
                                                   .labelLarge
                                                   .override(
@@ -174,8 +176,8 @@ class _VehiclesListPageWidgetState extends State<VehiclesListPageWidget> {
                                             ),
                                             Text(
                                               FFLocalizations.of(context).getText(
-                                                'i2pzntbt' /* Max weight */,
-                                              ),
+                                                'attributes.vehicle.maxWeight',
+                                              ).capitalize(),
                                               style: FlutterFlowTheme.of(context)
                                                   .labelLarge
                                                   .override(
@@ -265,7 +267,13 @@ class _VehiclesListPageWidgetState extends State<VehiclesListPageWidget> {
                                                       await _model
                                                           .waitForApiRequestCompleted();
                                                     } else {
-                                                      showErrorSnackBar(context, 'Failed to delete vehicle');
+                                                      showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                                          'errors.failure.delete'
+                                                      ).format(
+                                                          FFLocalizations.of(context).getText(
+                                                              'entities.vehicle'
+                                                          )
+                                                      ).capitalize());
                                                     }
 
                                                     setState(() {});

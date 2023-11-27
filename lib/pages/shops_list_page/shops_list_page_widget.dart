@@ -1,4 +1,6 @@
+import 'package:format/format.dart';
 import 'package:haulage_company/util/show_error_snack_bar.dart';
+import 'package:haulage_company/util/string_capitalize.dart';
 
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
@@ -76,8 +78,8 @@ class _ShopsListPageWidgetState extends State<ShopsListPageWidget> {
           ),
           title: Text(
             FFLocalizations.of(context).getText(
-              'vmxf0sn6' /* Shops */,
-            ),
+              'entities.shop.plural',
+            ).capitalize(),
             style: FlutterFlowTheme.of(context).headlineLarge,
           ),
           actions: const [],
@@ -156,8 +158,8 @@ class _ShopsListPageWidgetState extends State<ShopsListPageWidget> {
                                           children: [
                                             Text(
                                               FFLocalizations.of(context).getText(
-                                                'i03mri4k' /* Address */,
-                                              ),
+                                                'attributes.common.address',
+                                              ).capitalize(),
                                               style: FlutterFlowTheme.of(context)
                                                   .labelLarge
                                                   .override(
@@ -246,7 +248,13 @@ class _ShopsListPageWidgetState extends State<ShopsListPageWidget> {
                                                       await _model
                                                           .waitForApiRequestCompleted();
                                                     } else {
-                                                      showErrorSnackBar(context, 'Failed to delete shop');
+                                                      showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                                          'errors.failure.delete'
+                                                      ).format(
+                                                          FFLocalizations.of(context).getText(
+                                                              'entities.shop'
+                                                          )
+                                                      ).capitalize());
                                                     }
 
                                                     setState(() {});

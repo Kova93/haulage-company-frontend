@@ -1,4 +1,6 @@
+import 'package:format/format.dart';
 import 'package:haulage_company/util/show_error_snack_bar.dart';
+import 'package:haulage_company/util/string_capitalize.dart';
 
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
@@ -97,7 +99,13 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
             },
           ),
           title: Text(
-            widget.isExisting ? 'Edit transport' : 'Add transport',
+            FFLocalizations.of(context).getText(
+                widget.isExisting ? 'forms.edit.title' : 'forms.add.title'
+            ).format(
+                FFLocalizations.of(context).getText(
+                    'entities.transport'
+                )
+            ).capitalize(),
             style: FlutterFlowTheme.of(context).headlineLarge,
           ),
           actions: const [],
@@ -139,8 +147,8 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                       children: [
                         Text(
                           FFLocalizations.of(context).getText(
-                            'b1qnk99j' /* Date */,
-                          ),
+                            'attributes.transport.date',
+                          ).capitalize(),
                           style:
                               FlutterFlowTheme.of(context).labelLarge.override(
                                     fontFamily: 'Readex Pro',
@@ -231,8 +239,8 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                         ),
                         Text(
                           FFLocalizations.of(context).getText(
-                            '0ekth3pl' /* Order */,
-                          ),
+                            'entities.order',
+                          ).capitalize(),
                           style:
                               FlutterFlowTheme.of(context).labelLarge.override(
                                     fontFamily: 'Readex Pro',
@@ -268,8 +276,12 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                               setState(() => _model.orderDropDownValue = val),
                           textStyle: FlutterFlowTheme.of(context).bodyLarge,
                           hintText: FFLocalizations.of(context).getText(
-                            'bxu7vwpj' /* Select order... */,
-                          ),
+                            'widgets.common.dropdown.hint',
+                          ).format(
+                              FFLocalizations.of(context).getText(
+                                  'entities.order'
+                              )
+                          ).capitalize(),
                           icon: Icon(
                             Icons.keyboard_arrow_down_rounded,
                             color: FlutterFlowTheme.of(context).secondaryText,
@@ -289,8 +301,8 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                         ),
                         Text(
                           FFLocalizations.of(context).getText(
-                            'au7srnr6' /* Vehicles */,
-                          ),
+                            'entities.vehicle.plural',
+                          ).capitalize(),
                           style:
                               FlutterFlowTheme.of(context).labelLarge.override(
                                     fontFamily: 'Readex Pro',
@@ -423,8 +435,12 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                                   ).then((value) => setState(() {}));
                                 },
                                 text: FFLocalizations.of(context).getText(
-                                  'm0xzz2di' /* Add vehicle */,
-                                ),
+                                  'widgets.common.add',
+                                ).format(
+                                    FFLocalizations.of(context).getText(
+                                        'entities.vehicle'
+                                    )
+                                ).capitalize(),
                                 icon: Icon(
                                   Icons.add,
                                   color: FlutterFlowTheme.of(context).info,
@@ -459,8 +475,8 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                                 context.safePop();
                               },
                               text: FFLocalizations.of(context).getText(
-                                '1kjmf0s9' /* Cancel */,
-                              ),
+                                'widgets.common.cancel',
+                              ).capitalize(),
                               options: FFButtonOptions(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     24.0, 24.0, 24.0, 24.0),
@@ -484,15 +500,29 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                                   return;
                                 }
                                 if (_model.datePicked == null) {
-                                  showErrorSnackBar(context, 'No date picked');
+                                  showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                    'forms.transport.errors.noDatePicked'
+                                  ).capitalize());
                                   return;
                                 }
                                 if (_model.orderDropDownValue == null) {
-                                  showErrorSnackBar(context, 'No order selected');
+                                  showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                      'errors.validation.dropdown.empty'
+                                  ).format(
+                                      FFLocalizations.of(context).getText(
+                                          'entities.order'
+                                      )
+                                  ).capitalize());
                                   return;
                                 }
                                 if (_model.transportOperation?.usedVehicleDTOs.isEmpty ?? true) {
-                                  showErrorSnackBar(context, 'No vehicles added');
+                                  showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                      'errors.validation.list.empty'
+                                  ).format(
+                                      FFLocalizations.of(context).getText(
+                                          'entities.vehicle.plural'
+                                      )
+                                  ).capitalize());
                                   return;
                                 }
                                 _model.updateTransportOperationStruct(
@@ -560,7 +590,17 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                                       true)) {
                                     context.safePop();
                                   } else {
-                                    showErrorSnackBar(context, 'Failed to update transport operation');
+                                    var errorMessage = FFLocalizations.of(context).getText(
+                                        'errors.failure.update'
+                                    ).format(
+                                        FFLocalizations.of(context).getText(
+                                            'entities.transport'
+                                        )
+                                    ).capitalize();
+                                    if (_model.updateResult?.bodyText.isNotEmpty ?? false) {
+                                      errorMessage += ': ${_model.updateResult!.bodyText}';
+                                    }
+                                    showErrorSnackBar(context, errorMessage);
                                   }
                                 } else {
                                   _model.createResult =
@@ -575,15 +615,25 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                                       true)) {
                                     context.safePop();
                                   } else {
-                                    showErrorSnackBar(context, 'Failed to create transport operation');
+                                    var errorMessage = FFLocalizations.of(context).getText(
+                                        'errors.failure.create'
+                                    ).format(
+                                        FFLocalizations.of(context).getText(
+                                            'entities.transport'
+                                        )
+                                    ).capitalize();
+                                    if (_model.createResult?.bodyText.isNotEmpty ?? false) {
+                                      errorMessage += ': ${_model.createResult!.bodyText}';
+                                    }
+                                    showErrorSnackBar(context, errorMessage);
                                   }
                                 }
 
                                 setState(() {});
                               },
                               text: FFLocalizations.of(context).getText(
-                                '6vah3i9r' /* Confirm */,
-                              ),
+                                'widgets.common.confirm',
+                              ).capitalize(),
                               options: FFButtonOptions(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     24.0, 24.0, 24.0, 24.0),

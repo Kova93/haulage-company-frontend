@@ -1,4 +1,6 @@
+import 'package:format/format.dart';
 import 'package:haulage_company/util/show_error_snack_bar.dart';
+import 'package:haulage_company/util/string_capitalize.dart';
 
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
@@ -76,8 +78,8 @@ class _GoodsListPageWidgetState extends State<GoodsListPageWidget> {
           ),
           title: Text(
             FFLocalizations.of(context).getText(
-              'ca6e60m4' /* Goods */,
-            ),
+              'entities.good.plural',
+            ).capitalize(),
             style: FlutterFlowTheme.of(context).headlineLarge,
           ),
           actions: const [],
@@ -158,8 +160,8 @@ class _GoodsListPageWidgetState extends State<GoodsListPageWidget> {
                                             children: [
                                               Text(
                                                 FFLocalizations.of(context).getText(
-                                                  'lps7u20d' /* Description */,
-                                                ),
+                                                  'attributes.good.description',
+                                                ).capitalize(),
                                                 style: FlutterFlowTheme.of(context)
                                                     .labelLarge
                                                     .override(
@@ -174,8 +176,8 @@ class _GoodsListPageWidgetState extends State<GoodsListPageWidget> {
                                               ),
                                               Text(
                                                 FFLocalizations.of(context).getText(
-                                                  'va7bnt9b' /* Size */,
-                                                ),
+                                                  'attributes.common.size',
+                                                ).capitalize(),
                                                 style: FlutterFlowTheme.of(context)
                                                     .labelLarge
                                                     .override(
@@ -190,8 +192,8 @@ class _GoodsListPageWidgetState extends State<GoodsListPageWidget> {
                                               ),
                                               Text(
                                                 FFLocalizations.of(context).getText(
-                                                  '4l8ry766' /* Weight */,
-                                                ),
+                                                  'attributes.good.weight',
+                                                ).capitalize(),
                                                 style: FlutterFlowTheme.of(context)
                                                     .labelLarge
                                                     .override(
@@ -281,7 +283,13 @@ class _GoodsListPageWidgetState extends State<GoodsListPageWidget> {
                                                         await _model
                                                             .waitForApiRequestCompleted();
                                                       } else {
-                                                        showErrorSnackBar(context, 'Failed to delete good');
+                                                        showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                                          'errors.failure.delete'
+                                                        ).format(
+                                                          FFLocalizations.of(context).getText(
+                                                            'entities.good'
+                                                          )
+                                                        ).capitalize());
                                                       }
 
                                                       setState(() {});

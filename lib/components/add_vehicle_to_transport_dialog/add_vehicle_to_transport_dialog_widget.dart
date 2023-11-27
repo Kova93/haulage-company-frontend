@@ -1,4 +1,6 @@
+import 'package:format/format.dart';
 import 'package:haulage_company/util/show_error_snack_bar.dart';
+import 'package:haulage_company/util/string_capitalize.dart';
 
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -66,8 +68,8 @@ class _AddVehicleToTransportDialogWidgetState
           children: [
             Text(
               FFLocalizations.of(context).getText(
-                'ykrhgey3' /* Add vehicle to transport */,
-              ),
+                'dialogs.addVehicleToTransport.title',
+              ).capitalize(),
               style: FlutterFlowTheme.of(context).titleLarge,
             ),
             FlutterFlowDropDown<int>(
@@ -83,8 +85,12 @@ class _AddVehicleToTransportDialogWidgetState
                   setState(() => _model.vehicleDropDownValue = val),
               textStyle: FlutterFlowTheme.of(context).bodyLarge,
               hintText: FFLocalizations.of(context).getText(
-                'bkfxcw5w' /* Select vehicle... */,
-              ),
+                'widgets.common.dropdown.hint',
+              ).format(
+                FFLocalizations.of(context).getText(
+                  'entities.vehicle'
+                )
+              ).capitalize(),
               icon: Icon(
                 Icons.keyboard_arrow_down_rounded,
                 color: FlutterFlowTheme.of(context).secondaryText,
@@ -109,8 +115,8 @@ class _AddVehicleToTransportDialogWidgetState
                     Navigator.pop(context);
                   },
                   text: FFLocalizations.of(context).getText(
-                    '28ubdu6f' /* Cancel */,
-                  ),
+                    'widgets.common.cancel',
+                  ).capitalize(),
                   options: FFButtonOptions(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 24.0),
@@ -133,7 +139,13 @@ class _AddVehicleToTransportDialogWidgetState
                       return;
                     }
                     if (_model.vehicleDropDownValue == null) {
-                      showErrorSnackBar(context, 'No vehicle selected');
+                      showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                        'errors.validation.dropdown.empty'
+                      ).format(
+                        FFLocalizations.of(context).getText(
+                          'entities.vehicle'
+                        )
+                      ).capitalize());
                       return;
                     }
                     if (_model.transport?.usedVehicleDTOs
@@ -153,12 +165,14 @@ class _AddVehicleToTransportDialogWidgetState
                       });
                       Navigator.pop(context);
                     } else {
-                      showErrorSnackBar(context, 'Selected vehicle already added to transport');
+                      showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                        'dialogs.addVehicleToTransport.errors.vehicleAlreadyAdded'
+                      ).capitalize());
                     }
                   },
                   text: FFLocalizations.of(context).getText(
-                    '32pulq4n' /* Confirm */,
-                  ),
+                    'widgets.common.confirm',
+                  ).capitalize(),
                   options: FFButtonOptions(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 24.0),

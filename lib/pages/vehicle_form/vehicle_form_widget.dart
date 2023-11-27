@@ -1,4 +1,6 @@
+import 'package:format/format.dart';
 import 'package:haulage_company/util/show_error_snack_bar.dart';
+import 'package:haulage_company/util/string_capitalize.dart';
 
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
@@ -111,7 +113,13 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
             },
           ),
           title: Text(
-            widget.isExisting! ? 'Edit vehicle' : 'Add vehicle',
+            FFLocalizations.of(context).getText(
+                widget.isExisting! ? 'forms.edit.title' : 'forms.add.title'
+            ).format(
+                FFLocalizations.of(context).getText(
+                    'entities.vehicle'
+                )
+            ).capitalize(),
             style: FlutterFlowTheme.of(context).headlineLarge,
           ),
           actions: const [],
@@ -138,8 +146,8 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          'b5ep3o1d' /* License plate */,
-                        ),
+                          'attributes.vehicle.licensePlate',
+                        ).capitalize(),
                         labelStyle: FlutterFlowTheme.of(context).labelLarge,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
@@ -186,8 +194,8 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          '1hvpc6hc' /* Size */,
-                        ),
+                          'attributes.common.size',
+                        ).capitalize(),
                         labelStyle: FlutterFlowTheme.of(context).labelLarge,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
@@ -239,8 +247,8 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          'dv3cqh30' /* Maximum weight */,
-                        ),
+                          'attributes.vehicle.maxWeight',
+                        ).capitalize(),
                         labelStyle: FlutterFlowTheme.of(context).labelLarge,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
@@ -286,8 +294,8 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                     ),
                     Text(
                       FFLocalizations.of(context).getText(
-                        'l39ujb1e' /* Location */,
-                      ),
+                        'entities.location',
+                      ).capitalize(),
                       style: FlutterFlowTheme.of(context).labelLarge.override(
                             fontFamily: 'Readex Pro',
                             fontStyle: FontStyle.italic,
@@ -346,8 +354,12 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                               () => _model.locationDropDownValue = val),
                           textStyle: FlutterFlowTheme.of(context).bodyLarge,
                           hintText: FFLocalizations.of(context).getText(
-                            '0tznzxwg' /* Select location... */,
-                          ),
+                            'widgets.common.dropdown.hint',
+                          ).format(
+                              FFLocalizations.of(context).getText(
+                                  'entities.location'
+                              )
+                          ).capitalize(),
                           icon: Icon(
                             Icons.keyboard_arrow_down_rounded,
                             color: FlutterFlowTheme.of(context).secondaryText,
@@ -377,8 +389,8 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                             context.safePop();
                           },
                           text: FFLocalizations.of(context).getText(
-                            'wdh12arj' /* Cancel */,
-                          ),
+                            'widgets.common.cancel',
+                          ).capitalize(),
                           options: FFButtonOptions(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 24.0, 24.0, 24.0, 24.0),
@@ -402,7 +414,13 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                               return;
                             }
                             if (_model.locationDropDownValue == null) {
-                              showErrorSnackBar(context, 'No location selected');
+                              showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                  'errors.validation.dropdown.empty'
+                              ).format(
+                                  FFLocalizations.of(context).getText(
+                                      'entities.location'
+                                  )
+                              ).capitalize());
                               return;
                             }
                             _model.updateVehicleStruct(
@@ -426,7 +444,13 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                               if ((_model.updateResult?.succeeded ?? true)) {
                                 context.safePop();
                               } else {
-                                showErrorSnackBar(context, 'Failed to update vehicle');
+                                showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                    'errors.failure.update'
+                                ).format(
+                                    FFLocalizations.of(context).getText(
+                                        'entities.vehicle'
+                                    )
+                                ).capitalize());
                               }
                             } else {
                               _model.createResult = await HaulageCompanyAPIGroup
@@ -438,15 +462,21 @@ class _VehicleFormWidgetState extends State<VehicleFormWidget> {
                               if ((_model.createResult?.succeeded ?? true)) {
                                 context.safePop();
                               } else {
-                                showErrorSnackBar(context, 'Failed to create vehicle');
+                                showErrorSnackBar(context, FFLocalizations.of(context).getText(
+                                    'errors.failure.create'
+                                ).format(
+                                    FFLocalizations.of(context).getText(
+                                        'entities.vehicle'
+                                    )
+                                ).capitalize());
                               }
                             }
 
                             setState(() {});
                           },
                           text: FFLocalizations.of(context).getText(
-                            '244g6y53' /* Confirm */,
-                          ),
+                            'widgets.common.confirm',
+                          ).capitalize(),
                           options: FFButtonOptions(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 24.0, 24.0, 24.0, 24.0),
