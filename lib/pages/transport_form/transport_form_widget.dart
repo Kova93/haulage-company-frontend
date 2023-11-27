@@ -24,7 +24,7 @@ class TransportFormWidget extends StatefulWidget {
     this.transportOperationJSON,
   });
 
-  final bool? isExisting;
+  final bool isExisting;
   final dynamic transportOperationJSON;
 
   @override
@@ -43,10 +43,14 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.transportOperation = widget.transportOperationJSON != null &&
-              widget.transportOperationJSON != ''
-          ? TransportOperationDTOStruct.fromMap(widget.transportOperationJSON)
-          : null;
+      setState(() {
+        _model.transportOperation = widget.transportOperationJSON != null &&
+            widget.transportOperationJSON != ''
+            ? TransportOperationDTOStruct.fromMap(widget.transportOperationJSON)
+            : TransportOperationDTOStruct();
+
+        _model.datePicked ??= widget.isExisting ? _model.transportOperation?.date : null;
+      });
     });
   }
 
@@ -93,7 +97,7 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
             },
           ),
           title: Text(
-            widget.isExisting! ? 'Edit shop' : 'Add shop',
+            widget.isExisting ? 'Edit transport' : 'Add transport',
             style: FlutterFlowTheme.of(context).headlineLarge,
           ),
           actions: const [],
@@ -152,7 +156,7 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                             final datePickedDate = await showDatePicker(
                               context: context,
                               initialDate: getCurrentTimestamp,
-                              firstDate: DateTime(1900),
+                              firstDate: DateTime.now(),
                               lastDate: DateTime(2050),
                               builder: (context, child) {
                                 return wrapInMaterialDatePickerTheme(
@@ -216,7 +220,7 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                               child: Text(
                                 dateTimeFormat(
                                   'yMMMd',
-                                  _model.transportOperation!.date!,
+                                  _model.datePicked,
                                   locale:
                                       FFLocalizations.of(context).languageCode,
                                 ),
@@ -239,7 +243,7 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                           controller: _model.orderDropDownValueController ??=
                               FormFieldController<int>(
                             _model.orderDropDownValue ??=
-                                _model.transportOperation?.orderDTO.id,
+                                widget.isExisting ? _model.transportOperation?.orderDTO.id : null,
                           ),
                           options: (HaulageCompanyAPIGroup
                               .getAllOrdersCall
@@ -339,10 +343,7 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                                               .primaryText,
                                           size: 24.0,
                                         ),
-                                        onPressed: () {
-                                          print(
-                                              'DeleteVehicleButton pressed ...');
-                                        },
+                                        onPressed: () => setState(() => _model.transportOperation?.usedVehicleDTOs.removeAt(vehiclesListIndex)),
                                       ),
                                     ].divide(const SizedBox(width: 10.0)),
                                   ),
@@ -482,8 +483,16 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                                     !_model.formKey.currentState!.validate()) {
                                   return;
                                 }
+                                if (_model.datePicked == null) {
+                                  showErrorSnackBar(context, 'No date picked');
+                                  return;
+                                }
                                 if (_model.orderDropDownValue == null) {
                                   showErrorSnackBar(context, 'No order selected');
+                                  return;
+                                }
+                                if (_model.transportOperation?.usedVehicleDTOs.isEmpty ?? true) {
+                                  showErrorSnackBar(context, 'No vehicles added');
                                   return;
                                 }
                                 _model.updateTransportOperationStruct(
@@ -537,7 +546,7 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                                             .first)
                                         : null,
                                 );
-                                if (widget.isExisting!) {
+                                if (widget.isExisting) {
                                   _model.updateResult =
                                       await HaulageCompanyAPIGroup
                                           .updateTransportOperationCall
