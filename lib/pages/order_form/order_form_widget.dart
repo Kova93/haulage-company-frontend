@@ -171,8 +171,7 @@ class _OrderFormWidgetState extends State<OrderFormWidget> {
                               (HaulageCompanyAPIGroup.getAllShopsCall.rootList(
                             shopDropDownGetAllShopsResponse.jsonBody,
                           ) as List)
-                                  .map<String>((s) => s.toString())
-                                  .toList().map((e) => (e != ''
+                                  .map((e) => (e != ''
                                           ? ShopDTOStruct.fromMap(e)
                                           : null)
                                       ?.name)

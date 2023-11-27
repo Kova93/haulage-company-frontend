@@ -379,10 +379,10 @@ class _TransportFormWidgetState extends State<TransportFormWidget> {
                                 onPressed: () async {
                                   await showAlignedDialog(
                                     barrierColor:
-                                        FlutterFlowTheme.of(context).accent4,
+                                        FlutterFlowTheme.of(context).primaryBackground,
                                     context: context,
                                     isGlobal: true,
-                                    avoidOverflow: false,
+                                    avoidOverflow: true,
                                     targetAnchor: const AlignmentDirectional(0.0, 0.0)
                                         .resolve(Directionality.of(context)),
                                     followerAnchor: const AlignmentDirectional(

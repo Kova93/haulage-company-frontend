@@ -137,7 +137,7 @@ class _AddGoodToOrderDialogWidgetState
                     if (_model.getOrder?.goodDTOs
                             .where(
                                 (e) => e.goodDTO.id == _model.goodDropDownValue)
-                            .toList().isEmpty) {
+                            .isEmpty ?? true) {
                       _model.updatePage(() {
                         _model.updateGetOrderStruct(
                           (e) => e

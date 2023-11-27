@@ -138,7 +138,7 @@ class _AddVehicleToTransportDialogWidgetState
                     }
                     if (_model.transport?.usedVehicleDTOs
                             .where((e) => e.id == _model.vehicleDropDownValue)
-                            .toList().isEmpty) {
+                            .isEmpty ?? true) {
                       _model.updatePage(() {
                         _model.updateTransportStruct(
                           (e) => e
